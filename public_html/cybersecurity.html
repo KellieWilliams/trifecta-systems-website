@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity | Trifecta.Systems</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" type="text/javascript"></script>
+        
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="Gallery/favicon/site.webmanifest" />
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#0F131C] text-white py-4 shadow-lg"> <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
+                <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md">
+                <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            </a>
+
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <nav id="mobileMenu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
+                    <li class="relative group w-full md:w-auto"> 
+                        <a href="index.html#services" class="nav-link"> Services
+                            <svg class="ml-1 w-4 h-4 transition-transform duration-200 group-hover:rotate-180 hidden md:inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        
+                        <ul class="absolute hidden md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                            <li><a href="web-development.html" class="block py-2 hover:bg-gray-700 rounded-sm">Web Development</a></li>
+                            <li><a href="data-analytics.html" class="block py-2 hover:bg-gray-700 rounded-sm">Data Analytics</a></li>
+                            <li><a href="cybersecurity.html" class="block py-2 hover:bg-gray-700 rounded-sm">Cybersecurity</a></li>
+                            <li><a href="ai-custom-solutions.html" class="block py-2 hover:bg-gray-700 rounded-sm">Custom/AI Solutions</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li> <li><a href="index.html#contact" class="nav-link">Contact</a></li> </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section-base hero-cybersecurity-bg"> <div class="hero-overlay"></div> <div class="container mx-auto px-4 relative z-10"> <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
+                Fortifying Your Digital Defenses
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90 text-gray-300">
+                Protecting your business from evolving cyber threats with proactive and robust security solutions.
+            </p>
+            <a href="#cybersecurity-services-list" class="btn-primary"> Explore Services
+            </a>
+        </div>
+    </section>
+
+    <section id="cybersecurity-services-section" class="main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Our Cybersecurity Expertise</h2> <div class="max-w-4xl mx-auto text-content-block"> <p class="mb-6">
+                    In an increasingly interconnected world, cybersecurity is no longer an option—it's a necessity. Trifecta.Systems provides comprehensive cybersecurity services designed to safeguard your digital assets, protect sensitive data, and ensure business continuity against sophisticated cyberattacks.
+                </p>
+                <p class="mb-6">
+                    Our approach combines cutting-edge technology with expert strategies to identify vulnerabilities, implement robust defenses, and respond effectively to security incidents. From risk assessments and compliance adherence to network security and employee training, we build a multi-layered defense tailored to your organization's unique threat landscape.
+                </p>
+                <p>
+                    We empower you with peace of mind, knowing that your systems and data are secure, allowing you to focus on innovation and growth without the constant worry of cyber threats.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="cybersecurity-services-list" class="main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Our Core Cybersecurity Services</h2> <div class="max-w-4xl mx-auto text-content-block"> <ul class="list-disc pl-8 space-y-4">
+                    <li>
+                        <strong class="text-white">Vulnerability Assessments & Penetration Testing:</strong> Proactive identification of weaknesses in your systems, applications, and networks to prevent breaches before they occur.
+                    </li>
+                    <li>
+                        <strong class="text-white">Managed Security Services:</strong> Continuous monitoring, threat detection, and rapid response to security incidents, ensuring 24/7 protection.
+                    </li>
+                    <li>
+                        <strong class="text-white">Security Awareness Training:</strong> Educating your employees on best practices to recognize and avoid phishing, malware, and social engineering attacks, turning them into your first line of defense.
+                    </li>
+                    <li>
+                        <strong class="text-white">Incident Response & Recovery:</strong> Expert assistance in responding to and recovering from cyberattacks, minimizing downtime and data loss.
+                    </li>
+                    <li>
+                        <strong class="text-white">Compliance & Governance:</strong> Helping your business meet regulatory requirements (e.g., GDPR, HIPAA, PCI-DSS) and establish robust security policies.
+                    </li>
+                    <li>
+                        <strong class="text-white">Cloud Security:</strong> Securing your data and applications hosted in cloud environments (AWS, Azure, Google Cloud) against cloud-specific threats.
+                    </li>
+                    <li>
+                        <strong class="text-white">Endpoint Protection:</strong> Protecting all devices connected to your network—laptops, desktops, mobile phones—from malware and other threats.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner"> <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Development | Trifecta.Systems</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preload" as="image" href="Gallery/Summit%20Serpents%20Thumbnail.jpg">
+    <link rel="preload" as="image" href="Gallery/Cryptic%20Creations%20Thumbnail.jpg">
+    <link rel="preload" as="image" href="Gallery/Beasties%20Thumbnail.jpg">
+
+    <script src="script.js" type="text/javascript"></script>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="Gallery/favicon/site.webmanifest" />
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#0F131C] text-white py-4 shadow-lg"> <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
+                <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md">
+                <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            </a>
+
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <nav id="mobileMenu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
+                    <li class="relative group w-full md:w-auto"> 
+                        <a href="index.html#services" class="nav-link"> Services
+                            <svg class="ml-1 w-4 h-4 transition-transform duration-200 group-hover:rotate-180 hidden md:inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        
+                        <ul class="absolute hidden md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                            <li><a href="web-development.html" class="block py-2 hover:bg-gray-700 rounded-sm">Web Development</a></li>
+                            <li><a href="data-analytics.html" class="block py-2 hover:bg-gray-700 rounded-sm">Data Analytics</a></li>
+                            <li><a href="cybersecurity.html" class="block py-2 hover:bg-gray-700 rounded-sm">Cybersecurity</a></li>
+                            <li><a href="ai-custom-solutions.html" class="block py-2 hover:bg-gray-700 rounded-sm">Custom/AI Solutions</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li> <li><a href="index.html#contact" class="nav-link">Contact</a></li> </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section-base hero-web-dev-bg"> <div class="hero-overlay"></div> <div class="container mx-auto px-4 relative z-10"> <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
+                Crafting Your Online Presence
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90 text-gray-300"> Building responsive, engaging, and powerful websites tailored to your unique business goals.
+            </p>
+            <a href="#portfolio" class="btn-primary"> View Our Work
+            </a>
+        </div>
+    </section>
+
+    <section class="main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Our Website Development Expertise</h2> <div class="max-w-4xl mx-auto text-content-block"> <p class="mb-6">
+                    Whether you need a simple, elegant single-page website to establish your online presence, or a complex e-commerce platform to drive sales, Trifecta.Systems has you covered. We specialize in creating custom web solutions that are not only visually appealing but also highly functional, secure, and optimized for performance across all devices.
+                </p>
+                <p class="mb-6">
+                    Our approach involves understanding your brand, target audience, and business objectives to deliver a website that truly converts visitors into customers. From intuitive user interfaces to robust backend systems, we ensure every aspect of your online platform is meticulously crafted to meet your needs.
+                </p>
+                <p>
+                    We handle everything from initial concept and design to development, deployment, and ongoing maintenance, allowing you to focus on your core business. Let us transform your digital vision into a powerful reality.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Featured Web Projects</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="portfolio-card"> <img src="Gallery/Summit%20Serpents%20Thumbnail.jpg" alt="Summit Serpents Project Thumbnail" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="portfolio-title">Summit Serpents Website Presence</h3> <p class="portfolio-description"> A clean, professional website for a specialized reptile breeder, designed to establish a strong online presence and provide essential information to their audience.
+                        </p>
+                        <a href="https://summitserpents.com/" target="_blank" rel="noopener noreferrer" class="btn-secondary"> Visit Website
+                        </a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card"> <img src="Gallery/Cryptic%20Creations%20Thumbnail.jpg" alt="Cryptic Creations Project Thumbnail" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="portfolio-title">Cryptic Creations E-commerce</h3> <p class="portfolio-description"> A custom e-commerce solution for a unique online retailer, enabling seamless product display, secure transactions, and efficient management of their exclusive inventory.
+                        </p>
+                        <a href="https://crypticcreations.net/" target="_blank" rel="noopener noreferrer" class="btn-secondary"> Visit Website
+                        </a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card"> <img src="Gallery/Beasties%20Thumbnail.jpg" alt="Beasties Project Thumbnail" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="portfolio-title">Beasties: Local Store & Online Retailer</h3> <p class="portfolio-description"> A comprehensive web solution for a local retail store, seamlessly integrating their physical presence with an online catalog for extended reach and customer convenience.
+                        </p>
+                        <a href="https://beastiessoco.com/" target="_blank" rel="noopener noreferrer" class="btn-secondary"> Visit Website
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner"> <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+        </div>
+    </footer>
+</body>
+</html>

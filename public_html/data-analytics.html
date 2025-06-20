@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics | Trifecta.Systems</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preload" as="image" href="Gallery/Tableau%20Sales%20Thumbnail.jpg">
+    <link rel="preload" as="image" href="Gallery/CO2_Emissions_Thumbnail.jpg">
+    <link rel="preload" as="image" href="Gallery/World_Happiness_Thumbnail.jpg">
+
+    <script src="script.js" type="text/javascript"></script>
+        
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="Gallery/favicon/site.webmanifest" />
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#0F131C] text-white py-4 shadow-lg"> <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
+                <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md">
+                <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            </a>
+
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <nav id="mobileMenu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
+                    <li class="relative group w-full md:w-auto"> 
+                        <a href="index.html#services" class="nav-link"> Services
+                            <svg class="ml-1 w-4 h-4 transition-transform duration-200 group-hover:rotate-180 hidden md:inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        
+                        <ul class="absolute hidden md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                            <li><a href="web-development.html" class="block py-2 hover:bg-gray-700 rounded-sm">Web Development</a></li>
+                            <li><a href="data-analytics.html" class="block py-2 hover:bg-gray-700 rounded-sm">Data Analytics</a></li>
+                            <li><a href="cybersecurity.html" class="block py-2 hover:bg-gray-700 rounded-sm">Cybersecurity</a></li>
+                            <li><a href="ai-custom-solutions.html" class="block py-2 hover:bg-gray-700 rounded-sm">Custom/AI Solutions</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li> <li><a href="index.html#contact" class="nav-link">Contact</a></li> </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section-base hero-data-analytics-bg"> <div class="hero-overlay"></div> <div class="container mx-auto px-4 relative z-10"> <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
+                Unlocking Insights from Your Data
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90 text-gray-300">
+                Transforming raw data into actionable intelligence for smarter business decisions.
+            </p>
+            <a href="#analytics-portfolio" class="btn-primary"> Explore Our Analytics Services
+            </a>
+        </div>
+    </section>
+
+    <section id="analytics-services" class="main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Our Data Analytics Expertise</h2> <div class="max-w-4xl mx-auto text-content-block"> <p class="mb-6">
+                    In today's data-driven world, understanding your information is paramount to success. Trifecta.Systems helps businesses of all sizes harness the power of their data, converting complex datasets into clear, comprehensible, and actionable insights. Our analytics solutions empower you to identify trends, predict outcomes, and optimize operations.
+                </p>
+                <p class="mb-6">
+                    We offer a full spectrum of data analytics services, from initial data collection and cleaning to advanced statistical modeling and custom dashboard development. Our goal is to provide you with the tools and knowledge necessary to make informed strategic decisions that drive growth and efficiency.
+                </p>
+                <p>
+                    Whether you're looking to enhance customer understanding, streamline internal processes, or uncover new market opportunities, our expert team is ready to build tailored analytics solutions that meet your unique business objectives.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="analytics-portfolio" class="main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Featured Data Visualizations</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="portfolio-card"> <img src="Gallery/Tableau%20Sales%20Thumbnail.jpg" alt="Executive Overview of Sales by Region Thumbnail" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="portfolio-title">Executive Overview of Sales by Region</h3> <p class="portfolio-description"> An interactive dashboard providing key insights into regional sales trends, product performance, and quarterly growth.
+                        </p>
+                        <a href="https://public.tableau.com/app/profile/kellie7179/viz/ExecutiveOverviewofSalesbyRegion/ExecutiveOverview" target="_blank" rel="noopener noreferrer" class="btn-secondary"> View Visualization
+                        </a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card"> <img src="Gallery/CO2_Emissions_Thumbnail.jpg" alt="CO2 Emissions by Region" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="portfolio-title">CO2 Emissions by Region</h3> <p class="portfolio-description"> A detailed analysis of CO2 emissions pet Capita by region.
+                        </p>
+                        <a href="https://public.tableau.com/app/profile/kellie7179/viz/CO2perCapitabyRegion2000-2011/Dashboard1" target="_blank" rel="noopener noreferrer" class="btn-secondary"> View Visualization
+                        </a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card"> <img src="Gallery/World_Happiness_Thumbnail.jpg" alt="World Happiness" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="portfolio-title">World Happiness Report</h3> <p class="portfolio-description"> Visualizing world happiness scores based on GDP, Life Expectancy, Trust, and many other measureables.
+                        </p>
+                        <a href="https://public.tableau.com/app/profile/kellie7179/viz/WorldHappinessReportDashboard_16791005607640/Dashboard1" target="_blank" rel="noopener noreferrer" class="btn-secondary"> View Visualization
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="text-center mt-12">
+                <a href="https://public.tableau.com/app/profile/kellie7179/vizzes" target="_blank" rel="noopener noreferrer" class="btn-primary"> View Full Tableau Public Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner"> <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+        </div>
+    </footer>
+</body>
+</html>

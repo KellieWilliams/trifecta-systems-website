@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Solutions for Your Business | Trifecta.Systems</title>
+    <meta name="description" content="Trifecta.Systems provides expert website development, data analytics, cybersecurity, and custom AI solutions for small businesses and nonprofits. Empower your business with cutting-edge technology.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Preload images for faster response on mouse hover for Our Services Section -->
+    <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Web_Development.png">
+    <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Data_Analytics.png">
+    <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Cybersecurity.png">
+    <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Custom_AI.png">    
+
+        <!-- favicon -->
+    <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="Gallery/favicon/site.webmanifest" />
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-[#0F131C] text-white py-4 shadow-lg">
+        <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
+                <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md">
+                <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            </a>
+
+            <!-- Change to hamburger menu on sm screens -->
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <nav id="mobileMenu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
+                    
+                    <li class="relative group w-full md:w-auto"> 
+                        <a href="#services" class="nav-link">
+                            Services
+                            <svg class="ml-1 w-4 h-4 transition-transform duration-200 group-hover:rotate-180 hidden md:inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        
+                        <ul class="absolute hidden md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                            <li><a href="web-development.html" class="block py-2 hover:bg-gray-700 rounded-sm">Web Development</a></li>
+                            <li><a href="data-analytics.html" class="block py-2 hover:bg-gray-700 rounded-sm">Data Analytics</a></li>
+                            <li><a href="cybersecurity.html" class="block py-2 hover:bg-gray-700 rounded-sm">Cybersecurity</a></li>
+                            <li><a href="ai-custom-solutions.html" class="block py-2 hover:bg-gray-700 rounded-sm">Custom/AI Solutions</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative text-gray-300 py-20 text-center shadow-inner rounded-b-lg mb-12 overflow-hidden hero-section-default-bg">
+        <div class="absolute inset-0 bg-black opacity-50 z-5"></div> 
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
+                Empowering Your Business Through Technology
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                Providing expert technical services to small businesses and nonprofits.<br>
+                Website Development<br>
+                Data Analytics<br>
+                Cybersecurity<br>
+                Other Custom Digital Solutions
+            </p>
+            <a href="#services" class="btn-primary">
+                Explore Our Services
+            </a>
+        </div>
+    </section>
+
+    <!-- Our Services Section -->
+    <section id="services" class="main-section container mx-auto px-4">
+    <h2 class="section-heading">Our Services</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <!-- Web Development Card -->
+        <a href="web-development.html" class="group service-card service-card-web">
+            <div class="service-card-overlay"></div>
+            <div class="service-card-content">
+                <div class="service-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code text-white">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                </div>
+                <h3 class="service-title">Website Development</h3>
+                <p class="service-description">
+                    From compelling designs to robust e-commerce solutions, we build websites that truly represent your brand and drive engagement.
+                </p>
+            </div>
+        </a>
+
+        <!-- Data Analytics Card -->
+        <a href="data-analytics.html" class="group service-card service-card-data">
+            <div class="service-card-overlay"></div>
+            <div class="service-card-content">
+                <div class="service-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart-2 text-white">
+                        <line x1="18" x2="18" y1="20" y2="10"></line>
+                        <line x1="12" x2="12" y1="20" y2="4"></line>
+                        <line x1="6" x2="6" y1="20" y2="14"></line>
+                    </svg>
+                </div>
+                <h3 class="service-title">Data Analytics</h3>
+                <p class="service-description">
+                    Unlock the power of your data. We help you collect, analyze, and interpret insights to make informed business decisions.
+                </p>
+            </div>
+        </a>
+
+        <!-- Cybersecurity Card -->
+        <a href="cybersecurity.html" class="group service-card service-card-security">
+            <div class="service-card-overlay"></div>
+            <div class="service-card-content">
+                <div class="service-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check text-white">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                </div>
+                <h3 class="service-title">Cyber Security</h3>
+                <p class="service-description">
+                    Protect your valuable assets. Our cybersecurity solutions safeguard your data and systems from evolving threats.
+                </p>
+            </div>
+        </a>
+
+        <!-- Custom/AI Solutions Card -->
+        <a href="ai-custom-solutions.html" class="group service-card service-card-ai-custom">
+            <div class="service-card-overlay"></div>
+            <div class="service-card-content">
+                <div class="service-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gem text-white">
+                        <path d="M6 3v5a6 6 0 0 1 6 6v3"></path>
+                        <path d="M18 3v5a6 6 0 0 0 -6 6v3"></path>
+                        <path d="M3 11a9 9 0 0 1 9 9l0 0"></path>
+                        <path d="M21 11a9 9 0 0 0 -9 9l0 0"></path>
+                        <path d="M8 22l4 -12l4 12"></path>
+                    </svg>
+                </div>
+                <h3 class="service-title">AI-Powered Custom Digital Solutions</h3>
+                <p class="service-description">
+                    Leverage our expertise in AI and prompt engineering to create tailored digital solutions that meet your unique needs, from automating workflows to generating creative assets.
+                </p>
+            </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="main-section container mx-auto px-4">
+        <h2 class="section-heading">About Us</h2>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-10">
+            <div class="md:w-1/2">
+                <img src="Gallery/Gemini_Generated_Image_About_Us_Monitor.png" alt="Abstract image representing 'About Us'" class="rounded-xl shadow-lg mx-auto w-3/4 h-auto object-cover">
+            </div>
+            <div class="md:w-1/2 text-center md:text-left text-content-block"> <p class="mb-6">
+                    At Trifecta.Systems, we believe in empowering small businesses and nonprofits with the technology they need to thrive in the digital age. We started because a friend needed their e-commerce website updated and streamlined for their custom reptile enclosures (<a href="https://crypticcreations.net/" class="text-gray-200 hover:text-white underline transition duration-300 ease-in-out">Cryptic Creations</a>). Now we have helped many, reptile or otherwise, with their digital needs.
+                </p>
+                <p class="mb-8">
+                    Our mission is to provide accessible, reliable, and cutting-edge technical expertise, allowing you to focus on what you do best while we handle your digital infrastructure. We're committed to building long-term partnerships and delivering solutions that truly make a difference.
+                </p>
+                <a href="about-the-owner.html" class="btn-primary inline-block">
+                    About the Owner
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="main-section container mx-auto px-4">
+    <h2 class="section-heading">Contact Us</h2>
+    <div class="max-w-2xl mx-auto p-8 bg-slate-800 rounded-xl shadow-lg border border-gray-600">
+        <p class="text-center text-lg mb-8 text-gray-300">
+            Please fill out the form below and we'll get back to you as soon as possible.
+        </p>
+        <form id="contactForm" action="backend/submit_form.php" method="POST" class="space-y-6">
+            <div>
+                <label for="name" class="block text-gray-300 text-sm font-bold mb-2">
+                    Your Name <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="name" name="name" required
+                       class="form-input">
+            </div>
+            <div>
+                <label for="phone" class="block text-gray-300 text-sm font-bold mb-2">
+                    Phone Number (Optional)
+                </label>
+                <input type="tel" id="phone" name="phone"
+                       class="form-input">
+            </div>
+            <div>
+                <label for="email" class="block text-gray-300 text-sm font-bold mb-2">
+                    Your Email <span class="text-red-500">*</span>
+                </label>
+                <input type="email" id="email" name="email" required
+                       class="form-input">
+            </div>
+            <div>
+                <label for="message" class="block text-gray-300 text-sm font-bold mb-2">
+                    Message <span class="text-red-500">*</span>
+                </label>
+                <textarea id="message" name="message" rows="6" required
+                          class="form-input"></textarea>
+            </div>
+
+            <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+
+            <div class="flex items-center justify-center">
+                <button type="submit"
+                        class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105 shadow-xl">
+                    Send Message
+                </button>
+            </div>
+        </form>
+    </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" type="text/javascript"></script>
+
+    <!-- reCAPTCHA API call -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW"></script>
+</body>
+</html>

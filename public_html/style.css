@@ -1,0 +1,386 @@
+/* Base Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0F131C; /* Dark Background */
+    color: #ffffff; /* Light Font */
+    -webkit-font-smoothing: antialiased; /* antialiased equivalent */
+    -moz-osx-font-smoothing: grayscale; /* antialiased equivalent */
+}
+
+/* Container for consistent content width */
+.container {
+    max-width: 1200px; /* Equivalent to max-w-6xl or similar, assuming this was already there */
+}
+
+/* Sticky Header Style */
+header {
+    position: sticky; /* Make the header stick to the top */
+    top: 0; /* Position it at the very top */
+    z-index: 1000; /* Ensure it stays above other content when scrolling */
+    /* Existing background, text color, padding, and shadow styles are inherited from Tailwind classes in HTML header element directly */
+}
+
+/* Ensure anchors land correctly below the sticky header */
+#services,
+#about,
+#contact,
+#portfolio { /* Added #portfolio for this page */
+    scroll-margin-top: 5rem; /* Adjust this value to match your header's height + desired buffer */
+}
+
+/* Default Hero Section Background (for index.html) */
+.hero-section-default-bg {
+    background-image: url('Gallery/Gemini_Generated_Image_Hero_Background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Loading Spinner (if used on other pages/scripts) */
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #3498db; /* Blue color for the spinner */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto; /* Center the spinner */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Logo Spin Animation with scale effect (if used via script) */
+@keyframes logo-spin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(360deg) scale(1.2); } /* Enlarge at halfway point of the spin */
+    100% { transform: rotate(720deg) scale(1); } /* Shrink back and complete spin */
+}
+
+.animate-logo-spin {
+    animation: logo-spin 1.5s ease-out forwards; /* 1.5s duration, ease-out, stays at end state */
+}
+
+/* New Custom Classes from HTML Refactoring */
+
+/* 1. Main Content Section Styling */
+.main-section {
+    padding-top: 4rem; /* py-16 */
+    padding-bottom: 4rem; /* py-16 */
+    background-color: #161B29; /* bg-[#161B29] - this was adjusted to match index.html for main sections */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+    margin-bottom: 3rem; /* mb-12 */
+}
+
+/* 2. Main Section Heading Styling */
+.section-heading {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 700; /* font-bold */
+    text-align: center; /* text-center */
+    margin-bottom: 3rem; /* mb-12 */
+    color: #ffffff; /* text-white - consistent across pages */
+}
+
+/* 3. Primary Button Styling (for major calls to action) */
+.btn-primary {
+    display: inline-block; /* Ensure it behaves like a block element for padding/margin but respects content width */
+    background-color: #ffffff; /* bg-white */
+    color: #202239; /* text-[#202239] */
+    padding-left: 2rem; /* px-8 */
+    padding-right: 2rem; /* px-8 */
+    padding-top: 1rem; /* py-4 */
+    padding-bottom: 1rem; /* py-4 */
+    border-radius: 9999px; /* rounded-full */
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+    transition-property: all; /* transition */
+    transition-duration: 300ms; /* duration-300 */
+    transition-timing-function: ease-in-out; /* ease-in-out */
+    text-decoration: none; /* Remove default anchor underline */
+}
+.btn-primary:hover {
+    background-color: #e5e7eb; /* hover:bg-gray-200 */
+    transform: scale(1.05); /* hover:scale-105 */
+}
+
+/* 4. Secondary Button Styling (for portfolio links, etc.) */
+.btn-secondary {
+    display: inline-block; /* inline-block */
+    background-color: #4b5563; /* bg-gray-600 */
+    color: #ffffff; /* text-white */
+    font-weight: 700; /* font-bold */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    border-radius: 9999px; /* rounded-full */
+    font-size: 0.875rem; /* text-sm */
+    transition-property: background-color, transform; /* transition */
+    transition-duration: 300ms; /* duration-300 */
+    transition-timing-function: ease-in-out; /* ease-in-out */
+    text-decoration: none; /* Remove default anchor underline */
+}
+.btn-secondary:hover {
+    background-color: #374151; /* hover:bg-gray-700 */
+    transform: scale(1.05); /* Add a slight scale for consistency */
+}
+
+
+/* 5. Service Card Styling (for index.html) */
+.service-card {
+    display: block; /* block */
+    background-color: #1e293b; /* bg-slate-800 - changed from #1a202c in original css to match HTML */
+    padding: 2rem; /* p-8 */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
+    border: 1px solid #4b5563; /* border border-gray-600 */
+    position: relative; /* relative */
+    overflow: hidden; /* overflow-hidden */
+    text-decoration: none; /* Remove default anchor underline */
+    
+    transition: background-image 0.5s ease-in-out, background-color 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.service-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* hover:shadow-lg */
+}
+
+/* Specific background images for service cards on hover */
+.service-card-web:hover {
+    background-image: url('Gallery/Gemini_Generated_Image_Web_Development.png');
+    background-size: cover;
+    background-position: center;
+}
+.service-card-data:hover {
+    background-image: url('Gallery/Gemini_Generated_Image_Data_Analytics.png');
+    background-size: cover;
+    background-position: center;
+}
+.service-card-security:hover {
+    background-image: url('Gallery/Gemini_Generated_Image_Cybersecurity.png');
+    background-size: cover;
+    background-position: center;
+}
+.service-card-ai-custom:hover {
+    background-image: url('Gallery/Gemini_Generated_Image_Custom_AI.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Service Card Overlay */
+.service-card-overlay {
+    position: absolute; /* absolute */
+    top: 0; /* inset-0 */
+    right: 0; /* inset-0 */
+    bottom: 0; /* inset-0 */
+    left: 0; /* inset-0 */
+    background-color: #000000; /* bg-black */
+    opacity: 0; /* opacity-0 */
+    z-index: 0; /* z-0 */
+    transition: opacity 0.3s ease-in-out; /* transition-opacity duration-300 ease-in-out */
+}
+.service-card:hover .service-card-overlay {
+    opacity: 0.5; /* group-hover:opacity-50 */
+}
+
+/* Service Card Content Wrapper */
+.service-card-content {
+    position: relative; /* relative */
+    z-index: 10; /* z-10 */
+}
+
+/* 6. Service Card Icon Wrapper */
+.service-icon-wrapper {
+    margin-left: auto; /* mx-auto */
+    margin-right: auto; /* mx-auto */
+    margin-bottom: 1.5rem; /* mb-6 */
+    border-radius: 9999px; /* rounded-full */
+    padding: 0.75rem; /* p-3 */
+    background-color: #374151; /* bg-gray-700 */
+    width: fit-content; /* w-fit */
+    transition-property: background-color; /* transition */
+    transition-duration: 300ms; /* duration-300 */
+    transition-timing-function: ease-in-out; /* ease-in-out */
+}
+.service-card:hover .service-icon-wrapper { /* Uses parent .service-card group */
+    background-color: #4b5563; /* group-hover:bg-gray-600 */
+}
+
+/* 7. Service Card Title & Description */
+.service-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 600; /* font-semibold */
+    color: #d1d5db; /* text-gray-300 */
+    margin-bottom: 1rem; /* mb-4 */
+    text-align: center; /* text-center */
+}
+.service-card:hover .service-title { /* Uses parent .service-card group */
+    color: #ffffff; /* group-hover:text-white */
+}
+
+.service-description {
+    color: #d1d5db; /* text-gray-300 */
+    text-align: center; /* text-center */
+}
+
+/* 8. Contact Form Input Fields */
+.form-input {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow */
+    -webkit-appearance: none; /* appearance-none */
+    -moz-appearance: none; /* appearance-none */
+    appearance: none; /* appearance-none */
+    border: 1px solid #4b5563; /* border border-gray-600 */
+    border-radius: 0.375rem; /* rounded-md */
+    width: 100%; /* w-full */
+    padding-top: 0.75rem; /* py-3 */
+    padding-bottom: 0.75rem; /* py-3 */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    color: #1f2937; /* text-gray-900 */
+    line-height: 1.25; /* leading-tight */
+    background-color: #e5e7eb; /* bg-gray-200 */
+}
+.form-input:focus {
+    outline: 2px solid transparent; /* focus:outline-none */
+    outline-offset: 2px; /* focus:outline-none */
+    box-shadow: 0 0 0 2px #6b7280; /* focus:ring-2 focus:ring-gray-500 */
+}
+textarea.form-input {
+    resize: vertical; /* resize-y */
+}
+
+/* 9. Header Navigation Links */
+.nav-link {
+    display: block; /* block */
+    width: 100%; /* w-full */
+    text-align: center; /* text-center */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    border-radius: 0.375rem; /* rounded-md */
+    background-color: #3a3e63; /* bg-[#3a3e63] */
+    transition-property: all; /* transition */
+    transition-duration: 300ms; /* duration-300 */
+    transition-timing-function: ease-in-out; /* ease-in-out */
+    text-decoration: none; /* Remove default anchor underline */
+    color: #ffffff; /* Default link color inherited from header, explicit for nav-link */
+}
+.nav-link:hover {
+    color: #d1d5db; /* hover:text-gray-300 */
+    text-decoration: underline; /* hover:underline */
+}
+/* Responsive styles for nav-link on larger screens (md breakpoint) */
+@media (min-width: 768px) {
+    .nav-link {
+        background-color: transparent; /* md:bg-transparent */
+        display: inline-flex; /* md:inline-flex */
+        align-items: center; /* md:items-center */
+        justify-content: center; /* md:justify-center */
+        width: auto; /* reset w-full on desktop */
+    }
+}
+
+/* New: Fade animations for reviews (already existed, kept for completeness) */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out; /* Adjust duration as needed */
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in; /* Adjust duration as needed */
+}
+
+/* Hero Section Base Styles (for all hero sections, like on index and service pages) */
+.hero-section-base {
+    position: relative; /* relative */
+    padding-top: 5rem; /* py-20 */
+    padding-bottom: 5rem; /* py-20 */
+    text-align: center; /* text-center */
+    box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06); /* shadow-inner */
+    border-bottom-left-radius: 0.5rem; /* rounded-b-lg */
+    border-bottom-right-radius: 0.5rem; /* rounded-b-lg */
+    margin-bottom: 3rem; /* mb-12 */
+    overflow: hidden; /* overflow-hidden */
+    /* Note: text color specific to hero text elements, not the section itself */
+}
+
+/* Specific background for Web Development Hero */
+.hero-web-dev-bg {
+    background-image: url('Gallery/Gemini_Generated_Image_Web_Development.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Specific background for Data Analytics Hero */
+.hero-data-analytics-bg {
+    background-image: url('Gallery/Gemini_Generated_Image_Data_Analytics.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Specific background for Cybersecurity Hero */
+.hero-cybersecurity-bg {
+    background-image: url('Gallery/Gemini_Generated_Image_Cybersecurity.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Specific background for Custom Solutions & AI Hero */
+.hero-custom-ai-bg {
+    background-image: url('Gallery/Gemini_Generated_Image_Custom_AI.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Hero Overlay (for dimming background image) */
+.hero-overlay {
+    position: absolute; /* absolute */
+    top: 0; /* inset-0 */
+    right: 0; /* inset-0 */
+    bottom: 0; /* inset-0 */
+    left: 0; /* inset-0 */
+    background-color: rgba(0, 0, 0, 0.5); /* bg-black opacity-50 */
+    z-index: 5; /* z-5 */
+}
+
+/* Text block for main content paragraphs (e.g., introduction text) */
+.text-content-block {
+    font-size: 1.125rem; /* text-lg */
+    color: #d1d5db; /* text-gray-300 */
+    line-height: 1.625; /* leading-relaxed */
+    text-align: center; /* text-center */
+    /* max-w-4xl and mx-auto should be on the div using this class, not the class itself */
+}
+
+/* Portfolio Card Styling */
+.portfolio-card {
+    background-color: #1e293b; /* bg-slate-800 */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
+    overflow: hidden; /* overflow-hidden */
+    border: 1px solid #4b5563; /* border border-gray-600 */
+}
+
+/* Portfolio Item Title */
+.portfolio-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 600; /* font-semibold */
+    color: #d1d5db; /* text-gray-300 */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+/* Portfolio Item Description */
+.portfolio-description {
+    color: #d1d5db; /* text-gray-300 */
+    font-size: 0.875rem; /* text-sm */
+    margin-bottom: 1rem; /* mb-4 */
+}
