@@ -64,4 +64,4 @@ As this is a static business website, direct contributions are not typically sou
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
