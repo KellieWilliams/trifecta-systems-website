@@ -33,37 +33,37 @@
         </a>
 
         <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2024/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
         </button>
 
         <nav id="mobileMenu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium">
             <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
-
-                <li class="relative group w-full md:w-auto">
+                
+                <li class="relative group w-full md:w-auto services-menu-item"> 
                     <div class="flex items-center justify-center nav-link-wrapper md:block">
-                        <a href="index.html#services" class="nav-link">
+                        <a href="#services" class="nav-link">
                             Services
                         </a>
                         <button id="servicesDropdownToggle" class="md:hidden ml-1 p-1 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-gray-400">
-                            <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2024/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
                     </div>
-
-                    <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out md:static md:w-auto md:shadow-none md:rounded-none md:bg-transparent">
-                        <li><a href="web-development.html" class="block py-2 hover:bg-gray-700 rounded-sm">Web Development</a></li>
-                        <li><a href="data-analytics.html" class="block py-2 hover:bg-gray-700 rounded-sm">Data Analytics</a></li>
-                        <li><a href="cybersecurity.html" class="block py-2 hover:bg-gray-700 rounded-sm">Cybersecurity</a></li>
-                        <li><a href="ai-custom-solutions.html" class="block py-2 hover:bg-gray-700 rounded-sm">Custom/AI Solutions</a></li>
+                    
+                    <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                        <li><a href="web-development.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Web Development</a></li>
+                        <li><a href="data-analytics.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Data Analytics</a></li>
+                        <li><a href="cybersecurity.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Cybersecurity</a></li>
+                        <li><a href="ai-custom-solutions.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Custom/AI Solutions</a></li>
                     </ul>
                 </li>
-
-                <li><a href="index.html#about" class="nav-link">About Us</a></li>
-
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
     </div>

@@ -284,10 +284,24 @@ textarea.form-input {
 @media (min-width: 768px) {
     .nav-link {
         background-color: transparent; /* md:bg-transparent */
-        /* display: inline-flex; This is now the default, can be removed or kept for clarity */
-        /* align-items: center; This is now the default, can be removed or kept for clarity */
-        /* justify-content: center; This is now the default, can be removed or kept for clarity */
-        width: auto; /* reset w-full on desktop if it was explicitly set */
+        width: auto;
+    }
+
+    /* NEW: Apply min-width to ALL li elements within the main desktop nav */
+    #mobileMenu ul > li {
+        min-width: 160px; /* <-- ADJUST THIS VALUE TO TUNE THE SPACING */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Keep this rule for the submenu positioning: */
+    #servicesSubmenu {
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        min-width: 192px; /* Ensure this is wide enough for 'Web Development' etc. */
+        max-width: 250px;
     }
 }
 
