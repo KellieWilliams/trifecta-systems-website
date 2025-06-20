@@ -45,15 +45,15 @@ To view or deploy this project:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/YourGitHubUsername/your-repository-name.git](https://github.com/YourGitHubUsername/your-repository-name.git)
+    git clone https://github.com/KellieWilliams/trifecta-systems-website.git
     ```
 2.  **Navigate to the project directory:**
     ```bash
-    cd your-repository-name
+    cd trifecta-systems-website
     ```
 3.  **Ensure PHP environment:** For the contact form to function, a PHP-enabled web server (e.g., Apache, Nginx with PHP-FPM) is required.
 4.  **Configure backend secrets:**
-    * Create a `config` directory at the root level of your project (parallel to `backend/`).
+    * Create a `config` directory at the root level of your project (parallel to `public_html/`).
     * Inside `config/`, create a file named `secrets.php`.
     * Add your reCAPTCHA secret key, recipient email (`TO_EMAIL`), and sender email (`FROM_EMAIL`) within this `secrets.php` file, following the structure expected by `backend/submit_form.php`. **(Example structure will be provided in a separate setup guide for production)**
     * Ensure the `config` directory is **not committed to Git** (as managed by the `.gitignore` file).
