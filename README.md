@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository hosts the official landing page and static site for **Trifecta.Systems**, a consulting firm dedicated to empowering small businesses and nonprofits with cutting-edge technology solutions. The website serves as a primary point of contact and information, detailing our core service offerings and our commitment to fostering digital growth.
+This repository hosts the official landing page and static site for **[Trifecta.Systems](https://trifecta.systems/)**, a consulting firm dedicated to empowering small businesses and nonprofits with cutting-edge technology solutions. The website serves as a primary point of contact and information, detailing our core service offerings and our commitment to fostering digital growth.
 
 ## Purpose
 
