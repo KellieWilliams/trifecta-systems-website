@@ -210,13 +210,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuButton = document.getElementById('mobileMenuButton');
     const mobileMenu = document.getElementById('mobileMenu');
 
+    // NEW: Get references to the services dropdown elements
+    const servicesDropdownToggle = document.getElementById('servicesDropdownToggle');
+    const servicesSubmenu = document.getElementById('servicesSubmenu');
+    // Get the SVG icon inside the services dropdown toggle button
+    const servicesDropdownIcon = servicesDropdownToggle ? servicesDropdownToggle.querySelector('svg') : null;
+
+
     if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden'); // Toggle visibility
             mobileMenu.classList.toggle('flex');   // Toggle flex display
+            
+            // NEW: Close services submenu when main menu is closed
+            if (mobileMenu.classList.contains('hidden') && servicesSubmenu && !servicesSubmenu.classList.contains('hidden')) {
+                servicesSubmenu.classList.add('hidden');
+                if (servicesDropdownIcon) {
+                    servicesDropdownIcon.classList.remove('rotate-180');
+                }
+            }
         });
 
+        // NEW: Event Listener for Services Dropdown Toggle (for mobile)
+        if (servicesDropdownToggle && servicesSubmenu) {
+            servicesDropdownToggle.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent this click from bubbling up and closing the main menu immediately
+                servicesSubmenu.classList.toggle('hidden'); // Toggle submenu visibility
+                if (servicesDropdownIcon) {
+                    servicesDropdownIcon.classList.toggle('rotate-180'); // Rotate icon
+                }
+            });
+        }
+
         // Optional: Close menu when a link is clicked (for single-page navigation)
+        // MODIFIED: Also close services submenu and reset its icon
         const menuLinks = mobileMenu.querySelectorAll('a');
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -225,6 +252,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.innerWidth < 768) { // Tailwind's 'md' breakpoint is 768px
                     mobileMenu.classList.add('hidden');
                     mobileMenu.classList.remove('flex');
+                    
+                    // NEW: Also close the services submenu if it's open
+                    if (servicesSubmenu && !servicesSubmenu.classList.contains('hidden')) {
+                        servicesSubmenu.classList.add('hidden');
+                        if (servicesDropdownIcon) {
+                            servicesDropdownIcon.classList.remove('rotate-180');
+                        }
+                    }
                 }
             });
         });

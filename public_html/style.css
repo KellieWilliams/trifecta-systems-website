@@ -254,8 +254,7 @@ textarea.form-input {
 
 /* 9. Header Navigation Links */
 .nav-link {
-    display: block; /* block */
-    width: 100%; /* w-full */
+    /* REMOVE display: block; and width: 100%; FROM HERE FOR MOBILE */
     text-align: center; /* text-center */
     padding-top: 0.5rem; /* py-2 */
     padding-bottom: 0.5rem; /* py-2 */
@@ -268,19 +267,27 @@ textarea.form-input {
     transition-timing-function: ease-in-out; /* ease-in-out */
     text-decoration: none; /* Remove default anchor underline */
     color: #ffffff; /* Default link color inherited from header, explicit for nav-link */
+    
+    /* Ensure it behaves like a flex item to center its content, but respect its own padding */
+    display: inline-flex; /* Use inline-flex for mobile default */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    white-space: nowrap; /* Prevent text from wrapping if it's short */
+    /* Remove width: 100%; to let it shrink to content + padding */
 }
 .nav-link:hover {
     color: #d1d5db; /* hover:text-gray-300 */
     text-decoration: underline; /* hover:underline */
 }
+
 /* Responsive styles for nav-link on larger screens (md breakpoint) */
 @media (min-width: 768px) {
     .nav-link {
         background-color: transparent; /* md:bg-transparent */
-        display: inline-flex; /* md:inline-flex */
-        align-items: center; /* md:items-center */
-        justify-content: center; /* md:justify-center */
-        width: auto; /* reset w-full on desktop */
+        /* display: inline-flex; This is now the default, can be removed or kept for clarity */
+        /* align-items: center; This is now the default, can be removed or kept for clarity */
+        /* justify-content: center; This is now the default, can be removed or kept for clarity */
+        width: auto; /* reset w-full on desktop if it was explicitly set */
     }
 }
 

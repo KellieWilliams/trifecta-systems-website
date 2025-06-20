@@ -33,7 +33,6 @@
                 <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
             </a>
 
-            <!-- Change to hamburger menu on sm screens -->
             <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -44,14 +43,18 @@
                 <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
                     
                     <li class="relative group w-full md:w-auto"> 
-                        <a href="#services" class="nav-link">
-                            Services
-                            <svg class="ml-1 w-4 h-4 transition-transform duration-200 group-hover:rotate-180 hidden md:inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
+                        <div class="flex items-center justify-center nav-link-wrapper md:block">
+                            <a href="#services" class="nav-link">
+                                Services
+                            </a>
+                            <button id="servicesDropdownToggle" class="md:hidden ml-1 p-1 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-gray-400">
+                                <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
                         
-                        <ul class="absolute hidden md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                        <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out md:static md:w-auto md:shadow-none md:rounded-none md:bg-transparent">
                             <li><a href="web-development.html" class="block py-2 hover:bg-gray-700 rounded-sm">Web Development</a></li>
                             <li><a href="data-analytics.html" class="block py-2 hover:bg-gray-700 rounded-sm">Data Analytics</a></li>
                             <li><a href="cybersecurity.html" class="block py-2 hover:bg-gray-700 rounded-sm">Cybersecurity</a></li>
