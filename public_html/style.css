@@ -36,6 +36,17 @@ header {
     background-repeat: no-repeat;
 }
 
+/* --- NEW CSS RULE --- */
+/* Specific background for About the Owner Hero */
+.hero-about-owner-bg {
+    background-image: url('Gallery/Gemini_Generated_Image_Hero_Background.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+/* --- END NEW CSS RULE --- */
+
+
 /* Loading Spinner (if used on other pages/scripts) */
 .loading-spinner {
     border: 4px solid rgba(255, 255, 255, 0.3);
@@ -101,6 +112,14 @@ header {
     transition-duration: 300ms; /* duration-300 */
     transition-timing-function: ease-in-out; /* ease-in-out */
     text-decoration: none; /* Remove default anchor underline */
+    color: #ffffff; /* Default link color inherited from header, explicit for nav-link */
+    
+    /* Ensure it behaves like a flex item to center its content, but respect its own padding */
+    display: inline-flex; /* Use inline-flex for mobile default */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    white-space: nowrap; /* Prevent text from wrapping if it's short */
+    /* Remove width: 100%; to let it shrink to content + padding */
 }
 .btn-primary:hover {
     background-color: #e5e7eb; /* hover:bg-gray-200 */
