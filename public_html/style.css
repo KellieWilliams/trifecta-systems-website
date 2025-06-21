@@ -382,6 +382,25 @@ textarea.form-input {
     /* max-w-4xl and mx-auto should be on the div using this class, not the class itself */
 }
 
+/* Apply consistent text styling to lists within main content sections */
+.main-section ul,
+.main-section ol { /* Includes ordered lists for consistency */
+    font-size: 1.125rem; /* Matches text-lg */
+    color: #d1d5db; /* Matches text-gray-300 */
+    line-height: 1.625; /* Matches leading-relaxed */
+    text-align: left; /* Ensures lists are left-aligned within their container */
+}
+
+/* Ensure list items inherit correctly if needed (often not strictly necessary but good practice) */
+.main-section ul li,
+.main-section ol li {
+    /* These properties are usually inherited from the parent ul/ol, but explicitly defining can prevent issues */
+    /* For instance, if another CSS rule tried to reset li properties */
+    font-size: inherit;
+    color: inherit;
+    line-height: inherit;
+}
+
 /* Portfolio Card Styling */
 .portfolio-card {
     background-color: #1e293b; /* bg-slate-800 */
