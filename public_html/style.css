@@ -30,7 +30,7 @@ header {
 
 /* Default Hero Section Background (for index.html) */
 .hero-section-default-bg {
-    background-image: url('Gallery/Gemini_Generated_Image_Hero_Background.png');
+    background-image: url('Gallery/Gemini_Generated_Image_Hero_Background.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
