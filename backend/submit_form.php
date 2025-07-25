@@ -1,6 +1,9 @@
 <?php
 // submit_form.php - Enhanced Security Version
 
+// Define security monitor access
+define('SECURITY_MONITOR_ACCESS', true);
+
 // 1. Set up CORS (Cross-Origin Resource Sharing)
 header("Access-Control-Allow-Origin: https://trifecta.systems");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -13,11 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// 2. Load configuration
+// 2. Load configuration and security monitor
     try {
         require_once __DIR__ . '/../config/secrets.php';
+        require_once __DIR__ . '/security_monitor.php';
     } catch (Throwable $e) {
-    error_log("Failed to load secrets.php: " . $e->getMessage());
+    error_log("Failed to load configuration: " . $e->getMessage());
     echo json_encode(['success' => false, 'message' => 'Server configuration error. Please try again later.']);
     http_response_code(500);
     exit();
@@ -105,7 +109,17 @@ function validateInput($data) {
         '/on\w+\s*=/i',
         '/<iframe/i',
         '/<object/i',
-        '/<embed/i'
+        '/<embed/i',
+        '/<form/i',
+        '/<input/i',
+        '/<textarea/i',
+        '/<select/i',
+        '/<button/i',
+        '/<link/i',
+        '/<meta/i',
+        '/vbscript:/i',
+        '/data:text\/html/i',
+        '/data:application\/javascript/i'
     ];
     
     foreach ($suspiciousPatterns as $pattern) {
@@ -141,6 +155,7 @@ try {
     
     // Check rate limit
     if (!checkRateLimit($clientIP)) {
+        $securityMonitor->logRateLimitViolation($clientIP, RATE_LIMIT_REQUESTS, RATE_LIMIT_WINDOW);
         error_log("Rate limit exceeded for IP: " . $clientIP);
         echo json_encode(['success' => false, 'message' => 'Too many requests. Please try again later.']);
         http_response_code(429);
@@ -171,6 +186,12 @@ try {
     
     // Check honeypot fields - if any are filled, it's likely a bot
     if (!empty($website) || !empty($emailConfirm) || !empty($phoneConfirm)) {
+        $triggeredFields = [];
+        if (!empty($website)) $triggeredFields[] = 'website';
+        if (!empty($emailConfirm)) $triggeredFields[] = 'email_confirm';
+        if (!empty($phoneConfirm)) $triggeredFields[] = 'phone_confirm';
+        
+        $securityMonitor->logHoneypotTrigger($clientIP, $triggeredFields);
         error_log("Honeypot field triggered for IP: " . $clientIP . " - Website: '$website', Email Confirm: '$emailConfirm', Phone Confirm: '$phoneConfirm'");
         echo json_encode(['success' => false, 'message' => 'Invalid form submission. Please try again.']);
         http_response_code(400);
@@ -179,6 +200,7 @@ try {
     
     // Validate CSRF token
     if (!validateCSRFToken($csrfToken)) {
+        $securityMonitor->logCSRFViolation($clientIP);
         error_log("CSRF token validation failed for IP: " . $clientIP);
         echo json_encode(['success' => false, 'message' => 'Security validation failed. Please refresh the page and try again.']);
         http_response_code(403);

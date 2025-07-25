@@ -4,7 +4,10 @@ Header always set Content-Security-Policy "default-src 'self'; script-src 'self'
 Header always set X-Frame-Options "SAMEORIGIN"
 Header always set X-Content-Type-Options "nosniff"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
-Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+Header always set X-Permitted-Cross-Domain-Policies "none"
 
 # Force HTTPS
 RewriteEngine On
@@ -38,4 +41,19 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     ExpiresByType image/x-icon "access plus 1 year"
     ExpiresByType application/pdf "access plus 1 month"
     ExpiresByType application/x-shockwave-flash "access plus 1 month"
-</IfModule> 
+</IfModule>
+
+# Block dangerous file types
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
+    Require all denied
+</FilesMatch>
+
+# Block access to sensitive files
+<FilesMatch "^(\.htaccess|\.htpasswd|\.env|config\.php|secrets\.php|\.git|\.svn|\.DS_Store|Thumbs\.db)$">
+    Require all denied
+</FilesMatch>
+
+# Block access to backup files
+<FilesMatch "\.(bak|backup|old|orig|save|swp|tmp|temp)$">
+    Require all denied
+</FilesMatch> 
