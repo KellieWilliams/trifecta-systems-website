@@ -1,6 +1,9 @@
 {
   "name": "Trifecta.Systems",
   "short_name": "Trifecta",
+  "description": "Tech Solutions for Your Business - Website Development, Data Analytics, Cybersecurity, and Custom AI Solutions",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/Gallery/favicon/web-app-manifest-192x192.png",
@@ -15,7 +18,8 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "theme_color": "#0F131C",
+  "background_color": "#0F131C",
+  "display": "standalone",
+  "orientation": "portrait"
 }
