@@ -305,6 +305,13 @@
                           class="form-input"></textarea>
             </div>
 
+            <!-- Honeypot fields to catch bots -->
+            <div class="absolute left-[-9999px] top-[-9999px] opacity-0 pointer-events-none">
+                <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                <input type="email" name="email_confirm" id="email_confirm" tabindex="-1" autocomplete="off">
+                <input type="text" name="phone_confirm" id="phone_confirm" tabindex="-1" autocomplete="off">
+            </div>
+
             <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
 
             <div class="flex items-center justify-center">

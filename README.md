@@ -39,11 +39,13 @@ Trifecta/
 │   ├── robots.txt              # Search engine directives
 │   ├── sitemap.xml             # XML sitemap
 │   ├── .htaccess               # Apache configuration
-│   ├── Gallery/                # Image assets
-│   │   ├── favicon/            # Favicon files
-│   │   └── *.png/jpg/webp      # Website images
-│   └── backend/                # Server-side scripts
-│       └── submit_form.php     # Contact form handler
+│   └── Gallery/                # Image assets
+│       ├── favicon/            # Favicon files
+│       └── *.png/jpg/webp      # Website images
+├── backend/                    # Server-side scripts
+│   ├── submit_form.php         # Contact form handler
+│   ├── csrf_token.php          # CSRF token management
+│   └── get_recaptcha_key.php   # reCAPTCHA key provider
 ├── config/                     # Configuration files (gitignored)
 │   └── secrets.php             # API keys and sensitive data
 └── README.md                   # This file
@@ -77,6 +79,7 @@ Trifecta/
 
 3. **Upload to web server**
    - Upload `public_html/` contents to your web root
+   - Upload `backend/` directory to a secure location outside web root
    - Ensure `config/` directory is outside web root for security
 
 4. **Verify setup**
@@ -89,6 +92,8 @@ Trifecta/
 ### Environment Variables
 
 The following variables need to be configured in `config/secrets.php`:
+
+**Important**: The `backend/` directory should be placed outside the web root for security. Update the fetch URLs in `script.js` if your backend is located elsewhere.
 
 - `RECAPTCHA_SECRET_KEY`: Google reCAPTCHA v3 secret key
 - `TO_EMAIL`: Email address to receive contact form submissions

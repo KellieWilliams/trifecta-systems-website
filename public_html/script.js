@@ -5,68 +5,157 @@
 // Removed: function onSubmit(token) { ... }
 
 
-// Client-side form validation and reCAPTCHA execution for the contact form.
+// Enhanced client-side form validation and reCAPTCHA execution
 async function validateFormAndRecaptcha(event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
 
     const contactForm = document.getElementById("contactForm");
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const messageInput = document.getElementById('message');
-    const recaptchaResponseInput = document.getElementById('recaptchaResponse'); // Get the hidden input
+    const recaptchaResponseInput = document.getElementById('recaptchaResponse');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
 
-    // Perform basic client-side validation for required fields.
-    if (!nameInput || !emailInput || !messageInput || !nameInput.value || !emailInput.value || !messageInput.value) {
-        alert('Please fill in all required fields (Name, Email, Message).'); // User-friendly alert
-        return false; // Prevent further execution.
+    // Enhanced client-side validation
+    const validationErrors = [];
+    
+    // Name validation
+    if (!nameInput.value.trim()) {
+        validationErrors.push('Name is required');
+    } else if (nameInput.value.trim().length > 100) {
+        validationErrors.push('Name must be 100 characters or less');
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailInput.value.trim()) {
+        validationErrors.push('Email is required');
+    } else if (!emailRegex.test(emailInput.value.trim())) {
+        validationErrors.push('Please enter a valid email address');
+    }
+    
+    // Message validation
+    if (!messageInput.value.trim()) {
+        validationErrors.push('Message is required');
+    } else if (messageInput.value.trim().length > 2000) {
+        validationErrors.push('Message must be 2000 characters or less');
+    }
+    
+    // Phone validation (optional)
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput && phoneInput.value.trim()) {
+        const phoneRegex = /^[\d\s\+\-\(\)]{10,20}$/;
+        if (!phoneRegex.test(phoneInput.value.trim())) {
+            validationErrors.push('Please enter a valid phone number');
+        }
+    }
+    
+    // Honeypot field validation (should be empty)
+    const honeypotFields = ['website', 'email_confirm', 'phone_confirm'];
+    for (const fieldName of honeypotFields) {
+        const field = document.getElementById(fieldName);
+        if (field && field.value.trim()) {
+            validationErrors.push('Invalid form submission detected');
+            break;
+        }
     }
 
+    if (validationErrors.length > 0) {
+        alert('Please correct the following errors:\n' + validationErrors.join('\n'));
+        return false;
+    }
+
+    // Disable submit button to prevent double submission
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
     try {
-        // Execute reCAPTCHA and get the token
+        // Execute reCAPTCHA with enhanced error handling
         if (typeof grecaptcha !== 'undefined' && grecaptcha.execute) {
-            // Replace 'YOUR_RECAPTCHA_SITE_KEY' with your actual reCAPTCHA site key from Google Admin Console
-            const token = await grecaptcha.execute('6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW', { action: 'submit_contact_form' });
-            recaptchaResponseInput.value = token; // Set the hidden input value
+            // Get reCAPTCHA site key from server
+            const siteKeyResponse = await fetch('../backend/get_recaptcha_key.php');
+            if (!siteKeyResponse.ok) {
+                throw new Error('Failed to get security configuration. Please refresh the page and try again.');
+            }
+            const siteKeyData = await siteKeyResponse.json();
+            
+            const token = await grecaptcha.execute(siteKeyData.site_key, { 
+                action: 'submit_contact_form' 
+            });
+            recaptchaResponseInput.value = token;
         } else {
-            console.error('reCAPTCHA script not loaded or grecaptcha.execute not available.');
-            // THIS IS THE LINE TO UPDATE FOR BRAVE USERS
-            alert('Error: reCAPTCHA is not available. Please try again. If using Brave Browser, please turn off Shields for this site.');
-            return false; // Strictly prevent submission if reCAPTCHA isn't ready
+            throw new Error('reCAPTCHA is not available. Please refresh the page and try again.');
         }
 
-        // Collect all form data
+        // Get CSRF token from server
+        const csrfToken = await getCSRFToken();
+        if (!csrfToken) {
+            throw new Error('Failed to get security token. Please refresh the page and try again.');
+        }
+
+        // Prepare form data with enhanced security
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData.entries());
-
-        // Ensure the reCAPTCHA token is explicitly included in the data sent
+        
+        // Remove honeypot fields from data before sending
+        delete data['website'];
+        delete data['email_confirm'];
+        delete data['phone_confirm'];
+        
         data['g-recaptcha-response'] = recaptchaResponseInput.value;
+        data['csrf_token'] = csrfToken;
 
-        // THIS IS THE NEW LINE YOU NEED TO ADD, and adjust its path:
-        // Adjust this URL to the actual path of your submit_form.php on Namecheap
-        // Assuming index.html is in public_html and submit_form.php is in public_html/backend/
-        const backendUrl = 'backend/submit_form.php'; // Correct path for your setup
-
-        const response = await fetch(backendUrl, {
+        const response = await fetch('../backend/submit_form.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json', // Tell the server you're sending JSON
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken
             },
-            body: JSON.stringify(data), // Send the data as a JSON string
+            body: JSON.stringify(data)
         });
 
-        const result = await response.json(); // Parse the JSON response from PHP
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ message: 'Network error occurred' }));
+            throw new Error(errorData.message || `HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
 
         if (result.success) {
-            alert(result.message); // Show success message
-            contactForm.reset(); // Clear the form
+            alert(result.message);
+            contactForm.reset();
+            // Clear any stored tokens and honeypot fields
+            recaptchaResponseInput.value = '';
+            honeypotFields.forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                if (field) field.value = '';
+            });
         } else {
-            alert(`Error: ${result.message}`); // Show error message from backend
+            throw new Error(result.message || 'Submission failed');
         }
 
     } catch (error) {
         console.error('Form submission error:', error);
-        alert('An unexpected error occurred. Please try again.');
+        alert('Error: ' + error.message);
+    } finally {
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send Message';
     }
+}
+
+// Fetch CSRF token from server
+async function getCSRFToken() {
+    try {
+        const response = await fetch('../backend/csrf_token.php');
+        if (response.ok) {
+            const data = await response.json();
+            return data.csrf_token;
+        }
+    } catch (error) {
+        console.error('Failed to get CSRF token:', error);
+    }
+    return null;
 }
 
 // --- Gemini AI Integration Logic for ai-custom-solutions.html ---
