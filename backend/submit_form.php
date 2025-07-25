@@ -86,9 +86,10 @@ function validateInput($data) {
     
     // Phone validation (optional)
     if (!empty($data['phone'])) {
-        $phone = preg_replace('/[^0-9+\-\(\)\s]/', '', $data['phone']);
-        if (strlen($phone) < 10 || strlen($phone) > 20) {
-            $errors[] = 'Phone number must be between 10 and 20 digits';
+        // Remove formatting and validate as 10 digits
+        $phoneDigits = preg_replace('/[^0-9]/', '', $data['phone']);
+        if (strlen($phoneDigits) !== 10) {
+            $errors[] = 'Phone number must be exactly 10 digits';
         }
     }
     

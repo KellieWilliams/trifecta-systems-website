@@ -27,10 +27,9 @@ async function validateFormAndRecaptcha(event) {
     }
     
     // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailInput.value.trim()) {
         validationErrors.push('Email is required');
-    } else if (!emailRegex.test(emailInput.value.trim())) {
+    } else if (!validateEmail(emailInput.value.trim())) {
         validationErrors.push('Please enter a valid email address');
     }
     
@@ -44,9 +43,10 @@ async function validateFormAndRecaptcha(event) {
     // Phone validation (optional)
     const phoneInput = document.getElementById('phone');
     if (phoneInput && phoneInput.value.trim()) {
-        const phoneRegex = /^[\d\s\+\-\(\)]{10,20}$/;
-        if (!phoneRegex.test(phoneInput.value.trim())) {
-            validationErrors.push('Please enter a valid phone number');
+        // Remove formatting for validation
+        const phoneDigits = phoneInput.value.replace(/\D/g, '');
+        if (phoneDigits.length !== 10) {
+            validationErrors.push('Please enter a valid 10-digit phone number');
         }
     }
     
@@ -156,6 +156,126 @@ async function getCSRFToken() {
         console.error('Failed to get CSRF token:', error);
     }
     return null;
+}
+
+// Phone number mask function
+function formatPhoneNumber(input) {
+    // Remove all non-digits
+    let value = input.value.replace(/\D/g, '');
+    
+    // Limit to 10 digits
+    value = value.substring(0, 10);
+    
+    // Apply mask: ###-###-####
+    if (value.length >= 6) {
+        value = value.substring(0, 3) + '-' + value.substring(3, 6) + '-' + value.substring(6);
+    } else if (value.length >= 3) {
+        value = value.substring(0, 3) + '-' + value.substring(3);
+    }
+    
+    input.value = value;
+}
+
+// Initialize phone number mask
+function initializePhoneMask() {
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        // Apply mask on input
+        phoneInput.addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+        
+        // Apply mask on paste
+        phoneInput.addEventListener('paste', function(e) {
+            setTimeout(() => {
+                formatPhoneNumber(this);
+            }, 0);
+        });
+        
+        // Handle backspace and delete properly
+        phoneInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' || e.key === 'Delete') {
+                // Allow default behavior for backspace/delete
+                return;
+            }
+            
+            // Only allow digits, backspace, delete, tab, escape, enter
+            if (!/[\d\b\delete\tab\escape\enter]/.test(e.key.toLowerCase())) {
+                e.preventDefault();
+            }
+        });
+    }
+}
+
+// Email validation function
+function validateEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+}
+
+// Initialize email validation
+function initializeEmailValidation() {
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+        // Real-time validation on input
+        emailInput.addEventListener('input', function() {
+            const email = this.value.trim();
+            const isValid = email === '' || validateEmail(email);
+            
+            // Update visual feedback
+            if (email === '') {
+                this.classList.remove('border-red-500', 'border-green-500');
+                this.classList.add('border-gray-600');
+            } else if (isValid) {
+                this.classList.remove('border-red-500', 'border-gray-600');
+                this.classList.add('border-green-500');
+            } else {
+                this.classList.remove('border-green-500', 'border-gray-600');
+                this.classList.add('border-red-500');
+            }
+        });
+        
+        // Validation on blur (when user leaves the field)
+        emailInput.addEventListener('blur', function() {
+            const email = this.value.trim();
+            if (email !== '' && !validateEmail(email)) {
+                // Show error message
+                showEmailError('Please enter a valid email address');
+            } else {
+                hideEmailError();
+            }
+        });
+        
+        // Clear validation on focus
+        emailInput.addEventListener('focus', function() {
+            hideEmailError();
+        });
+    }
+}
+
+// Show email error message
+function showEmailError(message) {
+    let errorElement = document.getElementById('email-error');
+    if (!errorElement) {
+        const emailInput = document.getElementById('email');
+        if (emailInput) {
+            errorElement = document.createElement('div');
+            errorElement.id = 'email-error';
+            errorElement.className = 'text-red-500 text-sm mt-1';
+            emailInput.parentNode.appendChild(errorElement);
+        }
+    }
+    if (errorElement) {
+        errorElement.textContent = message;
+    }
+}
+
+// Hide email error message
+function hideEmailError() {
+    const errorElement = document.getElementById('email-error');
+    if (errorElement) {
+        errorElement.remove();
+    }
 }
 
 // --- Gemini AI Integration Logic for ai-custom-solutions.html ---
@@ -424,4 +544,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateReviewDisplay(); // Display the first review immediately and start fade-in
         setInterval(updateReviewDisplay, 20000); // Cycle every 20 seconds
     }
+    
+    // --- Initialize Phone Number Mask ---
+    initializePhoneMask();
+    
+    // --- Initialize Email Validation ---
+    initializeEmailValidation();
 });
