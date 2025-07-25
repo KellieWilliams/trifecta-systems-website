@@ -278,6 +278,251 @@ function hideEmailError() {
     }
 }
 
+// --- Cookie Management System ---
+
+// Cookie consent management
+class CookieManager {
+    constructor() {
+        this.cookieBanner = document.getElementById('cookie-banner');
+        this.cookieModal = document.getElementById('cookie-modal');
+        this.cookieConsentKey = 'trifecta_cookie_consent';
+        this.cookiePreferencesKey = 'trifecta_cookie_preferences';
+        this.init();
+    }
+    
+    init() {
+        // Check if user has already made a choice
+        const consent = this.getCookieConsent();
+        if (!consent) {
+            this.showCookieBanner();
+        }
+        
+        this.bindEvents();
+    }
+    
+    bindEvents() {
+        // Banner buttons
+        const acceptBtn = document.getElementById('accept-cookies');
+        const settingsBtn = document.getElementById('cookie-settings');
+        
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', () => this.acceptAllCookies());
+        }
+        
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', () => this.showCookieModal());
+        }
+        
+        // Modal buttons
+        const closeBtn = document.getElementById('close-cookie-modal');
+        const saveBtn = document.getElementById('save-cookie-preferences');
+        const acceptAllBtn = document.getElementById('accept-all-cookies');
+        const rejectAllBtn = document.getElementById('reject-all-cookies');
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.hideCookieModal());
+        }
+        
+        if (saveBtn) {
+            saveBtn.addEventListener('click', () => this.savePreferences());
+        }
+        
+        if (acceptAllBtn) {
+            acceptAllBtn.addEventListener('click', () => this.acceptAllCookies());
+        }
+        
+        if (rejectAllBtn) {
+            rejectAllBtn.addEventListener('click', () => this.rejectAllCookies());
+        }
+        
+        // Close modal when clicking outside
+        if (this.cookieModal) {
+            this.cookieModal.addEventListener('click', (e) => {
+                if (e.target === this.cookieModal) {
+                    this.hideCookieModal();
+                }
+            });
+        }
+    }
+    
+    showCookieBanner() {
+        if (this.cookieBanner) {
+            // Small delay to ensure page is loaded
+            setTimeout(() => {
+                this.cookieBanner.classList.remove('translate-y-full');
+            }, 1000);
+        }
+    }
+    
+    hideCookieBanner() {
+        if (this.cookieBanner) {
+            this.cookieBanner.classList.add('translate-y-full');
+        }
+    }
+    
+    showCookieModal() {
+        if (this.cookieModal) {
+            this.cookieModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    hideCookieModal() {
+        if (this.cookieModal) {
+            this.cookieModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    }
+    
+    acceptAllCookies() {
+        const preferences = {
+            essential: true,
+            functional: true,
+            analytics: true,
+            timestamp: new Date().toISOString()
+        };
+        
+        this.setCookieConsent('accepted', preferences);
+        this.hideCookieBanner();
+        this.hideCookieModal();
+        this.loadCookies(preferences);
+    }
+    
+    rejectAllCookies() {
+        const preferences = {
+            essential: true, // Essential cookies cannot be rejected
+            functional: false,
+            analytics: false,
+            timestamp: new Date().toISOString()
+        };
+        
+        this.setCookieConsent('rejected', preferences);
+        this.hideCookieBanner();
+        this.hideCookieModal();
+        this.loadCookies(preferences);
+    }
+    
+    savePreferences() {
+        const functionalCookies = document.getElementById('functional-cookies');
+        const analyticsCookies = document.getElementById('analytics-cookies');
+        
+        const preferences = {
+            essential: true, // Always true
+            functional: functionalCookies ? functionalCookies.checked : false,
+            analytics: analyticsCookies ? analyticsCookies.checked : false,
+            timestamp: new Date().toISOString()
+        };
+        
+        this.setCookieConsent('custom', preferences);
+        this.hideCookieBanner();
+        this.hideCookieModal();
+        this.loadCookies(preferences);
+    }
+    
+    setCookieConsent(status, preferences) {
+        // Store in localStorage for persistence
+        localStorage.setItem(this.cookieConsentKey, status);
+        localStorage.setItem(this.cookiePreferencesKey, JSON.stringify(preferences));
+        
+        // Also set a cookie for server-side access
+        const expiryDate = new Date();
+        expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+        document.cookie = `${this.cookieConsentKey}=${status}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Strict`;
+    }
+    
+    getCookieConsent() {
+        return localStorage.getItem(this.cookieConsentKey);
+    }
+    
+    getCookiePreferences() {
+        const preferences = localStorage.getItem(this.cookiePreferencesKey);
+        return preferences ? JSON.parse(preferences) : null;
+    }
+    
+    loadCookies(preferences) {
+        // Essential cookies are always loaded
+        this.loadEssentialCookies();
+        
+        // Load other cookies based on preferences
+        if (preferences.functional) {
+            this.loadFunctionalCookies();
+        }
+        
+        if (preferences.analytics) {
+            this.loadAnalyticsCookies();
+        }
+    }
+    
+    loadEssentialCookies() {
+        // Essential cookies are already loaded (reCAPTCHA, sessionStorage)
+        console.log('Essential cookies loaded');
+    }
+    
+    loadFunctionalCookies() {
+        // Load functional cookies (Google Fonts optimization, etc.)
+        console.log('Functional cookies loaded');
+    }
+    
+    loadAnalyticsCookies() {
+        // Load analytics cookies (future implementation)
+        console.log('Analytics cookies loaded');
+    }
+    
+    // Check if specific cookie type is allowed
+    isCookieAllowed(type) {
+        const preferences = this.getCookiePreferences();
+        if (!preferences) return false;
+        
+        switch (type) {
+            case 'essential':
+                return true; // Always allowed
+            case 'functional':
+                return preferences.functional;
+            case 'analytics':
+                return preferences.analytics;
+            default:
+                return false;
+        }
+    }
+}
+
+// Initialize cookie manager
+let cookieManager;
+
+// Email obfuscation function
+function obfuscateEmail() {
+    const emailElement = document.getElementById('obfuscated-email');
+    if (emailElement) {
+        // Obfuscated email parts
+        const parts = ['info', 'trifecta', 'systems'];
+        const domain = parts[1] + '.' + parts[2];
+        const email = parts[0] + '@' + domain;
+        
+        // Create clickable email link
+        emailElement.innerHTML = email;
+        emailElement.addEventListener('click', function() {
+            window.location.href = 'mailto:' + email;
+        });
+        
+        // Add title attribute for accessibility
+        emailElement.title = 'Click to send email to ' + email;
+    }
+}
+
+// Load cookie banner HTML
+async function loadCookieBanner() {
+    try {
+        const response = await fetch('cookie-banner.html');
+        const html = await response.text();
+        const container = document.getElementById('cookie-banner-container');
+        if (container) {
+            container.innerHTML = html;
+        }
+    } catch (error) {
+        console.error('Failed to load cookie banner:', error);
+    }
+}
+
 // --- Gemini AI Integration Logic for ai-custom-solutions.html ---
 
 // Function to generate a response from the general Gemini API demo.
@@ -550,4 +795,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Initialize Email Validation ---
     initializeEmailValidation();
+    
+    // --- Load Cookie Banner and Initialize Cookie Manager ---
+    loadCookieBanner().then(() => {
+        cookieManager = new CookieManager();
+    });
+    
+    // --- Initialize Email Obfuscation ---
+    obfuscateEmail();
 });
