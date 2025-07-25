@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Rights Request | Trifecta.Systems</title>
+    <meta name="description" content="Exercise your data rights under GDPR and CCPA - request access, deletion, or portability of your personal data.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trifecta.systems/data-rights-request.html">
+    <meta property="og:title" content="Data Rights Request | Trifecta.Systems">
+    <meta property="og:description" content="Exercise your data rights under GDPR and CCPA - request access, deletion, or portability of your personal data.">
+    <meta property="og:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://trifecta.systems/data-rights-request.html">
+    <meta property="twitter:title" content="Data Rights Request | Trifecta.Systems">
+    <meta property="twitter:description" content="Exercise your data rights under GDPR and CCPA - request access, deletion, or portability of your personal data.">
+    <meta property="twitter:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="Gallery/favicon/site.webmanifest" />
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-[#0F131C] text-white py-4 shadow-lg">
+        <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
+                <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
+                <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            </a>
+
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2024/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <nav id="mobileMenu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
+                    <li class="relative group w-full md:w-auto services-menu-item"> 
+                        <div class="flex items-center justify-center nav-link-wrapper md:block">
+                            <a href="index.html#services" class="nav-link">
+                                Services
+                            </a>
+                            <button id="servicesDropdownToggle" class="md:hidden ml-1 p-1 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-gray-400">
+                                <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2024/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                            <li><a href="web-development.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Web Development</a></li>
+                            <li><a href="data-analytics.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Data Analytics</a></li>
+                            <li><a href="cybersecurity.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Cybersecurity</a></li>
+                            <li><a href="ai-custom-solutions.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Custom/AI Solutions</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-white mb-8">Data Rights Request</h1>
+            
+            <div class="bg-slate-800 rounded-lg p-8 text-gray-300 space-y-6">
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4">Your Data Rights</h2>
+                    <p class="leading-relaxed mb-6">
+                        Under privacy laws like GDPR (General Data Protection Regulation) and CCPA (California Consumer Privacy Act), 
+                        you have specific rights regarding your personal data. Use this form to exercise those rights.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-slate-700 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold text-white mb-2">📋 Access Your Data</h3>
+                            <p class="text-sm">Request a copy of all personal data we have about you</p>
+                        </div>
+                        <div class="bg-slate-700 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold text-white mb-2">🗑️ Delete Your Data</h3>
+                            <p class="text-sm">Request deletion of your personal data from our systems</p>
+                        </div>
+                        <div class="bg-slate-700 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold text-white mb-2">📤 Data Portability</h3>
+                            <p class="text-sm">Receive your data in a machine-readable format</p>
+                        </div>
+                        <div class="bg-slate-700 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold text-white mb-2">✏️ Correct Your Data</h3>
+                            <p class="text-sm">Request correction of inaccurate personal information</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4">Submit Your Request</h2>
+                    <form id="dataRightsForm" class="space-y-6">
+                        <!-- Request Type -->
+                        <div>
+                            <label for="requestType" class="block text-gray-300 text-sm font-bold mb-2">
+                                Request Type <span class="text-red-500">*</span>
+                            </label>
+                            <select id="requestType" name="requestType" required class="form-input">
+                                <option value="">Select a request type</option>
+                                <option value="access">Access my personal data</option>
+                                <option value="deletion">Delete my personal data</option>
+                                <option value="portability">Data portability (download my data)</option>
+                                <option value="correction">Correct inaccurate data</option>
+                                <option value="objection">Object to data processing</option>
+                                <option value="withdrawal">Withdraw consent</option>
+                            </select>
+                        </div>
+
+                        <!-- Personal Information -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="firstName" class="block text-gray-300 text-sm font-bold mb-2">
+                                    First Name <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" id="firstName" name="firstName" required class="form-input">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-gray-300 text-sm font-bold mb-2">
+                                    Last Name <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" id="lastName" name="lastName" required class="form-input">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-gray-300 text-sm font-bold mb-2">
+                                Email Address <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" required placeholder="example@example.com" class="form-input">
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-gray-300 text-sm font-bold mb-2">
+                                Phone Number (Optional)
+                            </label>
+                            <input type="tel" id="phone" name="phone" placeholder="###-###-####" class="form-input">
+                        </div>
+
+                        <!-- Verification -->
+                        <div>
+                            <label for="verificationMethod" class="block text-gray-300 text-sm font-bold mb-2">
+                                Verification Method <span class="text-red-500">*</span>
+                            </label>
+                            <select id="verificationMethod" name="verificationMethod" required class="form-input">
+                                <option value="">Select verification method</option>
+                                <option value="email">Email verification</option>
+                                <option value="phone">Phone verification</option>
+                                <option value="document">Government ID verification</option>
+                            </select>
+                        </div>
+
+                        <!-- Additional Details -->
+                        <div>
+                            <label for="additionalDetails" class="block text-gray-300 text-sm font-bold mb-2">
+                                Additional Details (Optional)
+                            </label>
+                            <textarea id="additionalDetails" name="additionalDetails" rows="4" 
+                                      placeholder="Please provide any additional information that might help us process your request..." 
+                                      class="form-input"></textarea>
+                        </div>
+
+                        <!-- Honeypot fields -->
+                        <div class="absolute left-[-9999px] top-[-9999px] opacity-0 pointer-events-none">
+                            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                            <input type="email" name="email_confirm" id="email_confirm" tabindex="-1" autocomplete="off">
+                            <input type="text" name="phone_confirm" id="phone_confirm" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- reCAPTCHA -->
+                        <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+
+                        <!-- Submit Button -->
+                        <div class="flex items-center justify-center">
+                            <button type="submit" 
+                                    class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105 shadow-xl">
+                                Submit Request
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4">What Happens Next?</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1">1</div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">Request Received</h3>
+                                <p class="text-sm text-gray-300">We'll acknowledge your request within 24 hours</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1">2</div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">Identity Verification</h3>
+                                <p class="text-sm text-gray-300">We'll verify your identity to protect your data</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1">3</div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">Request Processing</h3>
+                                <p class="text-sm text-gray-300">We'll process your request within 30 days (or 45 days with notice)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1">4</div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">Response Delivered</h3>
+                                <p class="text-sm text-gray-300">You'll receive your data or confirmation of action taken</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4">Important Information</h2>
+                    <div class="bg-slate-700 rounded-lg p-4 space-y-3">
+                        <div class="flex items-start space-x-2">
+                            <span class="text-yellow-400 flex-shrink-0">⚠️</span>
+                            <p class="text-sm">We may need to verify your identity before processing your request to protect your privacy</p>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-blue-400 flex-shrink-0">⏱️</span>
+                            <p class="text-sm">We will respond to your request within 30 days, or 45 days if we need additional time</p>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-green-400 flex-shrink-0">💰</span>
+                            <p class="text-sm">There is no charge for processing your data rights request</p>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-purple-400 flex-shrink-0">🔄</span>
+                            <p class="text-sm">You can submit multiple requests, but we may limit excessive requests</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+            <div class="mt-4 text-sm">
+                <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include Cookie Banner -->
+    <div id="cookie-banner-container"></div>
+    
+    <script src="script.js" type="text/javascript" defer></script>
+
+    <!-- reCAPTCHA API call -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW" defer></script>
+</body>
+</html> 

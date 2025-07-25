@@ -489,10 +489,219 @@ class CookieManager {
 // Initialize cookie manager
 let cookieManager;
 
+// Data Rights Request Form Handler
+function initializeDataRightsForm() {
+    const form = document.getElementById('dataRightsForm');
+    if (form) {
+        form.addEventListener('submit', handleDataRightsSubmit);
+    }
+}
+
+async function handleDataRightsSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    
+    try {
+        // Disable submit button
+        submitButton.disabled = true;
+        submitButton.textContent = 'Processing...';
+        
+        // Validate form
+        const validationErrors = validateDataRightsForm(form);
+        if (validationErrors.length > 0) {
+            throw new Error(validationErrors.join(', '));
+        }
+        
+        // Execute reCAPTCHA
+        const recaptchaResponseInput = document.getElementById('recaptchaResponse');
+        if (typeof grecaptcha !== 'undefined' && grecaptcha.execute) {
+            // Get reCAPTCHA site key from server
+            const siteKeyResponse = await fetch('../backend/get_recaptcha_key.php');
+            if (!siteKeyResponse.ok) {
+                throw new Error('Failed to get security configuration. Please refresh the page and try again.');
+            }
+            const siteKeyData = await siteKeyResponse.json();
+
+            const token = await grecaptcha.execute(siteKeyData.site_key, {
+                action: 'submit_data_rights_request'
+            });
+            recaptchaResponseInput.value = token;
+        } else {
+            throw new Error('reCAPTCHA is not available. Please refresh the page and try again.');
+        }
+        
+        // Get CSRF token
+        const csrfToken = await getCSRFToken();
+        if (!csrfToken) {
+            throw new Error('Failed to get security token. Please refresh the page and try again.');
+        }
+        
+        // Prepare form data
+        const formData = new FormData(form);
+        const data = {};
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        
+        // Add CSRF token
+        data.csrf_token = csrfToken;
+        
+        // Remove honeypot fields
+        delete data.website;
+        delete data.email_confirm;
+        delete data.phone_confirm;
+        
+        // Submit request
+        const response = await fetch('../backend/data_rights_request.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            // Show success message
+            showDataRightsSuccess(result.request_id);
+            form.reset();
+        } else {
+            throw new Error(result.message || 'An error occurred while submitting your request.');
+        }
+        
+    } catch (error) {
+        console.error('Data rights request error:', error);
+        showDataRightsError(error.message);
+    } finally {
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+    }
+}
+
+function validateDataRightsForm(form) {
+    const errors = [];
+    
+    // Required fields validation
+    const requiredFields = ['requestType', 'firstName', 'lastName', 'email', 'verificationMethod'];
+    requiredFields.forEach(field => {
+        const input = form.querySelector(`[name="${field}"]`);
+        if (!input || !input.value.trim()) {
+            errors.push(`${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`);
+        }
+    });
+    
+    // Email validation
+    const emailInput = form.querySelector('[name="email"]');
+    if (emailInput && emailInput.value.trim() && !validateEmail(emailInput.value.trim())) {
+        errors.push('Please enter a valid email address');
+    }
+    
+    // Phone validation (if provided)
+    const phoneInput = form.querySelector('[name="phone"]');
+    if (phoneInput && phoneInput.value.trim()) {
+        const phoneDigits = phoneInput.value.replace(/\D/g, '');
+        if (phoneDigits.length !== 10) {
+            errors.push('Phone number must be exactly 10 digits');
+        }
+    }
+    
+    // Honeypot validation
+    const honeypotFields = ['website', 'email_confirm', 'phone_confirm'];
+    honeypotFields.forEach(field => {
+        const input = form.querySelector(`[name="${field}"]`);
+        if (input && input.value.trim()) {
+            errors.push('Invalid form submission');
+        }
+    });
+    
+    return errors;
+}
+
+function showDataRightsSuccess(requestId) {
+    // Create success message
+    const successDiv = document.createElement('div');
+    successDiv.className = 'fixed top-4 right-4 bg-green-600 text-white p-4 rounded-lg shadow-lg z-50 max-w-md';
+    successDiv.innerHTML = `
+        <div class="flex items-start">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-green-200" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <h3 class="text-sm font-medium">Request Submitted Successfully!</h3>
+                <div class="mt-2 text-sm">
+                    <p>Your data rights request has been submitted.</p>
+                    <p class="mt-1 font-mono text-xs">Request ID: ${requestId}</p>
+                    <p class="mt-1 text-xs">Check your email for confirmation.</p>
+                </div>
+            </div>
+            <div class="ml-auto pl-3">
+                <button onclick="this.parentElement.parentElement.remove()" class="text-green-200 hover:text-white">
+                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(successDiv);
+    
+    // Auto-remove after 10 seconds
+    setTimeout(() => {
+        if (successDiv.parentElement) {
+            successDiv.remove();
+        }
+    }, 10000);
+}
+
+function showDataRightsError(message) {
+    // Create error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'fixed top-4 right-4 bg-red-600 text-white p-4 rounded-lg shadow-lg z-50 max-w-md';
+    errorDiv.innerHTML = `
+        <div class="flex items-start">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-red-200" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <h3 class="text-sm font-medium">Error</h3>
+                <div class="mt-2 text-sm">
+                    <p>${message}</p>
+                </div>
+            </div>
+            <div class="ml-auto pl-3">
+                <button onclick="this.parentElement.parentElement.remove()" class="text-red-200 hover:text-white">
+                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(errorDiv);
+    
+    // Auto-remove after 10 seconds
+    setTimeout(() => {
+        if (errorDiv.parentElement) {
+            errorDiv.remove();
+        }
+    }, 10000);
+}
+
 // Email obfuscation function
 function obfuscateEmail() {
-    const emailElement = document.getElementById('obfuscated-email');
-    if (emailElement) {
+    const emailElements = document.querySelectorAll('#obfuscated-email');
+    emailElements.forEach(emailElement => {
         // Obfuscated email parts
         const parts = ['info', 'trifecta', 'systems'];
         const domain = parts[1] + '.' + parts[2];
@@ -506,7 +715,7 @@ function obfuscateEmail() {
         
         // Add title attribute for accessibility
         emailElement.title = 'Click to send email to ' + email;
-    }
+    });
 }
 
 // Load cookie banner HTML
@@ -803,4 +1012,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Initialize Email Obfuscation ---
     obfuscateEmail();
+    
+    // --- Initialize Data Rights Request Form ---
+    initializeDataRightsForm();
 });
