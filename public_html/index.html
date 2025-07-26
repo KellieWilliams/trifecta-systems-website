@@ -86,8 +86,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Preload images for faster response on mouse hover for Our Services Section -->
+    <!-- Preload critical images for faster loading -->
     <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Hero_Background.webp">
+    <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_About_Us_Monitor.webp" fetchpriority="high">
     <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Web_Development.png">
     <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Data_Analytics.png">
     <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Cybersecurity.png">
@@ -253,7 +254,17 @@
         <h2 class="section-heading">About Us</h2>
         <div class="flex flex-col md:flex-row items-center justify-center gap-10">
             <div class="md:w-1/2">
-                <img src="Gallery/Gemini_Generated_Image_About_Us_Monitor.png" alt="Abstract image representing 'About Us'" class="rounded-xl shadow-lg mx-auto w-3/4 h-auto object-cover" loading="lazy">
+                <picture>
+                    <source srcset="Gallery/Gemini_Generated_Image_About_Us_Monitor.webp" type="image/webp">
+                    <img src="Gallery/Gemini_Generated_Image_About_Us_Monitor.png" 
+                         alt="Abstract image representing 'About Us'" 
+                         class="rounded-xl shadow-lg mx-auto w-3/4 h-auto object-cover" 
+                         loading="eager"
+                         fetchpriority="high"
+                         decoding="async"
+                         width="600"
+                         height="400">
+                </picture>
             </div>
             <div class="md:w-1/2 text-center md:text-left text-content-block"> <p class="mb-6">
                     At Trifecta.Systems, we believe in empowering small businesses and nonprofits with the technology they need to thrive in the digital age. We started because a friend needed their e-commerce website updated and streamlined for their custom reptile enclosures (<a href="https://crypticcreations.net/" class="text-gray-200 hover:text-white underline transition duration-300 ease-in-out">Cryptic Creations</a>). Now we have helped many, reptile or otherwise, with their digital needs.
