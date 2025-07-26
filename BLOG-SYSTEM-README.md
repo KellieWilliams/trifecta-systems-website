@@ -363,5 +363,5 @@ For questions or issues with the blog system:
 
 ---
 
-**Last Updated**: January 2025  
+**Last Updated**: July 2025  
 **Version**: 3.1 (Enhanced Fallback System) 
