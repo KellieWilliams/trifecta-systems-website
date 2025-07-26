@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Essential Cybersecurity Practices for Small Businesses in 2025 | Trifecta.Systems Blog</title>
-    <meta name="description" content="As cyber threats continue to evolve, small businesses need to stay ahead of the curve. Here are the essential cybersecurity practices that every small business should implement in 2025.">
+    <title>{{title}} | Trifecta.Systems Blog</title>
+    <meta name="description" content="{{description}}">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://trifecta.systems/blog-posts/cybersecurity-best-practices-2025.html">
-    <meta property="og:title" content="Essential Cybersecurity Practices for Small Businesses in 2025">
-    <meta property="og:description" content="As cyber threats continue to evolve, small businesses need to stay ahead of the curve. Here are the essential cybersecurity practices that every small business should implement in 2025.">
+    <meta property="og:url" content="https://trifecta.systems/blog-posts/{{slug}}.html">
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:description" content="{{description}}">
     <meta property="og:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
-    <meta property="article:published_time" content="2025-07-25T00:00:00Z">
+    <meta property="article:published_time" content="{{published_time}}">
     <meta property="article:author" content="Kellie Williams">
-    <meta property="article:section" content="Cybersecurity">
+    <meta property="article:section" content="{{category}}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://trifecta.systems/blog-posts/cybersecurity-best-practices-2025.html">
-    <meta property="twitter:title" content="Essential Cybersecurity Practices for Small Businesses in 2025">
-    <meta property="twitter:description" content="As cyber threats continue to evolve, small businesses need to stay ahead of the curve. Here are the essential cybersecurity practices that every small business should implement in 2025.">
+    <meta property="twitter:url" content="https://trifecta.systems/blog-posts/{{slug}}.html">
+    <meta property="twitter:title" content="{{title}}">
+    <meta property="twitter:description" content="{{description}}">
     <meta property="twitter:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -91,20 +91,20 @@
                     <li><span class="mx-2">/</span></li>
                     <li><a href="../blog.html" class="hover:text-white transition-colors duration-200">Blog</a></li>
                     <li><span class="mx-2">/</span></li>
-                    <li class="text-white">Essential Cybersecurity Practices for Small Businesses in 2025</li>
+                    <li class="text-white">{{title}}</li>
                 </ol>
             </nav>
 
             <!-- Article Header -->
             <article class="bg-slate-800 rounded-lg p-8 mb-8">
                 <div class="mb-6">
-                    <span class="bg-red-600 text-white text-sm px-3 py-1 rounded-full">Cybersecurity</span>
-                    <span class="text-gray-400 text-sm ml-4">Jul 25, 2025</span>
-                    <span class="text-gray-400 text-sm ml-4">5 min read</span>
+                    <span class="bg-{{category_color}}-600 text-white text-sm px-3 py-1 rounded-full">{{category}}</span>
+                    <span class="text-gray-400 text-sm ml-4">{{date}}</span>
+                    <span class="text-gray-400 text-sm ml-4">{{read_time}} min read</span>
                 </div>
                 
                 <h1 class="text-4xl font-bold text-white mb-6">
-                    Essential Cybersecurity Practices for Small Businesses in 2025
+                    {{title}}
                 </h1>
                 
                 <div class="flex items-center mb-8">
@@ -116,28 +116,13 @@
                 </div>
 
                 <p class="text-xl text-gray-300 leading-relaxed">
-                    As cyber threats continue to evolve, small businesses need to stay ahead of the curve. Here are the essential cybersecurity practices that every small business should implement in 2025.
+                    {{excerpt}}
                 </p>
             </article>
 
             <!-- Article Content -->
             <div class="bg-slate-800 rounded-lg p-8 text-gray-300 leading-relaxed space-y-6" id="blog-content">
-                <p>As cyber threats continue to evolve, small businesses need to stay ahead of the curve. Here are the essential cybersecurity practices that every small business should implement in 2025.</p>
-                
-                <h2 class="text-2xl font-bold text-white">1. Multi-Factor Authentication (MFA)</h2>
-                <p>Implement MFA across all business accounts and systems. This simple step can prevent the majority of account compromise attacks.</p>
-                
-                <h2 class="text-2xl font-bold text-white">2. Regular Security Updates</h2>
-                <p>Keep all software, operating systems, and applications updated with the latest security patches.</p>
-                
-                <h2 class="text-2xl font-bold text-white">3. Employee Security Training</h2>
-                <p>Regular training on phishing awareness, password security, and safe browsing practices is crucial.</p>
-                
-                <h2 class="text-2xl font-bold text-white">4. Data Backup Strategy</h2>
-                <p>Implement a 3-2-1 backup strategy: 3 copies, 2 different media types, 1 off-site location.</p>
-                
-                <h2 class="text-2xl font-bold text-white">5. Network Security</h2>
-                <p>Use firewalls, secure Wi-Fi networks, and consider VPN solutions for remote work.</p>
+                {{content}}
             </div>
 
             <!-- Share and Navigation -->

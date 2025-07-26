@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Generator | Trifecta.Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased bg-slate-900 text-white">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 class="text-3xl font-bold mb-8">Blog Post Generator</h1>
+        
+        <form id="blogForm" class="space-y-6">
+            <div>
+                <label for="title" class="block text-sm font-medium mb-2">Title</label>
+                <input type="text" id="title" name="title" required 
+                       class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+            
+            <div>
+                <label for="description" class="block text-sm font-medium mb-2">Meta Description</label>
+                <textarea id="description" name="description" rows="3" required
+                          class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+            </div>
+            
+            <div>
+                <label for="excerpt" class="block text-sm font-medium mb-2">Excerpt (for blog listing)</label>
+                <textarea id="excerpt" name="excerpt" rows="2" required
+                          class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="category" class="block text-sm font-medium mb-2">Category</label>
+                    <select id="category" name="category" required
+                            class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500">
+                        <option value="">Select Category</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Web Dev">Web Development</option>
+                        <option value="Data Analytics">Data Analytics</option>
+                        <option value="AI & ML">AI & ML</option>
+                        <option value="Tech Trends">Tech Trends</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="readTime" class="block text-sm font-medium mb-2">Read Time (minutes)</label>
+                    <input type="number" id="readTime" name="readTime" min="1" max="60" required
+                           class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="date" class="block text-sm font-medium mb-2">Publication Date</label>
+                    <input type="date" id="date" name="date" required
+                           class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                
+                <div>
+                    <label for="slug" class="block text-sm font-medium mb-2">URL Slug</label>
+                    <input type="text" id="slug" name="slug" required
+                           class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"
+                           placeholder="my-blog-post-title">
+                </div>
+            </div>
+            
+            <div>
+                <label for="content" class="block text-sm font-medium mb-2">Content (HTML)</label>
+                <textarea id="content" name="content" rows="20" required
+                          class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 font-mono text-sm"
+                          placeholder="<p>Your blog post content here...</p>"></textarea>
+            </div>
+            
+            <div class="flex space-x-4">
+                <button type="submit" 
+                        class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
+                    Generate Blog Post
+                </button>
+                <button type="button" id="previewBtn"
+                        class="bg-gray-600 hover:bg-gray-500 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
+                    Preview
+                </button>
+            </div>
+        </form>
+        
+        <div id="output" class="mt-8 hidden">
+            <h2 class="text-2xl font-bold mb-4">Generated Blog Post Data</h2>
+            <div class="bg-slate-800 rounded-lg p-6">
+                <pre id="jsonOutput" class="text-sm text-gray-300 overflow-x-auto"></pre>
+            </div>
+            
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold mb-2">Instructions:</h3>
+                <ol class="list-decimal list-inside space-y-1 text-sm text-gray-300">
+                    <li>Copy the generated JSON data above</li>
+                    <li>Open <code class="bg-slate-700 px-1 rounded">blog-system.js</code></li>
+                    <li>Add the new blog post object to the <code class="bg-slate-700 px-1 rounded">blogPosts</code> array</li>
+                    <li>Save the file and test the new blog post</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div id="preview" class="mt-8 hidden">
+            <h2 class="text-2xl font-bold mb-4">Preview</h2>
+            <div class="bg-slate-800 rounded-lg p-6">
+                <div id="previewContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('blogForm');
+            const output = document.getElementById('output');
+            const jsonOutput = document.getElementById('jsonOutput');
+            const preview = document.getElementById('preview');
+            const previewContent = document.getElementById('previewContent');
+            const previewBtn = document.getElementById('previewBtn');
+            
+            // Auto-generate slug from title
+            const titleInput = document.getElementById('title');
+            const slugInput = document.getElementById('slug');
+            
+            titleInput.addEventListener('input', function() {
+                const slug = titleInput.value
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .trim();
+                slugInput.value = slug;
+            });
+            
+            // Set default date to today
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                
+                // Format date for display
+                const date = new Date(data.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                });
+                
+                // Get category color
+                const categoryColors = {
+                    'Cybersecurity': 'red',
+                    'Web Dev': 'green',
+                    'Data Analytics': 'blue',
+                    'AI & ML': 'purple',
+                    'Tech Trends': 'purple'
+                };
+                
+                const blogPost = {
+                    slug: data.slug,
+                    title: data.title,
+                    description: data.description,
+                    excerpt: data.excerpt,
+                    category: data.category,
+                    category_color: categoryColors[data.category] || 'gray',
+                    date: formattedDate,
+                    read_time: parseInt(data.readTime),
+                    published_time: new Date(data.date).toISOString(),
+                    content: data.content
+                };
+                
+                jsonOutput.textContent = JSON.stringify(blogPost, null, 2);
+                output.classList.remove('hidden');
+                preview.classList.add('hidden');
+            });
+            
+            previewBtn.addEventListener('click', function() {
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                
+                const date = new Date(data.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                });
+                
+                const categoryColors = {
+                    'Cybersecurity': 'red',
+                    'Web Dev': 'green',
+                    'Data Analytics': 'blue',
+                    'AI & ML': 'purple',
+                    'Tech Trends': 'purple'
+                };
+                
+                const previewHTML = `
+                    <article class="bg-slate-700 rounded-lg p-6 mb-6">
+                        <div class="mb-4">
+                            <span class="bg-${categoryColors[data.category] || 'gray'}-600 text-white text-sm px-3 py-1 rounded-full">${data.category}</span>
+                            <span class="text-gray-400 text-sm ml-4">${formattedDate}</span>
+                            <span class="text-gray-400 text-sm ml-4">${data.readTime} min read</span>
+                        </div>
+                        
+                        <h1 class="text-3xl font-bold text-white mb-4">${data.title}</h1>
+                        
+                        <p class="text-xl text-gray-300 mb-6">${data.excerpt}</p>
+                        
+                        <div class="prose prose-invert max-w-none">
+                            ${data.content}
+                        </div>
+                    </article>
+                `;
+                
+                previewContent.innerHTML = previewHTML;
+                preview.classList.remove('hidden');
+                output.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html> 

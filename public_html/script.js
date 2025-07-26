@@ -721,7 +721,12 @@ function obfuscateEmail() {
 // Load cookie banner HTML
 async function loadCookieBanner() {
     try {
-        const response = await fetch('cookie-banner.html');
+        // Determine the correct path based on current page location
+        const currentPath = window.location.pathname;
+        const isInSubdirectory = currentPath.includes('/blog-posts/');
+        const cookieBannerPath = isInSubdirectory ? '../cookie-banner.html' : 'cookie-banner.html';
+        
+        const response = await fetch(cookieBannerPath);
         const html = await response.text();
         const container = document.getElementById('cookie-banner-container');
         if (container) {
