@@ -26,6 +26,72 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="marked.min.js" onload="console.log('Marked.js script loaded')" onerror="console.error('Failed to load marked.js')"></script>
+    
+    <!-- Fallback marked.js implementation -->
+    <script>
+        // Simple fallback if marked.js fails to load
+        if (!window.marked) {
+            console.log('Creating fallback marked.js implementation');
+            window.marked = {
+                parse: function(text) {
+                    // Enhanced markdown to HTML conversion
+                    let html = text;
+                    
+                    // Headers
+                    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+                    
+                    // Bold and italic
+                    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+                    html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+                    html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+                    
+                    // Code blocks
+                    html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+                    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+                    
+                    // Links
+                    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300 underline">$1</a>');
+                    
+                    // Blockquotes
+                    html = html.replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-gray-600 pl-4 italic text-gray-400">$1</blockquote>');
+                    
+                    // Unordered lists
+                    html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
+                    html = html.replace(/(<li>.*<\/li>)/s, '<ul class="list-disc list-inside space-y-1">$1</ul>');
+                    
+                    // Ordered lists
+                    html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+                    html = html.replace(/(<li>.*<\/li>)/s, '<ol class="list-decimal list-inside space-y-1">$1</ol>');
+                    
+                    // Paragraphs (handle multiple newlines)
+                    html = html.replace(/\n\n/g, '</p><p>');
+                    html = html.replace(/^([^<].*)/gm, '<p>$1</p>');
+                    
+                    // Clean up empty paragraphs and fix list structure
+                    html = html.replace(/<p><\/p>/g, '');
+                    html = html.replace(/<p>(<[uo]l>.*<\/[uo]l>)<\/p>/g, '$1');
+                    html = html.replace(/<p>(<h[1-6]>.*<\/h[1-6]>)<\/p>/g, '$1');
+                    html = html.replace(/<p>(<blockquote>.*<\/blockquote>)<\/p>/g, '$1');
+                    
+                    // Fix nested lists
+                    html = html.replace(/<\/ul>\s*<ul>/g, '');
+                    html = html.replace(/<\/ol>\s*<ol>/g, '');
+                    
+                    return html;
+                },
+                setOptions: function() {
+                    // No-op for compatibility
+                }
+            };
+            console.log('Enhanced fallback marked.js created');
+        }
+    </script>
 
     <!-- favicon -->
     <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
@@ -264,22 +330,55 @@
                 return;
             }
 
+            console.log('DOM loaded, checking for marked.js...');
+            console.log('window.marked available:', !!window.marked);
+            console.log('window.marked type:', typeof window.marked);
+
             // Wait for marked.js to load
             const checkMarked = setInterval(() => {
-                if (window.marked) {
+                console.log('Checking for marked.js...', !!window.marked);
+                if (window.marked && typeof window.marked.parse === 'function') {
                     clearInterval(checkMarked);
-                    console.log('Marked.js loaded, loading blog post');
+                    console.log('Marked.js loaded successfully, loading blog post');
                     loadBlogPost(slug);
                 }
-            }, 100);
+            }, 200);
 
-            // Timeout after 10 seconds
+            // Timeout after 15 seconds (increased from 10)
             setTimeout(() => {
                 clearInterval(checkMarked);
-                if (!window.marked) {
-                    document.getElementById('blog-content').innerHTML = '<p class="text-red-400">Error: Markdown parser failed to load. Please refresh the page.</p>';
+                if (!window.marked || typeof window.marked.parse !== 'function') {
+                    console.error('Marked.js failed to load within 15 seconds, using fallback');
+                    // Force the fallback to be created
+                    if (!window.marked) {
+                        console.log('Forcing fallback creation');
+                        // Create fallback directly instead of using template literal
+                        if (!window.marked) {
+                            console.log('Creating enhanced fallback marked.js implementation');
+                            window.marked = {
+                                parse: function(text) {
+                                    let html = text;
+                                    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                                    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                                    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+                                    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                                    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+                                    html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+                                    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+                                    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300 underline">$1</a>');
+                                    html = html.replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-gray-600 pl-4 italic text-gray-400">$1</blockquote>');
+                                    html = html.replace(/^- (.*$)/gim, '<li>$1</li>');
+                                    html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+                                    html = html.replace(/\n\n/g, '</p><p>');
+                                    return html;
+                                },
+                                setOptions: function() {}
+                            };
+                        }
+                    }
+                    loadBlogPost(slug);
                 }
-            }, 10000);
+            }, 15000);
 
             async function loadBlogPost(slug) {
                 console.log('Loading blog post with slug:', slug);
