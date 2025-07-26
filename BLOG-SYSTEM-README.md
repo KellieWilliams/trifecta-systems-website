@@ -2,17 +2,17 @@
 
 ## Overview
 
-The Trifecta.Systems blog system uses a **Markdown-based approach** with a **single-page architecture** for content management. This system provides a clean separation between content and presentation while offering fast navigation and SEO optimization.
+The Trifecta.Systems blog system uses a **Markdown-based approach** with a **single-page architecture** for content management. This system provides a clean separation between content and presentation while offering fast navigation, SEO optimization, and robust error handling.
 
 ## Architecture
 
 ### Core Components
 
 1. **Markdown Files** (`blog-posts/*.md`) - Content storage with YAML front matter
-2. **Blog System** (`blog-system.js`) - JavaScript engine for rendering and navigation
+2. **Blog Listing Page** (`blog.html`) - Main blog page with category filtering
 3. **Single Blog Post Page** (`blog-post.html`) - Dynamic page that displays any blog post
 4. **Blog Generator** (`blog-generator.html`) - Tool for creating new blog posts
-5. **Main Blog Page** (`blog.html`) - Listing page with category filtering
+5. **Markdown Parser** (`marked.min.js`) - Local library for Markdown to HTML conversion
 
 ### How It Works
 
@@ -22,23 +22,23 @@ The Trifecta.Systems blog system uses a **Markdown-based approach** with a **sin
 4. **Dynamic Loading**: The blog system loads Markdown files and converts them to HTML
 5. **Template Rendering**: Content is rendered into a consistent HTML template
 6. **Navigation**: Client-side routing handles post navigation with proper URL updates
+7. **Fallback System**: Enhanced fallback Markdown parser if external library fails
 
 ## File Structure
 
 ```
 public_html/
 ├── blog.html                    # Main blog listing page
-├── blog-post.html              # Single page for all blog posts (NEW)
-├── blog-system.js              # Blog system JavaScript engine
+├── blog-post.html              # Single page for all blog posts
 ├── blog-generator.html         # Blog post creation tool
-├── blog-posts/                 # Directory containing Markdown files
-│   ├── cybersecurity-best-practices-2025.md
-│   ├── privacy-law-compliance-small-businesses.md
-│   ├── modern-web-development-trends.md
-│   ├── data-driven-decision-making.md
-│   ├── tech-predictions-2025.md
-│   └── phishing-attacks-prevention.md
-└── BLOG-SYSTEM-README.md       # This documentation file
+├── marked.min.js               # Local Markdown parser library
+└── blog-posts/                 # Directory containing Markdown files
+    ├── passkeys.md             # Blog post files
+    ├── cursor-ai-pricing-insights.md
+    ├── gimp-bimp-batch-processing.md
+    ├── masonry-layout-guide.md
+    ├── tablet-jotform-esignatures.md
+    └── privacy-law-compliance-small-businesses.md
 ```
 
 ## URL Structure
@@ -51,9 +51,9 @@ public_html/
 ### URL Examples
 
 ```
-blog-post.html?slug=cybersecurity-best-practices-2025
-blog-post.html?slug=privacy-law-compliance-small-businesses
-blog-post.html?slug=modern-web-development-trends
+blog-post.html?slug=passkeys
+blog-post.html?slug=cursor-ai-pricing-insights
+blog-post.html?slug=gimp-bimp-batch-processing
 ```
 
 ### Benefits of Single-Page Architecture
@@ -63,7 +63,8 @@ blog-post.html?slug=modern-web-development-trends
 - ✅ **Clean URLs** - Parameter-based navigation
 - ✅ **SEO friendly** - Proper meta tags and structure
 - ✅ **Fast loading** - Dynamic content loading
-- ✅ **Error handling** - Graceful fallbacks
+- ✅ **Error handling** - Graceful fallbacks with enhanced parser
+- ✅ **Reliable parsing** - Local library with fallback system
 
 ## Creating New Blog Posts
 
@@ -83,7 +84,7 @@ blog-post.html?slug=modern-web-development-trends
 
 3. **Generate Files**: Click "Generate Blog Post"
 4. **Download Markdown**: Save the `.md` file to `blog-posts/` directory
-5. **Update Blog System**: Copy the generated JavaScript object and add it to `blog-system.js`
+5. **Update Blog System**: Copy the generated JavaScript object and add it to both `blog.html` and `blog-post.html`
 
 ### Method 2: Manual Creation
 
@@ -105,7 +106,7 @@ slug: "your-blog-post-slug"
 ```
 
 3. **Write Content**: Add your Markdown content below the front matter
-4. **Update Blog System**: Add the post metadata to `blog-system.js`
+4. **Update Blog System**: Add the post metadata to both `blog.html` and `blog-post.html`
 
 ## Markdown Formatting
 
@@ -119,6 +120,19 @@ slug: "your-blog-post-slug"
 - **Code**: `` `inline code` `` or code blocks
 - **Blockquotes**: `> quoted text`
 - **Tables**: Standard Markdown table syntax
+
+### Enhanced Fallback Parser
+
+The system includes an enhanced fallback Markdown parser that handles:
+
+- **Headers** (H1, H2, H3)
+- **Bold and italic** text (`**bold**`, `*italic*`)
+- **Code blocks** (```` ```code``` ```` and `` `inline code` ``)
+- **Links** (`[text](url)`)
+- **Blockquotes** (`> quote`)
+- **Unordered lists** (`- item`)
+- **Ordered lists** (`1. item`)
+- **Proper paragraph handling**
 
 ### HTML Integration
 
@@ -135,7 +149,7 @@ You can also use HTML within Markdown for advanced formatting:
 
 ### Adding Posts to the System
 
-In `blog-system.js`, add new posts to the `blogPosts` array:
+In both `blog.html` and `blog-post.html`, add new posts to the `blogPosts` array:
 
 ```javascript
 {
@@ -160,7 +174,6 @@ Available categories and their associated colors:
 - **Web Development** - Green (`green`)
 - **Data Analytics** - Blue (`blue`)
 - **Tech Trends** - Purple (`purple`)
-- **AI & ML** - Yellow (`yellow`)
 
 ## Features
 
@@ -171,13 +184,15 @@ Available categories and their associated colors:
 - **Twitter Cards**: Twitter-specific meta tags
 - **Structured Data**: Schema.org markup for search engines
 - **Clean URLs**: Parameter-based navigation for better SEO
+- **Social Sharing**: Twitter, LinkedIn, and email sharing links
 
 ### Performance
 
 - **Single Page Loading**: One HTML page serves all posts
 - **Lazy Loading**: Markdown files loaded on demand
 - **Caching**: Browser caching for improved performance
-- **Minimal Dependencies**: Only requires marked.js for Markdown parsing
+- **Local Library**: marked.js library hosted locally for reliability
+- **Fallback System**: Enhanced parser if external library fails
 
 ### User Experience
 
@@ -186,6 +201,7 @@ Available categories and their associated colors:
 - **Category Filtering**: Filter posts by category on the main blog page
 - **Responsive Design**: Mobile-friendly layout
 - **Breadcrumb Navigation**: Easy navigation back to blog listing
+- **Social Sharing**: Easy sharing to social platforms
 
 ### Content Management
 
@@ -194,6 +210,7 @@ Available categories and their associated colors:
 - **Consistent Styling**: All posts use the same template
 - **Flexible Formatting**: Markdown + HTML for advanced formatting
 - **No HTML Files**: Eliminates need for individual post HTML files
+- **Web-based Generator**: Tool for creating new posts
 
 ## Technical Details
 
@@ -204,9 +221,10 @@ The blog system uses a single HTML page (`blog-post.html`) that:
 1. **Extracts slug** from URL parameter (`?slug=post-slug`)
 2. **Finds post data** in the blog system
 3. **Loads Markdown file** based on the slug
-4. **Converts to HTML** using marked.js
+4. **Converts to HTML** using marked.js or fallback parser
 5. **Updates page content** dynamically
 6. **Updates meta tags** for SEO
+7. **Sets up social sharing** links
 
 ### Markdown Parsing
 
@@ -215,9 +233,20 @@ The system uses **marked.js** for Markdown parsing with the following configurat
 ```javascript
 marked.setOptions({
     breaks: true,    // Convert line breaks to <br>
-    gfm: true        // GitHub Flavored Markdown
+    gfm: true,       // GitHub Flavored Markdown
+    headerIds: true, // Add IDs to headers
+    mangle: false    // Don't mangle email addresses
 });
 ```
+
+### Enhanced Fallback System
+
+If the marked.js library fails to load, the system automatically falls back to an enhanced parser that handles:
+
+- All basic Markdown syntax
+- Proper HTML structure
+- Tailwind CSS classes for styling
+- Error handling and logging
 
 ### Front Matter Parsing
 
@@ -229,6 +258,7 @@ YAML front matter is parsed using a custom regex-based parser that extracts meta
 - **Invalid Markdown**: Fallback content for parsing errors
 - **Network Issues**: Retry logic for failed file loads
 - **Invalid Slug**: Redirect to main blog page if slug not found
+- **Parser Failures**: Enhanced fallback parser with comprehensive logging
 
 ## Navigation Flow
 
@@ -239,46 +269,54 @@ YAML front matter is parsed using a custom regex-based parser that extracts meta
 3. **Browser navigates** to `blog-post.html?slug=post-slug`
 4. **Page loads** and extracts slug from URL
 5. **Blog system** finds post data and loads Markdown
-6. **Content renders** in the template
+6. **Content renders** in the template with proper formatting
 7. **User can navigate** to related posts or back to blog listing
+8. **User can share** content via social media links
 
 ### Link Structure
 
 - **Blog listing links**: `blog-post.html?slug=post-slug`
 - **Related post links**: `blog-post.html?slug=related-post-slug`
 - **Back to blog**: `blog.html`
+- **Social sharing**: Dynamic links for Twitter, LinkedIn, Email
 
 ## Maintenance
 
 ### Regular Tasks
 
 1. **Content Updates**: Edit Markdown files directly
-2. **System Updates**: Modify `blog-system.js` for new features
+2. **System Updates**: Modify blog arrays in both `blog.html` and `blog-post.html`
 3. **Template Updates**: Update `blog-post.html` for design changes
 4. **SEO Optimization**: Review and update meta descriptions
+5. **Library Updates**: Keep marked.js library updated
 
 ### Backup Strategy
 
 - **Content**: Markdown files are easily backed up and version controlled
 - **Configuration**: Blog system configuration can be exported/imported
 - **Template**: Single HTML template can be backed up
+- **Library**: Local marked.js library ensures reliability
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Post Not Loading**: Check file path in `blog-system.js`
-2. **Markdown Not Rendering**: Verify marked.js is loaded
+1. **Post Not Loading**: Check file path in blog arrays
+2. **Markdown Not Rendering**: Check browser console for parser errors
 3. **Styling Issues**: Check CSS classes in template
 4. **SEO Problems**: Validate meta tags in browser dev tools
 5. **URL Issues**: Ensure slug parameter is correct
+6. **Parser Failures**: Check console for fallback parser activation
 
 ### Debug Mode
 
-Enable debug logging by adding to browser console:
+The system includes comprehensive logging:
 
 ```javascript
-window.blogSystem.debug = true;
+// Check console for these messages:
+console.log('DOM loaded, checking for marked.js...');
+console.log('Marked.js loaded successfully, loading blog post');
+console.log('Creating enhanced fallback marked.js implementation');
 ```
 
 ### Testing Checklist
@@ -290,6 +328,8 @@ window.blogSystem.debug = true;
 - [ ] Related posts display correctly
 - [ ] Back navigation works
 - [ ] Mobile responsiveness maintained
+- [ ] Social sharing links work
+- [ ] Fallback parser activates if needed
 
 ## Future Enhancements
 
@@ -319,8 +359,9 @@ For questions or issues with the blog system:
 3. Validate Markdown syntax
 4. Test with a simple post first
 5. Verify URL parameters are correct
+6. Check if fallback parser is being used
 
 ---
 
-**Last Updated**: January 2025
-**Version**: 3.0 (Single-Page Markdown-based) 
+**Last Updated**: January 2025  
+**Version**: 3.1 (Enhanced Fallback System) 

@@ -1,6 +1,6 @@
 # Trifecta.Systems Website
 
-A modern, responsive business website showcasing technology services for small businesses and nonprofits. Built with performance, accessibility, and SEO best practices in mind.
+A modern, responsive business website showcasing technology services for small businesses and nonprofits. Built with performance, accessibility, SEO, and privacy compliance best practices in mind.
 
 ## 🚀 Features
 
@@ -8,17 +8,21 @@ A modern, responsive business website showcasing technology services for small b
 - **Progressive Web App**: Service worker for offline functionality and caching
 - **SEO Optimized**: Structured data, meta tags, and semantic HTML
 - **Performance**: Lazy loading, image optimization, and deferred scripts
-- **Security**: Content Security Policy and security headers
+- **Security**: Content Security Policy, security headers, and form protection
+- **Privacy Compliance**: GDPR/CCPA compliant with cookie consent and data rights
+- **Blog System**: Dynamic Markdown-based blog with category filtering
 - **Accessibility**: WCAG 2.1 AA compliant with proper ARIA labels
 - **Modern Standards**: HTML5, CSS3, ES6+, and modern web APIs
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: HTML5, CSS3 (Tailwind CSS), JavaScript (ES6+)
-- **Backend**: PHP (contact form processing)
-- **Security**: Google reCAPTCHA v3
-- **Performance**: Service Worker, lazy loading, compression
+- **Backend**: PHP (contact form and data rights processing)
+- **Security**: Google reCAPTCHA v3, CSRF protection, honeypot fields
+- **Performance**: Service Worker, lazy loading, compression, WebP images
 - **SEO**: Schema.org structured data, Open Graph, Twitter Cards
+- **Blog**: Markdown-based with dynamic loading and parsing
+- **Privacy**: Cookie consent management, data rights request system
 - **Hosting**: Apache with .htaccess configuration
 
 ## 📁 Project Structure
@@ -32,22 +36,41 @@ Trifecta/
 │   ├── cybersecurity.html      # Cybersecurity services
 │   ├── ai-custom-solutions.html # AI and custom solutions
 │   ├── about-the-owner.html    # About the owner page
+│   ├── blog.html               # Blog listing page
+│   ├── blog-post.html          # Dynamic blog post template
+│   ├── blog-generator.html     # Blog post creation tool
+│   ├── privacy-policy.html     # Privacy policy page
+│   ├── terms-of-service.html   # Terms of service page
+│   ├── data-rights-request.html # Data rights request form
 │   ├── offline.html            # Offline page for PWA
 │   ├── style.css               # Custom CSS styles
 │   ├── script.js               # JavaScript functionality
 │   ├── sw.js                   # Service worker
+│   ├── marked.min.js           # Markdown parser library
 │   ├── robots.txt              # Search engine directives
 │   ├── sitemap.xml             # XML sitemap
 │   ├── .htaccess               # Apache configuration
+│   ├── blog-posts/             # Markdown blog content
+│   │   ├── passkeys.md         # Blog post files
+│   │   ├── cursor-ai-pricing-insights.md
+│   │   ├── gimp-bimp-batch-processing.md
+│   │   ├── masonry-layout-guide.md
+│   │   ├── tablet-jotform-esignatures.md
+│   │   └── privacy-law-compliance-small-businesses.md
 │   └── Gallery/                # Image assets
 │       ├── favicon/            # Favicon files
 │       └── *.png/jpg/webp      # Website images
-├── backend/                    # Server-side scripts
+├── backend/                    # Server-side scripts (outside web root)
 │   ├── submit_form.php         # Contact form handler
 │   ├── csrf_token.php          # CSRF token management
-│   └── get_recaptcha_key.php   # reCAPTCHA key provider
+│   ├── get_recaptcha_key.php   # reCAPTCHA key provider
+│   ├── data_rights_request.php # Data rights request handler
+│   ├── security_monitor.php    # Security monitoring class
+│   └── security_dashboard.php  # Security analytics
 ├── config/                     # Configuration files (gitignored)
 │   └── secrets.php             # API keys and sensitive data
+├── SECURITY.md                 # Security documentation
+├── BLOG-SYSTEM-README.md       # Blog system documentation
 └── README.md                   # This file
 ```
 
@@ -68,24 +91,19 @@ Trifecta/
    ```
 
 2. **Configure environment**
-   - Create `config/secrets.php` with your API keys:
-   ```php
-   <?php
-   define('RECAPTCHA_SECRET_KEY', 'your_recaptcha_secret_key');
-   define('TO_EMAIL', 'your_email@domain.com');
-   define('FROM_EMAIL', 'noreply@yourdomain.com');
-   ?>
-   ```
+   - Create `config/secrets.php` with your API keys (see `config/secrets.php.example`)
+   - Configure reCAPTCHA, email settings, and security parameters
 
 3. **Upload to web server**
    - Upload `public_html/` contents to your web root
-   - Upload `backend/` directory to a secure location outside web root
+   - Upload `backend/` directory to a secure location **outside** web root
    - Ensure `config/` directory is outside web root for security
 
 4. **Verify setup**
    - Visit your domain to confirm the site loads
    - Test the contact form functionality
    - Check browser console for service worker registration
+   - Test blog functionality and privacy features
 
 ## 🔧 Configuration
 
@@ -96,8 +114,12 @@ The following variables need to be configured in `config/secrets.php`:
 **Important**: The `backend/` directory should be placed outside the web root for security. Update the fetch URLs in `script.js` if your backend is located elsewhere.
 
 - `RECAPTCHA_SECRET_KEY`: Google reCAPTCHA v3 secret key
+- `RECAPTCHA_SITE_KEY`: Google reCAPTCHA v3 site key
 - `TO_EMAIL`: Email address to receive contact form submissions
 - `FROM_EMAIL`: Email address for sending notifications
+- `CSRF_TOKEN_EXPIRY`: CSRF token expiration time
+- `RATE_LIMIT_REQUESTS`: Rate limiting configuration
+- `SECURITY_MONITOR_ENABLED`: Security monitoring toggle
 
 ### Apache Configuration
 
@@ -106,6 +128,7 @@ The `.htaccess` file includes:
 - HTTPS redirect
 - Gzip compression
 - Browser caching rules
+- File access restrictions
 
 ### Service Worker
 
@@ -118,12 +141,13 @@ The service worker (`sw.js`) provides:
 
 ### Optimizations Implemented
 
-- **Image Optimization**: Lazy loading for below-fold images
+- **Image Optimization**: WebP format with PNG fallbacks, lazy loading
 - **Script Loading**: Deferred non-critical JavaScript
-- **Resource Preloading**: Critical images and fonts
+- **Resource Preloading**: Critical images and fonts with `fetchpriority`
 - **Caching**: Service worker with intelligent cache strategies
 - **Compression**: Gzip compression for text assets
 - **Minification**: Tailwind CSS CDN for optimized styles
+- **Markdown Parsing**: Local marked.js library for blog content
 
 ### Performance Metrics
 
@@ -137,27 +161,67 @@ The service worker (`sw.js`) provides:
 
 - **Content Security Policy**: Restricts resource loading
 - **HTTPS Enforcement**: Automatic redirect from HTTP
-- **Security Headers**: X-Frame-Options, X-Content-Type-Options, etc.
-- **Form Validation**: Client and server-side validation
-- **reCAPTCHA v3**: Bot protection for contact forms
-- **Input Sanitization**: PHP security best practices
+- **Security Headers**: Comprehensive security header implementation
+- **Form Protection**: reCAPTCHA v3, honeypot fields, CSRF tokens
+- **Input Validation**: Client and server-side validation with XSS protection
+- **Rate Limiting**: IP-based rate limiting for forms
+- **Security Monitoring**: Logging and alerting for suspicious activity
+- **File Access Control**: Blocked dangerous file types and sensitive files
 
 ## 🎯 SEO Features
 
 ### Search Engine Optimization
 
-- **Structured Data**: Schema.org markup for all pages
+- **Structured Data**: Schema.org markup for all pages (Organization, Service, Person, OfferCatalog)
 - **Meta Tags**: Comprehensive meta descriptions and titles
 - **Open Graph**: Social media sharing optimization
 - **Twitter Cards**: Twitter-specific meta tags
-- **XML Sitemap**: Automated sitemap generation
+- **XML Sitemap**: Automated sitemap generation including blog posts
 - **Robots.txt**: Search engine crawling directives
+- **Blog SEO**: Dynamic meta tags for individual blog posts
 
 ### Local SEO
 
 - **Business Schema**: Organization and service markup
 - **Contact Information**: Structured contact data
 - **Service Areas**: Geographic service coverage
+
+## 📝 Blog System
+
+### Features
+
+- **Markdown-Based**: Blog posts written in Markdown with YAML front matter
+- **Dynamic Loading**: Single-page architecture for blog posts
+- **Category Filtering**: Filter posts by category on the main blog page
+- **Social Sharing**: Twitter, LinkedIn, and email sharing links
+- **SEO Optimized**: Dynamic meta tags and structured data
+- **Content Management**: Web-based blog post generator tool
+- **Responsive Design**: Mobile-friendly blog layout
+
+### Creating Blog Posts
+
+1. Use the `blog-generator.html` tool to create new posts
+2. Or manually create `.md` files in the `blog-posts/` directory
+3. Add the post data to the `blogPosts` array in both `blog.html` and `blog-post.html`
+4. Upload the new `.md` file to the server
+
+## 🔐 Privacy & Compliance
+
+### GDPR/CCPA Compliance
+
+- **Cookie Consent**: Comprehensive cookie banner with categories
+- **Privacy Policy**: Detailed privacy policy with legal basis
+- **Data Rights**: Data Subject Rights (DSR) request form
+- **Terms of Service**: Complete terms of service page
+- **Email Obfuscation**: Bot-protected email addresses
+- **Children's Privacy**: Age 18+ protection (GDPR requirement)
+
+### Cookie Management
+
+- **Essential Cookies**: Required for site functionality
+- **Functional Cookies**: Enhanced user experience
+- **Analytics Cookies**: Optional tracking (user consent required)
+- **Settings Modal**: Detailed cookie preferences
 
 ## ♿ Accessibility Features
 
@@ -185,7 +249,10 @@ The service worker (`sw.js`) provides:
 ### Manual Testing Checklist
 
 - [ ] Responsive design on all devices
-- [ ] Contact form functionality
+- [ ] Contact form functionality with validation
+- [ ] Blog system and post loading
+- [ ] Cookie consent banner and settings
+- [ ] Privacy policy and data rights forms
 - [ ] Service worker registration
 - [ ] Offline functionality
 - [ ] Social media sharing
@@ -198,6 +265,7 @@ The service worker (`sw.js`) provides:
 - Google PageSpeed Insights
 - WAVE accessibility testing
 - Schema.org validation
+- Security header testing
 
 ## 🚀 Deployment
 
@@ -205,10 +273,12 @@ The service worker (`sw.js`) provides:
 
 - [ ] SSL certificate installed
 - [ ] Environment variables configured
+- [ ] Backend directory moved outside web root
 - [ ] Error logging enabled
 - [ ] Backup strategy implemented
 - [ ] Monitoring tools configured
 - [ ] Analytics tracking setup
+- [ ] Privacy compliance verified
 
 ### Recommended Hosting
 
@@ -224,6 +294,7 @@ The service worker (`sw.js`) provides:
 - **Google Search Console**: Search performance monitoring
 - **Lighthouse CI**: Automated performance testing
 - **Uptime Monitoring**: Pingdom, UptimeRobot
+- **Security Monitoring**: Built-in security dashboard
 
 ## 🤝 Contributing
 
