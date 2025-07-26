@@ -1014,5 +1014,42 @@ document.addEventListener('DOMContentLoaded', () => {
     obfuscateEmail();
     
     // --- Initialize Data Rights Request Form ---
-    initializeDataRightsForm();
+initializeDataRightsForm();
+
+// --- Initialize Blog Category Filter ---
+initializeBlogFilter();
 });
+
+// Blog Category Filter Function
+function initializeBlogFilter() {
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const blogPosts = document.querySelectorAll('.blog-post');
+    
+    if (categoryFilters.length === 0) return;
+    
+    categoryFilters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            const selectedCategory = filter.getAttribute('data-category');
+            
+            // Update active filter button
+            categoryFilters.forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600');
+                btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+            });
+            filter.classList.add('active', 'bg-blue-600');
+            filter.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+            
+            // Filter blog posts
+            blogPosts.forEach(post => {
+                const postCategory = post.getAttribute('data-category');
+                
+                if (selectedCategory === 'all' || postCategory === selectedCategory) {
+                    post.style.display = 'block';
+                    post.classList.add('animate-fade-in');
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+    });
+}

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog | Trifecta.Systems</title>
+    <meta name="description" content="Explore insights on technology, cybersecurity, AI, and digital solutions from Trifecta.Systems. Stay updated with the latest tech trends and best practices.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trifecta.systems/blog.html">
+    <meta property="og:title" content="Tech Blog | Trifecta.Systems">
+    <meta property="og:description" content="Explore insights on technology, cybersecurity, AI, and digital solutions from Trifecta.Systems. Stay updated with the latest tech trends and best practices.">
+    <meta property="og:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://trifecta.systems/blog.html">
+    <meta property="twitter:title" content="Tech Blog | Trifecta.Systems">
+    <meta property="twitter:description" content="Explore insights on technology, cybersecurity, AI, and digital solutions from Trifecta.Systems. Stay updated with the latest tech trends and best practices.">
+    <meta property="twitter:image" content="https://trifecta.systems/Trifecta_Logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="Gallery/favicon/site.webmanifest" />
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-[#0F131C] text-white py-4 shadow-lg">
+        <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
+                <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
+                <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            </a>
+
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2024/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <nav id="mobileMenu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
+                    <li class="relative group w-full md:w-auto services-menu-item"> 
+                        <div class="flex items-center justify-center nav-link-wrapper md:block">
+                            <a href="index.html#services" class="nav-link">
+                                Services
+                            </a>
+                            <button id="servicesDropdownToggle" class="md:hidden ml-1 p-1 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-gray-400">
+                                <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2024/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                            <li><a href="web-development.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Web Development</a></li>
+                            <li><a href="data-analytics.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Data Analytics</a></li>
+                            <li><a href="cybersecurity.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Cybersecurity</a></li>
+                            <li><a href="ai-custom-solutions.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Custom/AI Solutions</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="blog.html" class="nav-link text-blue-400">Blog</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative text-gray-300 py-20 text-center shadow-inner rounded-b-lg mb-12 overflow-hidden hero-section-default-bg">
+        <div class="absolute inset-0 bg-black opacity-50 z-5"></div> 
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
+                Tech Insights & Thoughts
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                Exploring technology, cybersecurity, AI, and digital solutions.<br>
+                Sharing knowledge and insights from the front lines of tech.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Category Filter -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button class="category-filter active bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200" data-category="all">
+                        All Posts
+                    </button>
+                    <button class="category-filter bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200" data-category="cybersecurity">
+                        Cybersecurity
+                    </button>
+                    <button class="category-filter bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200" data-category="ai">
+                        AI & Machine Learning
+                    </button>
+                    <button class="category-filter bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200" data-category="web-development">
+                        Web Development
+                    </button>
+                    <button class="category-filter bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200" data-category="data-analytics">
+                        Data Analytics
+                    </button>
+                    <button class="category-filter bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200" data-category="tech-trends">
+                        Tech Trends
+                    </button>
+                </div>
+            </div>
+
+            <!-- Blog Posts Grid -->
+            <div id="blog-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Sample Blog Post 1 -->
+                <article class="blog-post bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="cybersecurity">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded-full">Cybersecurity</span>
+                            <span class="text-gray-400 text-sm ml-auto">Jul 25, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            <a href="blog-posts/cybersecurity-best-practices-2025.html" class="hover:text-blue-400 transition-colors duration-200">
+                                Essential Cybersecurity Practices for Small Businesses in 2025
+                            </a>
+                        </h3>
+                        <p class="text-gray-300 mb-4 line-clamp-3 flex-grow">
+                            As cyber threats continue to evolve, small businesses need to stay ahead of the curve. Here are the essential cybersecurity practices that every small business should implement in 2025...
+                        </p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-sm text-gray-400">5 min read</span>
+                            <a href="blog-posts/cybersecurity-best-practices-2025.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sample Blog Post 2 -->
+                <article class="blog-post bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="ai">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-purple-600 text-white text-xs px-2 py-1 rounded-full">AI & ML</span>
+                            <span class="text-gray-400 text-sm ml-auto">Jul 18, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            <a href="blog-posts/ai-automation-small-business.html" class="hover:text-blue-400 transition-colors duration-200">
+                                How AI Automation Can Transform Small Business Operations
+                            </a>
+                        </h3>
+                        <p class="text-gray-300 mb-4 line-clamp-3 flex-grow">
+                            Artificial Intelligence isn't just for big corporations anymore. Discover how small businesses can leverage AI automation to streamline operations, reduce costs, and improve customer service...
+                        </p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-sm text-gray-400">7 min read</span>
+                            <a href="blog-posts/ai-automation-small-business.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sample Blog Post 3 -->
+                <article class="blog-post bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="web-development">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-600 text-white text-xs px-2 py-1 rounded-full">Web Dev</span>
+                            <span class="text-gray-400 text-sm ml-auto">Jul 11, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            <a href="blog-posts/modern-web-development-trends.html" class="hover:text-blue-400 transition-colors duration-200">
+                                Modern Web Development Trends That Matter in 2025
+                            </a>
+                        </h3>
+                        <p class="text-gray-300 mb-4 line-clamp-3 flex-grow">
+                            From performance optimization to accessibility, here are the web development trends that will shape the industry in 2025 and beyond. Learn what technologies and practices are worth your attention...
+                        </p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-sm text-gray-400">6 min read</span>
+                            <a href="blog-posts/modern-web-development-trends.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sample Blog Post 4 -->
+                <article class="blog-post bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="data-analytics">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">Analytics</span>
+                            <span class="text-gray-400 text-sm ml-auto">Jul 4, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            <a href="blog-posts/data-driven-decision-making.html" class="hover:text-blue-400 transition-colors duration-200">
+                                Data-Driven Decision Making: A Guide for Non-Technical Leaders
+                            </a>
+                        </h3>
+                        <p class="text-gray-300 mb-4 line-clamp-3 flex-grow">
+                            You don't need to be a data scientist to make data-driven decisions. This guide shows business leaders how to leverage data analytics to make better strategic decisions...
+                        </p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-sm text-gray-400">8 min read</span>
+                            <a href="blog-posts/data-driven-decision-making.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sample Blog Post 5 -->
+                <article class="blog-post bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="tech-trends">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">Trends</span>
+                            <span class="text-gray-400 text-sm ml-auto">Jun 27, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            <a href="blog-posts/tech-predictions-2025.html" class="hover:text-blue-400 transition-colors duration-200">
+                                Technology Predictions for 2025: What Small Businesses Should Watch
+                            </a>
+                        </h3>
+                        <p class="text-gray-300 mb-4 line-clamp-3 flex-grow">
+                            From emerging technologies to industry shifts, here are the key technology trends that small businesses should prepare for in 2025. Stay ahead of the curve with these insights...
+                        </p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-sm text-gray-400">10 min read</span>
+                            <a href="blog-posts/tech-predictions-2025.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sample Blog Post 6 -->
+                <article class="blog-post bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="cybersecurity">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded-full">Cybersecurity</span>
+                            <span class="text-gray-400 text-sm ml-auto">Jun 20, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            <a href="blog-posts/phishing-attacks-prevention.html" class="hover:text-blue-400 transition-colors duration-200">
+                                The Evolution of Phishing Attacks: How to Protect Your Business
+                            </a>
+                        </h3>
+                        <p class="text-gray-300 mb-4 line-clamp-3 flex-grow">
+                            Phishing attacks are becoming more sophisticated every year. Learn about the latest tactics cybercriminals are using and how to protect your business from these threats...
+                        </p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-sm text-gray-400">6 min read</span>
+                            <a href="blog-posts/phishing-attacks-prevention.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button id="load-more" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105 shadow-xl">
+                    Load More Posts
+                </button>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div class="mt-16 bg-slate-700 rounded-lg p-8 text-center">
+                <h3 class="text-2xl font-bold text-white mb-4">Stay Updated with Tech Insights</h3>
+                <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
+                    Get the latest technology insights, cybersecurity tips, and industry trends delivered to your inbox. No spam, just valuable content.
+                </p>
+                <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-lg bg-slate-600 text-white border border-gray-500 focus:border-blue-400 focus:outline-none">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+            <div class="mt-4 text-sm space-x-4">
+                <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a>
+                <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Terms of Service</a>
+                <a href="data-rights-request.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Rights</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include Cookie Banner -->
+    <div id="cookie-banner-container"></div>
+    
+    <script src="script.js" type="text/javascript" defer></script>
+
+    <!-- reCAPTCHA API call -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW" defer></script>
+</body>
+</html> 
