@@ -8,218 +8,216 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased bg-slate-900 text-white">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <h1 class="text-3xl font-bold mb-8">Blog Post Generator</h1>
+<body class="antialiased bg-slate-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">Blog Post Generator</h1>
         
-        <form id="blogForm" class="space-y-6">
-            <div>
-                <label for="title" class="block text-sm font-medium mb-2">Title</label>
-                <input type="text" id="title" name="title" required 
-                       class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500">
-            </div>
-            
-            <div>
-                <label for="description" class="block text-sm font-medium mb-2">Meta Description</label>
-                <textarea id="description" name="description" rows="3" required
-                          class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
-            </div>
-            
-            <div>
-                <label for="excerpt" class="block text-sm font-medium mb-2">Excerpt (for blog listing)</label>
-                <textarea id="excerpt" name="excerpt" rows="2" required
-                          class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label for="category" class="block text-sm font-medium mb-2">Category</label>
-                    <select id="category" name="category" required
-                            class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500">
-                        <option value="">Select Category</option>
-                        <option value="Cybersecurity">Cybersecurity</option>
-                        <option value="Web Dev">Web Development</option>
-                        <option value="Data Analytics">Data Analytics</option>
-                        <option value="AI & ML">AI & ML</option>
-                        <option value="Tech Trends">Tech Trends</option>
-                    </select>
+        <div class="max-w-4xl mx-auto">
+            <form id="blogForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="title" class="block text-sm font-medium mb-2">Title</label>
+                        <input type="text" id="title" name="title" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="slug" class="block text-sm font-medium mb-2">Slug (URL-friendly)</label>
+                        <input type="text" id="slug" name="slug" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
                 </div>
+
+                <div>
+                    <label for="description" class="block text-sm font-medium mb-2">Meta Description</label>
+                    <textarea id="description" name="description" rows="3" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                </div>
+
+                <div>
+                    <label for="excerpt" class="block text-sm font-medium mb-2">Excerpt (Short summary)</label>
+                    <textarea id="excerpt" name="excerpt" rows="2" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div>
+                        <label for="category" class="block text-sm font-medium mb-2">Category</label>
+                        <select id="category" name="category" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Web Dev">Web Development</option>
+                            <option value="Data Analytics">Data Analytics</option>
+                            <option value="Tech Trends">Tech Trends</option>
+                            <option value="AI & ML">AI & ML</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="category_color" class="block text-sm font-medium mb-2">Category Color</label>
+                        <select id="category_color" name="category_color" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="red">Red (Cybersecurity)</option>
+                            <option value="green">Green (Web Dev)</option>
+                            <option value="blue">Blue (Data Analytics)</option>
+                            <option value="purple">Purple (Tech Trends)</option>
+                            <option value="yellow">Yellow (AI & ML)</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="date" class="block text-sm font-medium mb-2">Date</label>
+                        <input type="date" id="date" name="date" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="read_time" class="block text-sm font-medium mb-2">Read Time (minutes)</label>
+                        <input type="number" id="read_time" name="read_time" min="1" max="60" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="content" class="block text-sm font-medium mb-2">Content (Markdown)</label>
+                    <textarea id="content" name="content" rows="20" required class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"></textarea>
+                    <p class="text-sm text-gray-400 mt-2">Write your content in Markdown format. Use ## for headings, ** for bold, * for italic, etc.</p>
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-colors duration-200">
+                        Generate Blog Post
+                    </button>
+                </div>
+            </form>
+
+            <div id="output" class="mt-8 hidden">
+                <h2 class="text-2xl font-bold mb-4">Generated Files</h2>
                 
-                <div>
-                    <label for="readTime" class="block text-sm font-medium mb-2">Read Time (minutes)</label>
-                    <input type="number" id="readTime" name="readTime" min="1" max="60" required
-                           class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500">
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Markdown File</h3>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <pre id="markdownOutput" class="text-sm text-gray-300 whitespace-pre-wrap"></pre>
+                        </div>
+                        <button id="downloadMarkdown" class="mt-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition-colors duration-200">
+                            Download Markdown File
+                        </button>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Blog System Update</h3>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <pre id="blogSystemUpdate" class="text-sm text-gray-300 whitespace-pre-wrap"></pre>
+                        </div>
+                        <button id="copyBlogSystemUpdate" class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-colors duration-200">
+                            Copy to Clipboard
+                        </button>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label for="date" class="block text-sm font-medium mb-2">Publication Date</label>
-                    <input type="date" id="date" name="date" required
-                           class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500">
-                </div>
-                
-                <div>
-                    <label for="slug" class="block text-sm font-medium mb-2">URL Slug</label>
-                    <input type="text" id="slug" name="slug" required
-                           class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"
-                           placeholder="my-blog-post-title">
-                </div>
-            </div>
-            
-            <div>
-                <label for="content" class="block text-sm font-medium mb-2">Content (HTML)</label>
-                <textarea id="content" name="content" rows="20" required
-                          class="w-full p-3 bg-slate-800 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 font-mono text-sm"
-                          placeholder="<p>Your blog post content here...</p>"></textarea>
-            </div>
-            
-            <div class="flex space-x-4">
-                <button type="submit" 
-                        class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
-                    Generate Blog Post
-                </button>
-                <button type="button" id="previewBtn"
-                        class="bg-gray-600 hover:bg-gray-500 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
-                    Preview
-                </button>
-            </div>
-        </form>
-        
-        <div id="output" class="mt-8 hidden">
-            <h2 class="text-2xl font-bold mb-4">Generated Blog Post Data</h2>
-            <div class="bg-slate-800 rounded-lg p-6">
-                <pre id="jsonOutput" class="text-sm text-gray-300 overflow-x-auto"></pre>
-            </div>
-            
-            <div class="mt-4">
-                <h3 class="text-lg font-semibold mb-2">Instructions:</h3>
-                <ol class="list-decimal list-inside space-y-1 text-sm text-gray-300">
-                    <li>Copy the generated JSON data above</li>
-                    <li>Open <code class="bg-slate-700 px-1 rounded">blog-system.js</code></li>
-                    <li>Add the new blog post object to the <code class="bg-slate-700 px-1 rounded">blogPosts</code> array</li>
-                    <li>Save the file and test the new blog post</li>
-                </ol>
-            </div>
-        </div>
-        
-        <div id="preview" class="mt-8 hidden">
-            <h2 class="text-2xl font-bold mb-4">Preview</h2>
-            <div class="bg-slate-800 rounded-lg p-6">
-                <div id="previewContent"></div>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('blogForm');
-            const output = document.getElementById('output');
-            const jsonOutput = document.getElementById('jsonOutput');
-            const preview = document.getElementById('preview');
-            const previewContent = document.getElementById('previewContent');
-            const previewBtn = document.getElementById('previewBtn');
+            // Set default date to today
+            document.getElementById('date').value = new Date().toISOString().split('T')[0];
             
             // Auto-generate slug from title
-            const titleInput = document.getElementById('title');
-            const slugInput = document.getElementById('slug');
-            
-            titleInput.addEventListener('input', function() {
-                const slug = titleInput.value
+            document.getElementById('title').addEventListener('input', function() {
+                const title = this.value;
+                const slug = title
                     .toLowerCase()
                     .replace(/[^a-z0-9\s-]/g, '')
                     .replace(/\s+/g, '-')
                     .replace(/-+/g, '-')
                     .trim();
-                slugInput.value = slug;
+                document.getElementById('slug').value = slug;
             });
-            
-            // Set default date to today
-            const dateInput = document.getElementById('date');
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.value = today;
-            
-            form.addEventListener('submit', function(e) {
+
+            // Auto-select category color based on category
+            document.getElementById('category').addEventListener('change', function() {
+                const category = this.value;
+                const colorMap = {
+                    'Cybersecurity': 'red',
+                    'Web Dev': 'green',
+                    'Data Analytics': 'blue',
+                    'Tech Trends': 'purple',
+                    'AI & ML': 'yellow'
+                };
+                document.getElementById('category_color').value = colorMap[category] || 'gray';
+            });
+
+            document.getElementById('blogForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                const formData = new FormData(form);
+                const formData = new FormData(this);
                 const data = Object.fromEntries(formData);
                 
                 // Format date for display
-                const date = new Date(data.date);
-                const formattedDate = date.toLocaleDateString('en-US', { 
+                const displayDate = new Date(data.date).toLocaleDateString('en-US', { 
                     month: 'short', 
                     day: 'numeric', 
                     year: 'numeric' 
                 });
                 
-                // Get category color
-                const categoryColors = {
-                    'Cybersecurity': 'red',
-                    'Web Dev': 'green',
-                    'Data Analytics': 'blue',
-                    'AI & ML': 'purple',
-                    'Tech Trends': 'purple'
-                };
+                // Format date for published_time
+                const publishedTime = new Date(data.date).toISOString();
                 
-                const blogPost = {
-                    slug: data.slug,
-                    title: data.title,
-                    description: data.description,
-                    excerpt: data.excerpt,
-                    category: data.category,
-                    category_color: categoryColors[data.category] || 'gray',
-                    date: formattedDate,
-                    read_time: parseInt(data.readTime),
-                    published_time: new Date(data.date).toISOString(),
-                    content: data.content
-                };
-                
-                jsonOutput.textContent = JSON.stringify(blogPost, null, 2);
-                output.classList.remove('hidden');
-                preview.classList.add('hidden');
+                // Generate Markdown content with front matter
+                const markdownContent = `---
+title: "${data.title}"
+description: "${data.description}"
+excerpt: "${data.excerpt}"
+category: "${data.category}"
+category_color: "${data.category_color}"
+date: "${displayDate}"
+read_time: ${data.read_time}
+published_time: "${publishedTime}"
+slug: "${data.slug}"
+---
+
+${data.content}`;
+
+                // Generate blog system update
+                const blogSystemUpdate = `{
+    slug: '${data.slug}',
+    markdownFile: 'blog-posts/${data.slug}.md',
+    title: '${data.title}',
+    description: '${data.description}',
+    excerpt: '${data.excerpt}',
+    category: '${data.category}',
+    category_color: '${data.category_color}',
+    date: '${displayDate}',
+    read_time: ${data.read_time},
+    published_time: '${publishedTime}'
+}`;
+
+                // Display output
+                document.getElementById('markdownOutput').textContent = markdownContent;
+                document.getElementById('blogSystemUpdate').textContent = blogSystemUpdate;
+                document.getElementById('output').classList.remove('hidden');
+
+                // Scroll to output
+                document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
             });
-            
-            previewBtn.addEventListener('click', function() {
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData);
-                
-                const date = new Date(data.date);
-                const formattedDate = date.toLocaleDateString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric', 
-                    year: 'numeric' 
+
+            // Download Markdown file
+            document.getElementById('downloadMarkdown').addEventListener('click', function() {
+                const content = document.getElementById('markdownOutput').textContent;
+                const blob = new Blob([content], { type: 'text/markdown' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${document.getElementById('slug').value}.md`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+
+            // Copy blog system update
+            document.getElementById('copyBlogSystemUpdate').addEventListener('click', function() {
+                const content = document.getElementById('blogSystemUpdate').textContent;
+                navigator.clipboard.writeText(content).then(() => {
+                    this.textContent = 'Copied!';
+                    setTimeout(() => {
+                        this.textContent = 'Copy to Clipboard';
+                    }, 2000);
                 });
-                
-                const categoryColors = {
-                    'Cybersecurity': 'red',
-                    'Web Dev': 'green',
-                    'Data Analytics': 'blue',
-                    'AI & ML': 'purple',
-                    'Tech Trends': 'purple'
-                };
-                
-                const previewHTML = `
-                    <article class="bg-slate-700 rounded-lg p-6 mb-6">
-                        <div class="mb-4">
-                            <span class="bg-${categoryColors[data.category] || 'gray'}-600 text-white text-sm px-3 py-1 rounded-full">${data.category}</span>
-                            <span class="text-gray-400 text-sm ml-4">${formattedDate}</span>
-                            <span class="text-gray-400 text-sm ml-4">${data.readTime} min read</span>
-                        </div>
-                        
-                        <h1 class="text-3xl font-bold text-white mb-4">${data.title}</h1>
-                        
-                        <p class="text-xl text-gray-300 mb-6">${data.excerpt}</p>
-                        
-                        <div class="prose prose-invert max-w-none">
-                            ${data.content}
-                        </div>
-                    </article>
-                `;
-                
-                previewContent.innerHTML = previewHTML;
-                preview.classList.remove('hidden');
-                output.classList.add('hidden');
             });
         });
     </script>
