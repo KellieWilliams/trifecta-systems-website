@@ -157,83 +157,151 @@
     <div id="cookie-banner-container"></div>
     
     <script src="script.js" type="text/javascript" defer></script>
-    <script src="blog-system.js" type="text/javascript" defer></script>
 
     <!-- reCAPTCHA API call -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW" defer></script>
 
     <script>
+        // Blog post data - same as in blog-post.html
+        const blogPosts = [
+            {
+                slug: 'passkeys',
+                markdownFile: 'blog-posts/passkeys.md',
+                title: 'Ditch the Password Drama: Why Passkeys Are Your New Best Friend Online',
+                description: 'Discover how passkeys are revolutionizing online security, making logging in faster and more secure while protecting you from phishing attacks and password-related headaches.',
+                excerpt: 'If you\'ve been surfing the web lately, you might have noticed Windows (or even your phone) popping up with an offer to \'make a passkey.\' Welcome to the future of online security!',
+                category: 'Cybersecurity',
+                category_color: 'red',
+                date: 'Jul 25, 2025',
+                read_time: 8,
+                published_time: '2025-07-25T00:00:00Z'
+            },
+            {
+                slug: 'privacy-law-compliance-small-businesses',
+                markdownFile: 'blog-posts/privacy-law-compliance-small-businesses.md',
+                title: 'Navigating the Labyrinth: Privacy Law Compliance for Small Web Businesses',
+                description: 'Learn how small web development businesses can navigate the complex landscape of privacy laws including GDPR, CCPA, and state-specific regulations while maintaining compliance and building trust.',
+                excerpt: 'In today\'s digital landscape, every website is a potential data collector. Learn how small web development businesses can navigate the complex landscape of privacy laws including GDPR, CCPA, and state-specific regulations.',
+                category: 'Cybersecurity',
+                category_color: 'red',
+                date: 'Jul 18, 2025',
+                read_time: 12,
+                published_time: '2025-07-18T00:00:00Z'
+            },
+            {
+                slug: 'cursor-ai-pricing-insights',
+                markdownFile: 'blog-posts/cursor-ai-pricing-insights.md',
+                title: 'Navigating Cursor AI\'s Pricing: What Our Project Taught Us',
+                description: 'Discover how Cursor AI\'s token-based pricing model actually works in practice, with real usage data from a website modernization project showing exceptional cost efficiency.',
+                excerpt: 'As a solo web developer, efficiency and predictable costs are paramount. When it comes to leveraging AI for coding, tools like Cursor AI promise to revolutionize our workflow.',
+                category: 'Tech Trends',
+                category_color: 'purple',
+                date: 'Jul 11, 2025',
+                read_time: 10,
+                published_time: '2025-07-11T00:00:00Z'
+            },
+            {
+                slug: 'gimp-bimp-batch-processing',
+                markdownFile: 'blog-posts/gimp-bimp-batch-processing.md',
+                title: 'Streamline Your Workflow: Batch Convert and Watermark Images with GIMP and BIMP',
+                description: 'Learn how to automate image processing tasks using GIMP and the BIMP plugin to efficiently convert HEIC to JPG and apply professional watermarks in batch operations.',
+                excerpt: 'In today\'s digital world, managing and preparing large numbers of images is a common task for photographers, small businesses, and content creators.',
+                category: 'Tech Trends',
+                category_color: 'purple',
+                date: 'Jul 4, 2025',
+                read_time: 12,
+                published_time: '2025-07-04T00:00:00Z'
+            },
+            {
+                slug: 'masonry-layout-guide',
+                markdownFile: 'blog-posts/masonry-layout-guide.md',
+                title: 'Building Better Galleries: Why the Masonry Display is Your New Best Friend in HTML',
+                description: 'Discover how masonry layouts can transform your image galleries and content displays with dynamic, space-efficient arrangements that look professional and engaging.',
+                excerpt: 'Ever scrolled through Pinterest or an art portfolio website and admired how the images just fit together perfectly, like a beautifully constructed brick wall?',
+                category: 'Web Dev',
+                category_color: 'green',
+                date: 'Jun 27, 2025',
+                read_time: 8,
+                published_time: '2025-06-27T00:00:00Z'
+            },
+            {
+                slug: 'tablet-jotform-esignatures',
+                markdownFile: 'blog-posts/tablet-jotform-esignatures.md',
+                title: 'Streamline Your Small Business: How a Tablet and Jotform Deliver Smart, Secure E-Signatures',
+                description: 'Discover how combining a simple tablet with Jotform can revolutionize your business processes with professional e-signatures, saving time and improving legal compliance.',
+                excerpt: 'In today\'s fast-paced business world, efficiency and legal compliance are paramount, especially for small business owners juggling multiple hats.',
+                category: 'Tech Trends',
+                category_color: 'purple',
+                date: 'Jun 20, 2025',
+                read_time: 10,
+                published_time: '2025-06-20T00:00:00Z'
+            }
+        ];
+
         // Blog page specific functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Wait for blog system to load
-            const checkBlogSystem = setInterval(() => {
-                if (window.blogSystem && window.blogSystem.blogPosts.length > 0) {
-                    clearInterval(checkBlogSystem);
-                    renderBlogPosts();
-                    setupCategoryFilters();
-                }
-            }, 100);
-
-            function renderBlogPosts(category = 'all') {
-                const blogPostsContainer = document.getElementById('blog-posts');
-                const posts = window.blogSystem.getAllPosts();
-                
-                // Filter posts by category if needed
-                const filteredPosts = category === 'all' ? posts : posts.filter(post => post.category === category);
-                
-                // Sort posts by date (newest first)
-                filteredPosts.sort((a, b) => new Date(b.published_time) - new Date(a.published_time));
-                
-                const postsHTML = filteredPosts.map(post => `
-                    <article class="blog-post bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="${post.category}">
-                        <div class="p-6 flex flex-col h-full">
-                            <div class="flex items-center mb-3">
-                                <span class="bg-${post.category_color}-600 text-white text-xs px-2 py-1 rounded-full">${post.category}</span>
-                                <span class="text-gray-400 text-sm ml-auto">${post.date}</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-3">
-                                <a href="blog-posts/${post.slug}.html" class="hover:text-blue-400 transition-colors duration-200">
-                                    ${post.title}
-                                </a>
-                            </h3>
-                            <p class="text-gray-300 mb-4 line-clamp-3 flex-grow">
-                                ${post.excerpt}
-                            </p>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span class="text-sm text-gray-400">${post.read_time} min read</span>
-                                <a href="blog-posts/${post.slug}.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
-                                    Read More →
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                `).join('');
-                
-                blogPostsContainer.innerHTML = postsHTML;
-            }
-
-            function setupCategoryFilters() {
-                const filterButtons = document.querySelectorAll('.category-filter');
-                
-                filterButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        // Remove active class from all buttons
-                        filterButtons.forEach(btn => {
-                            btn.classList.remove('active', 'bg-blue-600');
-                            btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
-                        });
-                        
-                        // Add active class to clicked button
-                        this.classList.remove('bg-gray-700', 'hover:bg-gray-600');
-                        this.classList.add('active', 'bg-blue-600');
-                        
-                        // Filter posts
-                        const category = this.getAttribute('data-category');
-                        renderBlogPosts(category);
-                    });
-                });
-            }
+            renderBlogPosts();
+            setupCategoryFilters();
         });
+
+        function renderBlogPosts(category = 'all') {
+            const blogPostsContainer = document.getElementById('blog-posts');
+            
+            // Filter posts by category if needed
+            const filteredPosts = category === 'all' ? blogPosts : blogPosts.filter(post => post.category === category);
+            
+            // Sort posts by date (newest first)
+            filteredPosts.sort((a, b) => new Date(b.published_time) - new Date(a.published_time));
+            
+            const postsHTML = filteredPosts.map(post => `
+                <article class="blog-post bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col" data-category="${post.category}">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-${post.category_color}-600 text-white text-xs px-2 py-1 rounded-full">${post.category}</span>
+                            <span class="text-gray-400 text-sm ml-auto">${post.date}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            <a href="blog-post.html?slug=${post.slug}" class="hover:text-blue-400 transition-colors duration-200">
+                                ${post.title}
+                            </a>
+                        </h3>
+                        <p class="text-gray-300 mb-4 line-clamp-3 flex-grow">
+                            ${post.excerpt}
+                        </p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-sm text-gray-400">${post.read_time} min read</span>
+                            <a href="blog-post.html?slug=${post.slug}" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+            
+            blogPostsContainer.innerHTML = postsHTML;
+        }
+
+        function setupCategoryFilters() {
+            const filterButtons = document.querySelectorAll('.category-filter');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-blue-600');
+                        btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                    this.classList.add('active', 'bg-blue-600');
+                    
+                    // Filter posts
+                    const category = this.getAttribute('data-category');
+                    renderBlogPosts(category);
+                });
+            });
+        }
     </script>
 </body>
 </html> 

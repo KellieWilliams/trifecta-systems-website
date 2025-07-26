@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post | Trifecta.Systems</title>
+    <meta name="description" content="Blog post from Trifecta.Systems">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://trifecta.systems/blog-post.html">
+    <meta property="og:title" content="Blog Post | Trifecta.Systems">
+    <meta property="og:description" content="Blog post from Trifecta.Systems">
+    <meta property="og:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
+    <meta property="article:published_time" content="">
+    <meta property="article:author" content="Kellie Williams">
+    <meta property="article:section" content="">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://trifecta.systems/blog-post.html">
+    <meta property="twitter:title" content="Blog Post | Trifecta.Systems">
+    <meta property="twitter:description" content="Blog post from Trifecta.Systems">
+    <meta property="twitter:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="Gallery/favicon/site.webmanifest" />
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-[#0F131C] text-white py-4 shadow-lg">
+        <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
+                <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
+                <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            </a>
+
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2024/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <nav id="mobileMenu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg font-medium w-full items-center">
+                    <li class="relative group w-full md:w-auto services-menu-item"> 
+                        <div class="flex items-center justify-center nav-link-wrapper md:block">
+                            <a href="index.html#services" class="nav-link">
+                                Services
+                            </a>
+                            <button id="servicesDropdownToggle" class="md:hidden ml-1 p-1 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-gray-400">
+                                <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2024/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                            <li><a href="web-development.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Web Development</a></li>
+                            <li><a href="data-analytics.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Data Analytics</a></li>
+                            <li><a href="cybersecurity.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Cybersecurity</a></li>
+                            <li><a href="ai-custom-solutions.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Custom/AI Solutions</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="blog.html" class="nav-link text-blue-400">Blog</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Post Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Breadcrumb -->
+            <nav class="mb-8">
+                <ol class="flex items-center space-x-2 text-sm text-gray-400">
+                    <li><a href="index.html" class="hover:text-white transition-colors duration-200">Home</a></li>
+                    <li><span class="mx-2">/</span></li>
+                    <li><a href="blog.html" class="hover:text-white transition-colors duration-200">Blog</a></li>
+                    <li><span class="mx-2">/</span></li>
+                    <li class="text-white" id="breadcrumb-title">Loading...</li>
+                </ol>
+            </nav>
+
+            <!-- Article Header -->
+            <article class="bg-slate-800 rounded-lg p-8 mb-8">
+                <div class="mb-6">
+                    <span class="category-badge text-white text-sm px-3 py-1 rounded-full">Loading...</span>
+                    <span class="text-gray-400 text-sm ml-4" id="post-date">Loading...</span>
+                    <span class="text-gray-400 text-sm ml-4" id="read-time">Loading...</span>
+                </div>
+                
+                <h1 class="text-4xl font-bold text-white mb-6" id="post-title">
+                    Loading...
+                </h1>
+                
+                <div class="flex items-center mb-8">
+                    <img src="Gallery/Owner_Photo.jpg" alt="Kellie Williams" class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <p class="text-white font-medium">Kellie Williams</p>
+                        <p class="text-gray-400 text-sm">Founder & CEO, Trifecta.Systems</p>
+                    </div>
+                </div>
+
+                <p class="text-xl text-gray-300 leading-relaxed" id="post-excerpt">
+                    Loading...
+                </p>
+            </article>
+
+            <!-- Article Content -->
+            <div class="bg-slate-800 rounded-lg p-8 text-gray-300 leading-relaxed space-y-6" id="blog-content">
+                <div class="flex items-center justify-center py-8">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
+                    <span class="ml-3 text-gray-400">Loading blog post...</span>
+                </div>
+            </div>
+
+            <!-- Share and Navigation -->
+            <div class="flex flex-col md:flex-row justify-between items-center mt-8 space-y-4 md:space-y-0">
+                <div class="flex space-x-4">
+                    <span class="text-gray-400">Share:</span>
+                    <a href="#" id="twitter-share" class="text-blue-400 hover:text-blue-300 transition-colors duration-200" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    <a href="#" id="linkedin-share" class="text-blue-400 hover:text-blue-300 transition-colors duration-200" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="#" id="email-share" class="text-blue-400 hover:text-blue-300 transition-colors duration-200" target="_blank" rel="noopener noreferrer">Email</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="blog.html" class="text-blue-400 hover:text-blue-300 transition-colors duration-200">← Back to Blog</a>
+                </div>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-white mb-6">Related Posts</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="related-posts">
+                    <!-- Related posts will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+            <div class="mt-4 text-sm space-x-4">
+                <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a>
+                <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Terms of Service</a>
+                <a href="data-rights-request.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Rights</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include Cookie Banner -->
+    <div id="cookie-banner-container"></div>
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <script src="script.js" type="text/javascript" defer></script>
+
+    <!-- reCAPTCHA API call -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW" defer></script>
+
+    <script>
+        // Blog post data - moved from blog-system.js for single-page architecture
+        const blogPosts = [
+            {
+                slug: 'passkeys',
+                markdownFile: 'blog-posts/passkeys.md',
+                title: 'Ditch the Password Drama: Why Passkeys Are Your New Best Friend Online',
+                description: 'Discover how passkeys are revolutionizing online security, making logging in faster and more secure while protecting you from phishing attacks and password-related headaches.',
+                excerpt: 'If you\'ve been surfing the web lately, you might have noticed Windows (or even your phone) popping up with an offer to \'make a passkey.\' Welcome to the future of online security!',
+                category: 'Cybersecurity',
+                category_color: 'red',
+                date: 'Jul 25, 2025',
+                read_time: 8,
+                published_time: '2025-07-25T00:00:00Z'
+            },
+            {
+                slug: 'privacy-law-compliance-small-businesses',
+                markdownFile: 'blog-posts/privacy-law-compliance-small-businesses.md',
+                title: 'Navigating the Labyrinth: Privacy Law Compliance for Small Web Businesses',
+                description: 'Learn how small web development businesses can navigate the complex landscape of privacy laws including GDPR, CCPA, and state-specific regulations while maintaining compliance and building trust.',
+                excerpt: 'In today\'s digital landscape, every website is a potential data collector. Learn how small web development businesses can navigate the complex landscape of privacy laws including GDPR, CCPA, and state-specific regulations.',
+                category: 'Cybersecurity',
+                category_color: 'red',
+                date: 'Jul 18, 2025',
+                read_time: 12,
+                published_time: '2025-07-18T00:00:00Z'
+            },
+            {
+                slug: 'cursor-ai-pricing-insights',
+                markdownFile: 'blog-posts/cursor-ai-pricing-insights.md',
+                title: 'Navigating Cursor AI\'s Pricing: What Our Project Taught Us',
+                description: 'Discover how Cursor AI\'s token-based pricing model actually works in practice, with real usage data from a website modernization project showing exceptional cost efficiency.',
+                excerpt: 'As a solo web developer, efficiency and predictable costs are paramount. When it comes to leveraging AI for coding, tools like Cursor AI promise to revolutionize our workflow.',
+                category: 'Tech Trends',
+                category_color: 'purple',
+                date: 'Jul 11, 2025',
+                read_time: 10,
+                published_time: '2025-07-11T00:00:00Z'
+            },
+            {
+                slug: 'gimp-bimp-batch-processing',
+                markdownFile: 'blog-posts/gimp-bimp-batch-processing.md',
+                title: 'Streamline Your Workflow: Batch Convert and Watermark Images with GIMP and BIMP',
+                description: 'Learn how to automate image processing tasks using GIMP and the BIMP plugin to efficiently convert HEIC to JPG and apply professional watermarks in batch operations.',
+                excerpt: 'In today\'s digital world, managing and preparing large numbers of images is a common task for photographers, small businesses, and content creators.',
+                category: 'Tech Trends',
+                category_color: 'purple',
+                date: 'Jul 4, 2025',
+                read_time: 12,
+                published_time: '2025-07-04T00:00:00Z'
+            },
+            {
+                slug: 'masonry-layout-guide',
+                markdownFile: 'blog-posts/masonry-layout-guide.md',
+                title: 'Building Better Galleries: Why the Masonry Display is Your New Best Friend in HTML',
+                description: 'Discover how masonry layouts can transform your image galleries and content displays with dynamic, space-efficient arrangements that look professional and engaging.',
+                excerpt: 'Ever scrolled through Pinterest or an art portfolio website and admired how the images just fit together perfectly, like a beautifully constructed brick wall?',
+                category: 'Web Dev',
+                category_color: 'green',
+                date: 'Jun 27, 2025',
+                read_time: 8,
+                published_time: '2025-06-27T00:00:00Z'
+            },
+            {
+                slug: 'tablet-jotform-esignatures',
+                markdownFile: 'blog-posts/tablet-jotform-esignatures.md',
+                title: 'Streamline Your Small Business: How a Tablet and Jotform Deliver Smart, Secure E-Signatures',
+                description: 'Discover how combining a simple tablet with Jotform can revolutionize your business processes with professional e-signatures, saving time and improving legal compliance.',
+                excerpt: 'In today\'s fast-paced business world, efficiency and legal compliance are paramount, especially for small business owners juggling multiple hats.',
+                category: 'Tech Trends',
+                category_color: 'purple',
+                date: 'Jun 20, 2025',
+                read_time: 10,
+                published_time: '2025-06-20T00:00:00Z'
+            }
+        ];
+
+        // Blog post page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the slug from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            if (!slug) {
+                // No slug provided, redirect to blog
+                window.location.href = 'blog.html';
+                return;
+            }
+
+            // Wait for marked.js to load
+            const checkMarked = setInterval(() => {
+                if (window.marked) {
+                    clearInterval(checkMarked);
+                    console.log('Marked.js loaded, loading blog post');
+                    loadBlogPost(slug);
+                }
+            }, 100);
+
+            // Timeout after 10 seconds
+            setTimeout(() => {
+                clearInterval(checkMarked);
+                if (!window.marked) {
+                    document.getElementById('blog-content').innerHTML = '<p class="text-red-400">Error: Markdown parser failed to load. Please refresh the page.</p>';
+                }
+            }, 10000);
+
+            async function loadBlogPost(slug) {
+                console.log('Loading blog post with slug:', slug);
+                console.log('Available posts:', blogPosts.map(p => p.slug));
+                
+                const post = blogPosts.find(p => p.slug === slug);
+                console.log('Found post:', post);
+                
+                if (!post) {
+                    // Post not found, redirect to blog
+                    console.log('Post not found, redirecting to blog');
+                    window.location.href = 'blog.html';
+                    return;
+                }
+
+                // Update page title
+                document.title = `${post.title} | Trifecta.Systems Blog`;
+                
+                // Update breadcrumb
+                document.getElementById('breadcrumb-title').textContent = post.title;
+                
+                // Update article header
+                document.getElementById('post-title').textContent = post.title;
+                document.getElementById('post-excerpt').textContent = post.excerpt;
+                document.getElementById('post-date').textContent = post.date;
+                document.getElementById('read-time').textContent = `${post.read_time} min read`;
+                
+                // Update category badge
+                const categoryBadge = document.querySelector('.category-badge');
+                categoryBadge.className = `category-badge bg-${post.category_color}-600 text-white text-sm px-3 py-1 rounded-full`;
+                categoryBadge.textContent = post.category;
+                
+                // Update meta tags
+                updateMetaTags(post);
+                
+                // Load Markdown content
+                await loadMarkdownContent(post);
+                
+                // Update related posts
+                updateRelatedPosts(post);
+                
+                // Setup social sharing links
+                setupSocialSharing(post);
+            }
+
+            function setupSocialSharing(post) {
+                const currentUrl = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent(post.title);
+                const description = encodeURIComponent(post.excerpt);
+                
+                // Twitter sharing
+                const twitterShare = document.getElementById('twitter-share');
+                if (twitterShare) {
+                    const twitterUrl = `https://twitter.com/intent/tweet?text=${title}&url=${currentUrl}&via=TrifectaSystems`;
+                    twitterShare.href = twitterUrl;
+                }
+                
+                // LinkedIn sharing
+                const linkedinShare = document.getElementById('linkedin-share');
+                if (linkedinShare) {
+                    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+                    linkedinShare.href = linkedinUrl;
+                }
+                
+                // Email sharing
+                const emailShare = document.getElementById('email-share');
+                if (emailShare) {
+                    const emailSubject = encodeURIComponent(`Check out this article: ${post.title}`);
+                    const emailBody = encodeURIComponent(`I thought you might be interested in this article from Trifecta.Systems:\n\n${post.title}\n\n${post.excerpt}\n\nRead more at: ${window.location.href}`);
+                    const emailUrl = `mailto:?subject=${emailSubject}&body=${emailBody}`;
+                    emailShare.href = emailUrl;
+                }
+            }
+
+            function updateMetaTags(post) {
+                // Update meta description
+                const metaDescription = document.querySelector('meta[name="description"]');
+                if (metaDescription) {
+                    metaDescription.setAttribute('content', post.description);
+                }
+
+                // Update Open Graph tags
+                const ogTitle = document.querySelector('meta[property="og:title"]');
+                if (ogTitle) ogTitle.setAttribute('content', post.title);
+
+                const ogDescription = document.querySelector('meta[property="og:description"]');
+                if (ogDescription) ogDescription.setAttribute('content', post.description);
+
+                const ogUrl = document.querySelector('meta[property="og:url"]');
+                if (ogUrl) ogUrl.setAttribute('content', `https://trifecta.systems/blog-post.html?slug=${post.slug}`);
+
+                const ogPublishedTime = document.querySelector('meta[property="article:published_time"]');
+                if (ogPublishedTime) ogPublishedTime.setAttribute('content', post.published_time);
+
+                const ogSection = document.querySelector('meta[property="article:section"]');
+                if (ogSection) ogSection.setAttribute('content', post.category);
+
+                // Update Twitter tags
+                const twitterTitle = document.querySelector('meta[property="twitter:title"]');
+                if (twitterTitle) twitterTitle.setAttribute('content', post.title);
+
+                const twitterDescription = document.querySelector('meta[property="twitter:description"]');
+                if (twitterDescription) twitterDescription.setAttribute('content', post.description);
+
+                const twitterUrl = document.querySelector('meta[property="twitter:url"]');
+                if (twitterUrl) twitterUrl.setAttribute('content', `https://trifecta.systems/blog-post.html?slug=${post.slug}`);
+            }
+
+            async function loadMarkdownContent(post) {
+                try {
+                    console.log('Loading markdown file:', post.markdownFile);
+                    console.log('Current URL:', window.location.href);
+                    console.log('Current pathname:', window.location.pathname);
+                    
+                    // Try multiple path approaches
+                    const pathAttempts = [
+                        post.markdownFile, // Original path
+                        '/' + post.markdownFile, // Absolute from root
+                        './' + post.markdownFile, // Explicit relative
+                        '../' + post.markdownFile // Up one directory
+                    ];
+                    
+                    let response = null;
+                    let successfulPath = null;
+                    
+                    for (const path of pathAttempts) {
+                        try {
+                            console.log('Attempting to load from path:', path);
+                            response = await fetch(path);
+                            console.log('Response status for', path, ':', response.status);
+                            
+                            if (response.ok) {
+                                successfulPath = path;
+                                console.log('Successfully loaded from:', path);
+                                break;
+                            }
+                        } catch (fetchError) {
+                            console.log('Failed to load from:', path, fetchError.message);
+                            continue;
+                        }
+                    }
+                    
+                    if (!response || !response.ok) {
+                        throw new Error(`Failed to load Markdown file from any path. Tried: ${pathAttempts.join(', ')}`);
+                    }
+                    
+                    console.log('Response URL:', response.url);
+                    console.log('Response headers:', response.headers);
+                    
+                    const markdownText = await response.text();
+                    console.log('Markdown content loaded, length:', markdownText.length);
+                    console.log('First 200 characters:', markdownText.substring(0, 200));
+                    
+                    // Parse front matter and content
+                    const { frontMatter, content } = parseFrontMatter(markdownText);
+                    console.log('Content parsed, length:', content.length);
+                    console.log('Front matter:', frontMatter);
+                    
+                    // Convert Markdown to HTML
+                    if (window.marked) {
+                        try {
+                            // Configure marked options for better rendering
+                            window.marked.setOptions({
+                                breaks: true,
+                                gfm: true,
+                                headerIds: true,
+                                mangle: false
+                            });
+                            
+                            const htmlContent = window.marked.parse(content);
+                            document.getElementById('blog-content').innerHTML = htmlContent;
+                            console.log('Markdown converted to HTML successfully');
+                            console.log('HTML content length:', htmlContent.length);
+                        } catch (parseError) {
+                            console.error('Error parsing Markdown:', parseError);
+                            document.getElementById('blog-content').innerHTML = `<p class="text-red-400">Error parsing Markdown content: ${parseError.message}</p>`;
+                        }
+                    } else {
+                        // Fallback if marked.js is not loaded
+                        document.getElementById('blog-content').innerHTML = `<p class="text-red-400">Error: Markdown parser not loaded. Please refresh the page.</p>`;
+                    }
+
+                } catch (error) {
+                    console.error('Error loading Markdown content:', error);
+                    console.error('Error details:', {
+                        message: error.message,
+                        stack: error.stack,
+                        post: post
+                    });
+                    document.getElementById('blog-content').innerHTML = `<p class="text-red-400">Error loading blog post content: ${error.message}. Please try again later.</p>`;
+                }
+            }
+
+            function parseFrontMatter(markdownText) {
+                const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+                const match = markdownText.match(frontMatterRegex);
+                
+                if (match) {
+                    const frontMatterText = match[1];
+                    const content = match[2];
+                    
+                    // Parse YAML front matter
+                    const frontMatter = {};
+                    frontMatterText.split('\n').forEach(line => {
+                        const colonIndex = line.indexOf(':');
+                        if (colonIndex > 0) {
+                            const key = line.substring(0, colonIndex).trim();
+                            let value = line.substring(colonIndex + 1).trim();
+                            
+                            // Remove quotes if present
+                            if ((value.startsWith('"') && value.endsWith('"')) || 
+                                (value.startsWith("'") && value.endsWith("'"))) {
+                                value = value.slice(1, -1);
+                            }
+                            
+                            frontMatter[key] = value;
+                        }
+                    });
+                    
+                    return { frontMatter, content };
+                }
+                
+                // If no front matter, return the entire text as content
+                return { frontMatter: {}, content: markdownText };
+            }
+
+            function updateRelatedPosts(currentPost) {
+                const relatedPostsContainer = document.getElementById('related-posts');
+                if (!relatedPostsContainer) return;
+
+                // Get related posts (same category, excluding current post)
+                const relatedPosts = blogPosts
+                    .filter(post => post.category === currentPost.category && post.slug !== currentPost.slug)
+                    .slice(0, 3);
+
+                // If not enough posts in same category, add posts from other categories
+                if (relatedPosts.length < 3) {
+                    const otherPosts = blogPosts
+                        .filter(post => post.category !== currentPost.category && post.slug !== currentPost.slug)
+                        .slice(0, 3 - relatedPosts.length);
+                    relatedPosts.push(...otherPosts);
+                }
+
+                const relatedPostsHTML = relatedPosts.map(post => `
+                    <a href="blog-post.html?slug=${post.slug}" class="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-colors duration-200">
+                        <span class="bg-${post.category_color}-600 text-white text-xs px-2 py-1 rounded-full">${post.category}</span>
+                        <h4 class="text-lg font-semibold text-white mt-3 mb-2">${post.title}</h4>
+                        <p class="text-gray-400 text-sm">${post.excerpt}</p>
+                    </a>
+                `).join('');
+
+                relatedPostsContainer.innerHTML = relatedPostsHTML;
+            }
+        });
+    </script>
+</body>
+</html> 
