@@ -293,8 +293,12 @@ class CookieManager {
     init() {
         // Check if user has already made a choice
         const consent = this.getCookieConsent();
+        console.log('Cookie consent status:', consent);
         if (!consent) {
+            console.log('No consent found, showing cookie banner');
             this.showCookieBanner();
+        } else {
+            console.log('Consent already given, not showing banner');
         }
         
         this.bindEvents();
@@ -346,11 +350,15 @@ class CookieManager {
     }
     
     showCookieBanner() {
+        console.log('showCookieBanner called, cookieBanner element:', this.cookieBanner);
         if (this.cookieBanner) {
             // Small delay to ensure page is loaded
             setTimeout(() => {
+                console.log('Removing translate-y-full class from cookie banner');
                 this.cookieBanner.classList.remove('translate-y-full');
             }, 1000);
+        } else {
+            console.log('Cookie banner element not found');
         }
     }
     
@@ -721,16 +729,17 @@ function obfuscateEmail() {
 // Load cookie banner HTML
 async function loadCookieBanner() {
     try {
-        // Determine the correct path based on current page location
-        const currentPath = window.location.pathname;
-        const isInSubdirectory = currentPath.includes('/blog-posts/');
-        const cookieBannerPath = isInSubdirectory ? '../cookie-banner.html' : 'cookie-banner.html';
-        
-        const response = await fetch(cookieBannerPath);
+        console.log('Loading cookie banner from: cookie-banner.html');
+        const response = await fetch('cookie-banner.html');
         const html = await response.text();
+        console.log('Cookie banner HTML loaded, length:', html.length);
+        
         const container = document.getElementById('cookie-banner-container');
         if (container) {
             container.innerHTML = html;
+            console.log('Cookie banner HTML inserted into container');
+        } else {
+            console.log('Cookie banner container not found');
         }
     } catch (error) {
         console.error('Failed to load cookie banner:', error);
@@ -1020,41 +1029,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Initialize Data Rights Request Form ---
 initializeDataRightsForm();
+    
 
-// --- Initialize Blog Category Filter ---
-initializeBlogFilter();
 });
-
-// Blog Category Filter Function
-function initializeBlogFilter() {
-    const categoryFilters = document.querySelectorAll('.category-filter');
-    const blogPosts = document.querySelectorAll('.blog-post');
-    
-    if (categoryFilters.length === 0) return;
-    
-    categoryFilters.forEach(filter => {
-        filter.addEventListener('click', () => {
-            const selectedCategory = filter.getAttribute('data-category');
-            
-            // Update active filter button
-            categoryFilters.forEach(btn => {
-                btn.classList.remove('active', 'bg-blue-600');
-                btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
-            });
-            filter.classList.add('active', 'bg-blue-600');
-            filter.classList.remove('bg-gray-700', 'hover:bg-gray-600');
-            
-            // Filter blog posts
-            blogPosts.forEach(post => {
-                const postCategory = post.getAttribute('data-category');
-                
-                if (selectedCategory === 'all' || postCategory === selectedCategory) {
-                    post.style.display = 'block';
-                    post.classList.add('animate-fade-in');
-                } else {
-                    post.style.display = 'none';
-                }
-            });
-        });
-    });
-}

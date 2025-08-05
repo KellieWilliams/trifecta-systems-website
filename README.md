@@ -10,7 +10,7 @@ A modern, responsive business website showcasing technology services for small b
 - **Performance**: Lazy loading, image optimization, and deferred scripts
 - **Security**: Content Security Policy, security headers, and form protection
 - **Privacy Compliance**: GDPR/CCPA compliant with cookie consent and data rights
-- **Blog System**: Dynamic Markdown-based blog with category filtering
+
 - **Accessibility**: WCAG 2.1 AA compliant with proper ARIA labels
 - **Modern Standards**: HTML5, CSS3, ES6+, and modern web APIs
 
@@ -21,7 +21,7 @@ A modern, responsive business website showcasing technology services for small b
 - **Security**: Google reCAPTCHA v3, CSRF protection, honeypot fields
 - **Performance**: Service Worker, lazy loading, compression, WebP images
 - **SEO**: Schema.org structured data, Open Graph, Twitter Cards
-- **Blog**: Markdown-based with dynamic loading and parsing
+
 - **Privacy**: Cookie consent management, data rights request system
 - **Hosting**: Apache with .htaccess configuration
 
@@ -36,9 +36,7 @@ Trifecta/
 │   ├── cybersecurity.html      # Cybersecurity services
 │   ├── ai-custom-solutions.html # AI and custom solutions
 │   ├── about-the-owner.html    # About the owner page
-│   ├── blog.html               # Blog listing page
-│   ├── blog-post.html          # Dynamic blog post template
-│   ├── blog-generator.html     # Blog post creation tool
+
 │   ├── privacy-policy.html     # Privacy policy page
 │   ├── terms-of-service.html   # Terms of service page
 │   ├── data-rights-request.html # Data rights request form
@@ -46,17 +44,11 @@ Trifecta/
 │   ├── style.css               # Custom CSS styles
 │   ├── script.js               # JavaScript functionality
 │   ├── sw.js                   # Service worker
-│   ├── marked.min.js           # Markdown parser library
+
 │   ├── robots.txt              # Search engine directives
 │   ├── sitemap.xml             # XML sitemap
 │   ├── .htaccess               # Apache configuration
-│   ├── blog-posts/             # Markdown blog content
-│   │   ├── passkeys.md         # Blog post files
-│   │   ├── cursor-ai-pricing-insights.md
-│   │   ├── gimp-bimp-batch-processing.md
-│   │   ├── masonry-layout-guide.md
-│   │   ├── tablet-jotform-esignatures.md
-│   │   └── privacy-law-compliance-small-businesses.md
+
 │   └── Gallery/                # Image assets
 │       ├── favicon/            # Favicon files
 │       └── *.png/jpg/webp      # Website images
@@ -70,7 +62,7 @@ Trifecta/
 ├── config/                     # Configuration files (gitignored)
 │   └── secrets.php             # API keys and sensitive data
 ├── SECURITY.md                 # Security documentation
-├── BLOG-SYSTEM-README.md       # Blog system documentation
+
 └── README.md                   # This file
 ```
 
@@ -103,7 +95,7 @@ Trifecta/
    - Visit your domain to confirm the site loads
    - Test the contact form functionality
    - Check browser console for service worker registration
-   - Test blog functionality and privacy features
+   - Test privacy features
 
 ## 🔧 Configuration
 
@@ -147,7 +139,7 @@ The service worker (`sw.js`) provides:
 - **Caching**: Service worker with intelligent cache strategies
 - **Compression**: Gzip compression for text assets
 - **Minification**: Tailwind CSS CDN for optimized styles
-- **Markdown Parsing**: Local marked.js library for blog content
+
 
 ### Performance Metrics
 
@@ -176,9 +168,9 @@ The service worker (`sw.js`) provides:
 - **Meta Tags**: Comprehensive meta descriptions and titles
 - **Open Graph**: Social media sharing optimization
 - **Twitter Cards**: Twitter-specific meta tags
-- **XML Sitemap**: Automated sitemap generation including blog posts
+- **XML Sitemap**: Automated sitemap generation
 - **Robots.txt**: Search engine crawling directives
-- **Blog SEO**: Dynamic meta tags for individual blog posts
+
 
 ### Local SEO
 
@@ -186,24 +178,7 @@ The service worker (`sw.js`) provides:
 - **Contact Information**: Structured contact data
 - **Service Areas**: Geographic service coverage
 
-## 📝 Blog System
 
-### Features
-
-- **Markdown-Based**: Blog posts written in Markdown with YAML front matter
-- **Dynamic Loading**: Single-page architecture for blog posts
-- **Category Filtering**: Filter posts by category on the main blog page
-- **Social Sharing**: Twitter, LinkedIn, and email sharing links
-- **SEO Optimized**: Dynamic meta tags and structured data
-- **Content Management**: Web-based blog post generator tool
-- **Responsive Design**: Mobile-friendly blog layout
-
-### Creating Blog Posts
-
-1. Use the `blog-generator.html` tool to create new posts
-2. Or manually create `.md` files in the `blog-posts/` directory
-3. Add the post data to the `blogPosts` array in both `blog.html` and `blog-post.html`
-4. Upload the new `.md` file to the server
 
 ## 🔐 Privacy & Compliance
 
@@ -250,7 +225,7 @@ The service worker (`sw.js`) provides:
 
 - [ ] Responsive design on all devices
 - [ ] Contact form functionality with validation
-- [ ] Blog system and post loading
+
 - [ ] Cookie consent banner and settings
 - [ ] Privacy policy and data rights forms
 - [ ] Service worker registration

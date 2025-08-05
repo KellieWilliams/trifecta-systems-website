@@ -20,13 +20,7 @@ const urlsToCache = [
   '/Gallery/favicon/favicon.ico',
   '/Gallery/favicon/favicon-96x96.png',
   '/Gallery/favicon/apple-touch-icon.png',
-  '/Gallery/favicon/site.webmanifest',
-  'https://cdn.tailwindcss.com',
-  'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
-  'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2',
-  'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc4.woff2',
-  'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc4.woff2',
-  'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmYUtfBBc4.woff2'
+  '/Gallery/favicon/site.webmanifest'
 ];
 
 // Install event - cache resources
