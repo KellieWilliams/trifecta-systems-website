@@ -44,10 +44,15 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     ExpiresByType application/x-shockwave-flash "access plus 1 month"
 </IfModule>
 
-# Block dangerous file types
+# Block dangerous file types (except blog parser proxy)
 <FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
     Require all denied
 </FilesMatch>
+
+# Allow blog parser proxy
+<Files "parser-proxy.php">
+    Require all granted
+</Files>
 
 # Block access to sensitive files
 <FilesMatch "^(\.htaccess|\.htpasswd|\.env|config\.php|secrets\.php|\.git|\.svn|\.DS_Store|Thumbs\.db)$">

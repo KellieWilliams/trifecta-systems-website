@@ -12,8 +12,8 @@ body {
     max-width: 1200px; /* Equivalent to max-w-6xl or similar, assuming this was already there */
 }
 
-/* Sticky Header Style */
-header {
+/* Sticky Header Style - Only for main navigation header */
+.main-navigation-header {
     position: sticky; /* Make the header stick to the top */
     top: 0; /* Position it at the very top */
     z-index: 1000; /* Ensure it stays above other content when scrolling */
