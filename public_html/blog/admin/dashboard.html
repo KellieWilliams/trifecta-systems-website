@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Trifecta.Systems Blog</title>
+    <meta name="description" content="Blog management dashboard for Trifecta.Systems">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="../../Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="../../Gallery/favicon/site.webmanifest" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-[#0F131C] text-white shadow-lg sticky top-0 z-50 main-navigation-header">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3 flex-shrink-0">
+                    <img id="mainLogo" src="../../Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
+                    <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../index.html#services" class="nav-link">Services</a>
+                    <a href="../../index.html#about" class="nav-link">About</a>
+                    <a href="../../index.html#contact" class="nav-link">Contact</a>
+                    <a href="../index.html" class="nav-link">Blog</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userInfo" class="text-gray-300 text-sm hidden">
+                        Welcome, <span id="username"></span>
+                    </span>
+                    <button id="logoutBtn" class="text-red-400 hover:text-red-300 text-sm font-medium hidden">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="bg-[#0F131C] min-h-screen py-16">
+        <div class="container mx-auto px-4">
+            <!-- Dashboard Header -->
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-[#161B29] rounded-lg shadow-xl p-8 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-white mb-2">Blog Management Dashboard</h1>
+                            <p class="text-gray-400">Manage your blog posts and content</p>
+                        </div>
+                        <a href="create-post.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+                            + New Post
+                        </a>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-[#0F131C] rounded-lg p-6">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-blue-500 rounded-lg">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-gray-400 text-sm">Total Posts</p>
+                                    <p id="totalPosts" class="text-2xl font-bold text-white">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#0F131C] rounded-lg p-6">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-green-500 rounded-lg">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-gray-400 text-sm">Published</p>
+                                    <p id="publishedPosts" class="text-2xl font-bold text-white">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#0F131C] rounded-lg p-6">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-yellow-500 rounded-lg">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-gray-400 text-sm">Drafts</p>
+                                    <p id="draftPosts" class="text-2xl font-bold text-white">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Posts List -->
+                <div class="bg-[#161B29] rounded-lg shadow-xl p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-white">Blog Posts</h2>
+                        <div class="flex space-x-2">
+                            <button id="refreshBtn" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+                                Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="loading" class="text-center py-16">
+                        <div class="loading-spinner"></div>
+                        <p class="text-gray-400 mt-4">Loading blog posts...</p>
+                    </div>
+
+                    <!-- Posts Table -->
+                    <div id="postsTable" class="hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b border-gray-700">
+                                        <th class="text-left py-3 px-4 text-gray-300 font-semibold">Title</th>
+                                        <th class="text-left py-3 px-4 text-gray-300 font-semibold">Category</th>
+                                        <th class="text-left py-3 px-4 text-gray-300 font-semibold">Date</th>
+                                        <th class="text-left py-3 px-4 text-gray-300 font-semibold">Status</th>
+                                        <th class="text-left py-3 px-4 text-gray-300 font-semibold">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="postsTableBody">
+                                    <!-- Posts will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Error State -->
+                    <div id="error" class="hidden text-center py-16">
+                        <p class="text-red-400 text-xl mb-4">Error Loading Posts</p>
+                        <p class="text-gray-400 mb-8">Unable to load blog posts. Please try again.</p>
+                        <button id="retryBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200">
+                            Try Again
+                        </button>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="empty" class="hidden text-center py-16">
+                        <svg class="w-16 h-16 text-gray-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <p class="text-gray-400 text-xl mb-4">No Blog Posts Found</p>
+                        <p class="text-gray-500 mb-8">Get started by creating your first blog post.</p>
+                        <a href="create-post.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200">
+                            Create Your First Post
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#161B29] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+                <p class="text-gray-400 mt-2">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin dashboard doesn't need the main script.js (cookie banner, service worker, etc.) -->
+    
+    <script>
+        let currentSessionId = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check session on page load
+            checkSession();
+            
+            // Event listeners
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+            document.getElementById('refreshBtn').addEventListener('click', loadPosts);
+            document.getElementById('retryBtn').addEventListener('click', loadPosts);
+        });
+
+        async function checkSession() {
+            // Get session ID from URL parameter or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            currentSessionId = urlParams.get('session_id') || localStorage.getItem('admin_session_id');
+            
+            if (!currentSessionId) {
+                // No session, redirect to login
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`../admin-auth-proxy.php?action=check_session&session_id=${currentSessionId}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Session is valid, show dashboard
+                    document.getElementById('username').textContent = result.username;
+                    document.getElementById('userInfo').classList.remove('hidden');
+                    document.getElementById('logoutBtn').classList.remove('hidden');
+                    
+                    // Store session ID
+                    localStorage.setItem('admin_session_id', currentSessionId);
+                    
+                    // Load posts
+                    loadPosts();
+                } else {
+                    // Invalid session, redirect to login
+                    localStorage.removeItem('admin_session_id');
+                    window.location.href = 'login.html';
+                }
+                
+            } catch (error) {
+                console.error('Session check error:', error);
+                window.location.href = 'login.html';
+            }
+        }
+
+        async function loadPosts() {
+            showLoading(true);
+            hideError();
+            hideEmpty();
+            hideTable();
+            
+            try {
+                const response = await fetch('../parser-proxy.php?action=list');
+                const posts = await response.json();
+                
+                if (Array.isArray(posts) && posts.length > 0) {
+                    displayPosts(posts);
+                    updateStats(posts);
+                } else {
+                    showEmpty();
+                }
+                
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                showError();
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function displayPosts(posts) {
+            const tableBody = document.getElementById('postsTableBody');
+            tableBody.innerHTML = '';
+            
+            posts.forEach(post => {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-700 hover:bg-[#0F131C] transition-colors duration-200';
+                
+                const categoryColor = getCategoryColor(post.category_color);
+                
+                row.innerHTML = `
+                    <td class="py-4 px-4">
+                        <div>
+                            <h3 class="text-white font-semibold mb-1">${post.title}</h3>
+                            <p class="text-gray-400 text-sm">${post.excerpt || post.description || ''}</p>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4">
+                        <span class="px-3 py-1 text-xs font-semibold text-white rounded-full ${categoryColor}">
+                            ${post.category}
+                        </span>
+                    </td>
+                    <td class="py-4 px-4 text-gray-300">
+                        ${formatDate(post.published_time)}
+                    </td>
+                    <td class="py-4 px-4">
+                        <span class="px-3 py-1 text-xs font-semibold text-white rounded-full ${post.status === 'published' ? 'bg-green-500' : 'bg-yellow-500'}">
+                            ${post.status === 'published' ? 'Published' : 'Draft'}
+                        </span>
+                    </td>
+                    <td class="py-4 px-4">
+                        <div class="flex space-x-2">
+                            <a href="../post.html?slug=${post.slug}" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm">
+                                View
+                            </a>
+                            <button onclick="editPost('${post.slug}')" class="text-yellow-400 hover:text-yellow-300 text-sm">
+                                Edit
+                            </button>
+                            <button onclick="deletePost('${post.slug}')" class="text-red-400 hover:text-red-300 text-sm">
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            showTable();
+        }
+
+        function updateStats(posts) {
+            document.getElementById('totalPosts').textContent = posts.length;
+            
+            // Count published vs draft posts
+            const publishedPosts = posts.filter(post => post.status === 'published').length;
+            const draftPosts = posts.filter(post => post.status === 'draft').length;
+            
+            document.getElementById('publishedPosts').textContent = publishedPosts;
+            document.getElementById('draftPosts').textContent = draftPosts;
+        }
+
+        function getCategoryColor(color) {
+            const colors = {
+                'blue': 'bg-blue-500',
+                'green': 'bg-green-500',
+                'red': 'bg-red-500',
+                'yellow': 'bg-yellow-500',
+                'purple': 'bg-purple-500',
+                'pink': 'bg-pink-500',
+                'indigo': 'bg-indigo-500',
+                'gray': 'bg-gray-500'
+            };
+            return colors[color] || 'bg-blue-500';
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        async function handleLogout() {
+            if (currentSessionId) {
+                try {
+                    const formData = new FormData();
+                    formData.append('action', 'logout');
+                    formData.append('session_id', currentSessionId);
+                    
+                    await fetch('../admin-auth-proxy.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                } catch (error) {
+                    console.error('Logout error:', error);
+                }
+            }
+            
+            // Clear session and redirect
+            localStorage.removeItem('admin_session_id');
+            window.location.href = 'login.html';
+        }
+
+        function editPost(slug) {
+            window.location.href = `edit-post.html?slug=${encodeURIComponent(slug)}`;
+        }
+
+        async function deletePost(slug) {
+            if (!confirm(`Are you sure you want to delete this post? This action cannot be undone.`)) {
+                return;
+            }
+            
+            try {
+                const formData = new FormData();
+                formData.append('action', 'delete_post');
+                formData.append('session_id', currentSessionId);
+                formData.append('slug', slug);
+                
+                const response = await fetch('../admin-api-proxy.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(result.message);
+                    // Reload the posts list
+                    loadPosts();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('An error occurred while deleting the post. Please try again.');
+            }
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            if (show) {
+                loading.classList.remove('hidden');
+            } else {
+                loading.classList.add('hidden');
+            }
+        }
+
+        function showTable() {
+            document.getElementById('postsTable').classList.remove('hidden');
+        }
+
+        function hideTable() {
+            document.getElementById('postsTable').classList.add('hidden');
+        }
+
+        function showError() {
+            document.getElementById('error').classList.remove('hidden');
+        }
+
+        function hideError() {
+            document.getElementById('error').classList.add('hidden');
+        }
+
+        function showEmpty() {
+            document.getElementById('empty').classList.remove('hidden');
+        }
+
+        function hideEmpty() {
+            document.getElementById('empty').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

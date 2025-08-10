@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Trifecta.Systems Blog</title>
+    <meta name="description" content="Admin login for Trifecta.Systems blog">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="../../Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="../../Gallery/favicon/site.webmanifest" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-[#0F131C] text-white shadow-lg sticky top-0 z-50 main-navigation-header">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3 flex-shrink-0">
+                    <img id="mainLogo" src="../../Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
+                    <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../index.html#services" class="nav-link">Services</a>
+                    <a href="../../index.html#about" class="nav-link">About</a>
+                    <a href="../../index.html#contact" class="nav-link">Contact</a>
+                    <a href="../index.html" class="nav-link">Blog</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Login Form -->
+    <main class="bg-[#0F131C] min-h-screen flex items-center justify-center py-16">
+        <div class="max-w-md w-full mx-auto px-4">
+            <div class="bg-[#161B29] rounded-lg shadow-xl p-8">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-white mb-2">Admin Login</h1>
+                    <p class="text-gray-400">Access the blog management portal</p>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="space-y-6">
+                    <!-- Action -->
+                    <input type="hidden" name="action" value="login">
+                    <!-- CSRF Token -->
+                    <input type="hidden" id="csrfToken" name="csrf_token" value="">
+                    
+                    <!-- Username -->
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-300 mb-2">
+                            Username
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            required
+                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter your username"
+                        >
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-300 mb-2">
+                            Password
+                        </label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required
+                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter your password"
+                        >
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#161B29]"
+                    >
+                        Sign In
+                    </button>
+                </form>
+
+                <!-- Loading State -->
+                <div id="loading" class="hidden text-center py-4">
+                    <div class="loading-spinner"></div>
+                    <p class="text-gray-400 mt-2">Signing in...</p>
+                </div>
+
+                <!-- Error Message -->
+                <div id="error" class="hidden mt-4 p-4 bg-red-900 border border-red-700 rounded-lg">
+                    <p id="errorMessage" class="text-red-300 text-sm"></p>
+                </div>
+
+                <!-- Back to Blog Link -->
+                <div class="mt-6 text-center">
+                    <a href="../index.html" class="text-blue-400 hover:text-blue-300 text-sm">
+                        ← Back to Blog
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#161B29] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+                <p class="text-gray-400 mt-2">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin login doesn't need the main script.js (cookie banner, service worker, etc.) -->
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate CSRF token
+            generateCSRFToken();
+            
+            // Handle form submission
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        });
+
+        function generateCSRFToken() {
+            const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            document.getElementById('csrfToken').value = token;
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Show loading state
+            showLoading(true);
+            hideError();
+            
+            try {
+                const response = await fetch('../admin-auth-proxy.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Store session ID and redirect to dashboard
+                    localStorage.setItem('admin_session_id', result.session_id);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    showError(result.message || 'Login failed. Please check your credentials.');
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('An error occurred during login. Please try again.');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            const form = document.getElementById('loginForm');
+            
+            if (show) {
+                loading.classList.remove('hidden');
+                form.classList.add('hidden');
+            } else {
+                loading.classList.add('hidden');
+                form.classList.remove('hidden');
+            }
+        }
+
+        function showError(message) {
+            const error = document.getElementById('error');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            errorMessage.textContent = message;
+            error.classList.remove('hidden');
+        }
+
+        function hideError() {
+            document.getElementById('error').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -7,7 +7,9 @@ category_color: "purple"
 date: "Jul 4, 2025"
 read_time: 12
 published_time: "2025-07-04T00:00:00Z"
-slug: "gimp-bimp-batch-processing"
+status: "published"
+slug: "gimp-batch-processing"
+tags: "GIMP, BIMP, image processing, batch processing, watermarking, HEIC conversion, productivity, open source, photography, workflow automation"
 ---
 
 In today's digital world, managing and preparing large numbers of images is a common task for photographers, small businesses, and content creators. Whether you're dealing with a client's vast portfolio of HEIC photos, preparing images for a website, or simply want to brand your work, manually converting and watermarking each file can be a tedious and time-consuming process.

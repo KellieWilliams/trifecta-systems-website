@@ -7,7 +7,9 @@ category_color: "green"
 date: "Jun 27, 2025"
 read_time: 8
 published_time: "2025-06-27T00:00:00Z"
+status: "published"
 slug: "masonry-layout-guide"
+tags: "masonry layout, CSS, JavaScript, web design, responsive design, image galleries, frontend development, user experience, Pinterest-style, layout optimization"
 ---
 
 Ever scrolled through Pinterest or an art portfolio website and admired how the images just fit together perfectly, like a beautifully constructed brick wall? That's the magic of a **Masonry layout**, and it's a game-changer for displaying content on the web.

@@ -132,6 +132,19 @@
         .blog-content em {
             color: #9ca3af;
         }
+        
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .blog-content img:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -207,6 +220,13 @@
                             <span id="post-date">
                                 <!-- Date will be inserted here -->
                             </span>
+                        </div>
+                        
+                        <!-- Tags -->
+                        <div id="post-tags" class="mt-4 hidden">
+                            <div class="flex flex-wrap gap-2">
+                                <!-- Tags will be inserted here -->
+                            </div>
                         </div>
                     </header>
 
@@ -325,6 +345,19 @@
             document.getElementById('post-excerpt').textContent = post.excerpt || post.description || '';
             document.getElementById('post-date').textContent = formatDate(post.published_time);
             document.getElementById('post-body').innerHTML = post.content;
+
+            // Display tags if they exist
+            const tagsContainer = document.getElementById('post-tags');
+            if (post.tags && post.tags.trim()) {
+                const tags = post.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+                if (tags.length > 0) {
+                    const tagsHtml = tags.map(tag => 
+                        `<span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">${tag}</span>`
+                    ).join('');
+                    tagsContainer.querySelector('div').innerHTML = tagsHtml;
+                    tagsContainer.classList.remove('hidden');
+                }
+            }
 
             // Hide loading, show content
             document.getElementById('loading').classList.add('hidden');

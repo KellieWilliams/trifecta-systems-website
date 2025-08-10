@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Post | Trifecta.Systems Blog Admin</title>
+    <meta name="description" content="Create a new blog post">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="../../Gallery/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../Gallery/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../Gallery/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Gallery/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trifecta" />
+    <link rel="manifest" href="../../Gallery/favicon/site.webmanifest" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-[#0F131C] text-white shadow-lg sticky top-0 z-50 main-navigation-header">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3 flex-shrink-0">
+                    <img id="mainLogo" src="../../Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
+                    <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../index.html#services" class="nav-link">Services</a>
+                    <a href="../../index.html#about" class="nav-link">About</a>
+                    <a href="../../index.html#contact" class="nav-link">Contact</a>
+                    <a href="../index.html" class="nav-link">Blog</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userInfo" class="text-gray-300 text-sm hidden">
+                        Welcome, <span id="username"></span>
+                    </span>
+                    <button id="logoutBtn" class="text-red-400 hover:text-red-300 text-sm font-medium hidden">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Create Post Form -->
+    <main class="bg-[#0F131C] min-h-screen py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="bg-[#161B29] rounded-lg shadow-xl p-8 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-white mb-2">Create New Post</h1>
+                            <p class="text-gray-400">Write and publish a new blog post</p>
+                        </div>
+                        <a href="dashboard.html" class="text-blue-400 hover:text-blue-300 font-semibold">
+                            ← Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="bg-[#161B29] rounded-lg shadow-xl p-8">
+                    <form id="createPostForm" class="space-y-8">
+                        <!-- Session and Action -->
+                        <input type="hidden" id="sessionId" name="session_id" value="">
+                        <input type="hidden" name="action" value="create_post">
+                        
+                        <!-- Basic Information -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Title -->
+                            <div class="md:col-span-2">
+                                <label for="title" class="block text-sm font-medium text-gray-300 mb-2">
+                                    Post Title *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="title" 
+                                    name="title" 
+                                    required
+                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="Enter the post title"
+                                >
+                            </div>
+
+                            <!-- Category -->
+                            <div>
+                                <label for="category" class="block text-sm font-medium text-gray-300 mb-2">
+                                    Category *
+                                </label>
+                                <select 
+                                    id="category" 
+                                    name="category" 
+                                    required
+                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                >
+                                    <option value="">Select a category</option>
+                                    <option value="Tech Trends">Tech Trends</option>
+                                    <option value="Web Dev">Web Dev</option>
+                                    <option value="Cybersecurity">Cybersecurity</option>
+                                    <option value="Data Analytics">Data Analytics</option>
+                                    <option value="AI Solutions">AI Solutions</option>
+                                </select>
+                            </div>
+
+                                                         <!-- Category Color -->
+                             <div>
+                                 <label for="category_color" class="block text-sm font-medium text-gray-300 mb-2">
+                                     Category Color *
+                                 </label>
+                                 <select 
+                                     id="category_color" 
+                                     name="category_color" 
+                                     required
+                                     class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                 >
+                                     <option value="">Select a category first</option>
+                                 </select>
+                             </div>
+
+                            <!-- Tags -->
+                            <div>
+                                <label for="tags" class="block text-sm font-medium text-gray-300 mb-2">
+                                    Tags
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="tags" 
+                                    name="tags" 
+                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="tag1, tag2, tag3"
+                                >
+                                <p class="text-gray-500 text-sm mt-1">Separate tags with commas</p>
+                            </div>
+
+                            <!-- Read Time -->
+                            <div>
+                                <label for="read_time" class="block text-sm font-medium text-gray-300 mb-2">
+                                    Read Time (minutes) *
+                                </label>
+                                <input 
+                                    type="number" 
+                                    id="read_time" 
+                                    name="read_time" 
+                                    required
+                                    min="1"
+                                    max="60"
+                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="5"
+                                >
+                            </div>
+
+                            <!-- Publish Date -->
+                            <div>
+                                <label for="publish_date" class="block text-sm font-medium text-gray-300 mb-2">
+                                    Publish Date *
+                                </label>
+                                <input 
+                                    type="date" 
+                                    id="publish_date" 
+                                    name="publish_date" 
+                                    required
+                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                >
+                            </div>
+
+                            <!-- Status -->
+                            <div>
+                                <label for="status" class="block text-sm font-medium text-gray-300 mb-2">
+                                    Status *
+                                </label>
+                                <select 
+                                    id="status" 
+                                    name="status" 
+                                    required
+                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                >
+                                    <option value="draft" selected>Draft</option>
+                                    <option value="published">Published</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Excerpt -->
+                        <div>
+                            <label for="excerpt" class="block text-sm font-medium text-gray-300 mb-2">
+                                Excerpt/Description *
+                            </label>
+                            <textarea 
+                                id="excerpt" 
+                                name="excerpt" 
+                                required
+                                rows="3"
+                                class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Brief description of the post (will appear in blog listings)"
+                            ></textarea>
+                        </div>
+
+                        <!-- Image Upload Section -->
+                        <div class="border-t border-gray-700 pt-8">
+                            <h3 class="text-lg font-semibold text-white mb-4">Images (Optional)</h3>
+                            
+                            <!-- Image Upload -->
+                            <div class="mb-6">
+                                <label for="imageUpload" class="block text-sm font-medium text-gray-300 mb-2">
+                                    Upload Images
+                                </label>
+                                <div class="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center">
+                                    <input 
+                                        type="file" 
+                                        id="imageUpload" 
+                                        name="images[]" 
+                                        multiple
+                                        accept="image/*"
+                                        class="hidden"
+                                    >
+                                    <div class="space-y-2">
+                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <div class="text-gray-400">
+                                            <button type="button" onclick="document.getElementById('imageUpload').click()" class="text-blue-400 hover:text-blue-300 font-medium">
+                                                Click to upload images
+                                            </button>
+                                            <p class="text-sm">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB each</p>
+                                    </div>
+                                </div>
+                                                                 <div id="imagePreview" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+                                 <div id="imageUrls" class="mt-4 hidden">
+                                     <h4 class="text-sm font-medium text-gray-300 mb-2">Uploaded Image URLs:</h4>
+                                     <div id="imageUrlList" class="space-y-2"></div>
+                                 </div>
+                            </div>
+
+                            <!-- External Image URLs -->
+                            <div>
+                                <label for="externalImages" class="block text-sm font-medium text-gray-300 mb-2">
+                                    External Image URLs (Optional)
+                                </label>
+                                <textarea 
+                                    id="externalImages" 
+                                    name="external_images" 
+                                    rows="3"
+                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="Enter external image URLs, one per line:&#10;https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
+                                ></textarea>
+                                <p class="text-gray-500 text-sm mt-1">One URL per line. These will be included in your markdown content.</p>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div>
+                            <label for="content" class="block text-sm font-medium text-gray-300 mb-2">
+                                Content (Markdown) *
+                            </label>
+                            <div class="mb-2 flex space-x-2">
+                                <button type="button" onclick="insertMarkdown('**bold**')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Bold</button>
+                                <button type="button" onclick="insertMarkdown('*italic*')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Italic</button>
+                                <button type="button" onclick="insertMarkdown('[link](url)')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Link</button>
+                                <button type="button" onclick="insertMarkdown('![alt text](image-url)')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Image</button>
+                                <button type="button" onclick="insertMarkdown('# Heading')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Heading</button>
+                                <button type="button" onclick="insertMarkdown('- List item')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">List</button>
+                            </div>
+                            <textarea 
+                                id="content" 
+                                name="content" 
+                                required
+                                rows="20"
+                                class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
+                                placeholder="Write your blog post content in Markdown format..."
+                            ></textarea>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex justify-end space-x-4 pt-6 border-t border-gray-700">
+                            <button 
+                                type="button" 
+                                onclick="saveDraft()"
+                                class="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors duration-200"
+                            >
+                                Save as Draft
+                            </button>
+                            <button 
+                                type="submit"
+                                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200"
+                            >
+                                Publish Post
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Loading State -->
+                    <div id="loading" class="hidden text-center py-16">
+                        <div class="loading-spinner"></div>
+                        <p class="text-gray-400 mt-4">Creating post...</p>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="success" class="hidden mt-6 p-4 bg-green-900 border border-green-700 rounded-lg">
+                        <p id="successMessage" class="text-green-300 text-sm"></p>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div id="error" class="hidden mt-6 p-4 bg-red-900 border border-red-700 rounded-lg">
+                        <p id="errorMessage" class="text-red-300 text-sm"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#161B29] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
+                <p class="text-gray-400 mt-2">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin create post doesn't need the main script.js -->
+    
+    <script>
+        let currentSessionId = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check session on page load
+            checkSession();
+            
+            // Set default publish date to today
+            document.getElementById('publish_date').value = new Date().toISOString().split('T')[0];
+            
+            // Handle form submission
+            document.getElementById('createPostForm').addEventListener('submit', handleSubmit);
+            
+                         // Handle image upload
+             document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
+             
+             // Handle category color automation
+             document.getElementById('category').addEventListener('change', updateCategoryColor);
+             
+             // Handle title changes for slug generation
+             document.getElementById('title').addEventListener('input', updateImageUrls);
+             
+             // Handle logout
+             document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+        });
+
+        async function checkSession() {
+            currentSessionId = localStorage.getItem('admin_session_id');
+            
+            if (!currentSessionId) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`../admin-auth-proxy.php?action=check_session&session_id=${currentSessionId}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('username').textContent = result.username;
+                    document.getElementById('userInfo').classList.remove('hidden');
+                    document.getElementById('logoutBtn').classList.remove('hidden');
+                    document.getElementById('sessionId').value = currentSessionId;
+                } else {
+                    localStorage.removeItem('admin_session_id');
+                    window.location.href = 'login.html';
+                }
+                
+            } catch (error) {
+                console.error('Session check error:', error);
+                window.location.href = 'login.html';
+            }
+        }
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Set status to published
+            formData.set('status', 'published');
+            
+            showLoading(true);
+            hideMessages();
+            
+            try {
+                const response = await fetch('../admin-api-proxy.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                                                      if (result.success) {
+                         let successMessage = `Post created successfully! <a href="../post.html?slug=${result.slug}" target="_blank" class="text-blue-400 hover:text-blue-300">View post</a> | <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">Back to dashboard</a>`;
+                         
+                         // Show uploaded image URLs if any
+                         if (result.uploaded_images && result.uploaded_images.length > 0) {
+                             successMessage += '<br><br><strong>Image URLs (use these in your markdown):</strong><br>';
+                             result.uploaded_images.forEach(imageUrl => {
+                                 successMessage += `<code class="text-xs">${imageUrl}</code><br>`;
+                             });
+                             successMessage += '<br><em class="text-blue-400 text-sm">Copy these URLs and paste them into your markdown content as: ![alt text](URL)</em>';
+                         }
+                         
+                         showSuccess(successMessage);
+                         form.reset();
+                         document.getElementById('publish_date').value = new Date().toISOString().split('T')[0];
+                         document.getElementById('imagePreview').innerHTML = '';
+                         document.getElementById('imageUrls').classList.add('hidden');
+                     } else {
+                    showError(result.message || 'Failed to create post');
+                }
+                
+            } catch (error) {
+                console.error('Create post error:', error);
+                showError('An error occurred while creating the post');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function saveDraft() {
+            const form = document.getElementById('createPostForm');
+            const formData = new FormData(form);
+            
+            // Set status to draft - also update the form field to ensure consistency
+            formData.set('status', 'draft');
+            document.getElementById('status').value = 'draft';
+            
+            // Debug: log the status value being sent
+            console.log('Saving draft with status:', formData.get('status'));
+            
+            showLoading(true);
+            hideMessages();
+            
+            try {
+                const response = await fetch('../admin-api-proxy.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccess(`Draft saved successfully! <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">Back to dashboard</a>`);
+                } else {
+                    showError(result.message || 'Failed to save draft');
+                }
+                
+            } catch (error) {
+                console.error('Save draft error:', error);
+                showError('An error occurred while saving the draft');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+                 function handleImageUpload(event) {
+             const files = event.target.files;
+             const preview = document.getElementById('imagePreview');
+             const imageUrls = document.getElementById('imageUrls');
+             const imageUrlList = document.getElementById('imageUrlList');
+             
+             preview.innerHTML = '';
+             imageUrlList.innerHTML = '';
+             
+             if (files.length > 0) {
+                 imageUrls.classList.remove('hidden');
+                 // Store files for later use
+                 window.uploadedFiles = files;
+             } else {
+                 imageUrls.classList.add('hidden');
+                 window.uploadedFiles = null;
+             }
+             
+             for (let file of files) {
+                 if (file.type.startsWith('image/')) {
+                     const reader = new FileReader();
+                     reader.onload = function(e) {
+                         const div = document.createElement('div');
+                         div.className = 'relative';
+                         div.innerHTML = `
+                             <img src="${e.target.result}" alt="Preview" class="w-full h-24 object-cover rounded-lg">
+                             <div class="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded cursor-pointer" onclick="removeImage(this)">×</div>
+                         `;
+                         preview.appendChild(div);
+                     };
+                     reader.readAsDataURL(file);
+                 }
+             }
+             
+             // Update image URLs with current slug
+             updateImageUrls();
+         }
+         
+         function removeImage(button) {
+             const imageDiv = button.parentElement;
+             const imageIndex = Array.from(imageDiv.parentElement.children).indexOf(imageDiv);
+             
+             // Remove from preview
+             imageDiv.remove();
+             
+             // Remove from uploadedFiles array
+             if (window.uploadedFiles && window.uploadedFiles.length > imageIndex) {
+                 const newFiles = Array.from(window.uploadedFiles);
+                 newFiles.splice(imageIndex, 1);
+                 window.uploadedFiles = newFiles;
+             }
+             
+             // Update URLs
+             updateImageUrls();
+             updateImageUrlList();
+         }
+         
+                 function updateImageUrls() {
+            const title = document.getElementById('title').value;
+            const imageUrlList = document.getElementById('imageUrlList');
+            
+            if (!window.uploadedFiles || window.uploadedFiles.length === 0) {
+                return;
+            }
+            
+            // Only show URLs if there's a title
+            if (!title || title.trim() === '') {
+                imageUrlList.innerHTML = '<div class="text-yellow-400 text-sm">Please enter a title first to see image URLs</div>';
+                return;
+            }
+            
+            // Generate slug from title
+            const slug = generateSlug(title);
+            
+            // Clear existing URLs
+            imageUrlList.innerHTML = '';
+            
+            // Generate relative URLs for each uploaded file
+            for (let file of window.uploadedFiles) {
+                if (file.type.startsWith('image/')) {
+                    const fileName = file.name;
+                    const sanitizedFileName = fileName.replace(/[^a-zA-Z0-9._-]/g, '_');
+                    const actualUrl = `../Gallery/Blog-images/${slug}/${sanitizedFileName}`;
+                    
+                    const urlDiv = document.createElement('div');
+                    urlDiv.className = 'flex items-center justify-between p-2 bg-gray-800 rounded text-sm';
+                    urlDiv.innerHTML = `
+                        <span class="text-gray-300 font-mono text-xs">${actualUrl}</span>
+                        <button type="button" onclick="insertImageUrl('${actualUrl}', '${fileName}')" class="text-blue-400 hover:text-blue-300 text-xs">Insert</button>
+                    `;
+                    imageUrlList.appendChild(urlDiv);
+                }
+            }
+        }
+         
+         function updateImageUrlList() {
+             const preview = document.getElementById('imagePreview');
+             const imageUrls = document.getElementById('imageUrls');
+             const imageUrlList = document.getElementById('imageUrlList');
+             
+             if (preview.children.length === 0) {
+                 imageUrls.classList.add('hidden');
+             }
+         }
+         
+         function insertImageUrl(url, fileName) {
+             const textarea = document.getElementById('content');
+             const imageMarkdown = `![${fileName}](${url})`;
+             
+             const start = textarea.selectionStart;
+             const end = textarea.selectionEnd;
+             
+             textarea.value = textarea.value.substring(0, start) + imageMarkdown + textarea.value.substring(end);
+             textarea.focus();
+             textarea.setSelectionRange(start + imageMarkdown.length, start + imageMarkdown.length);
+         }
+
+        function insertMarkdown(text) {
+            const textarea = document.getElementById('content');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            
+            let insertText = text;
+            if (selectedText) {
+                insertText = text.replace('text', selectedText);
+            }
+            
+            textarea.value = textarea.value.substring(0, start) + insertText + textarea.value.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start + insertText.length, start + insertText.length);
+        }
+
+        async function handleLogout() {
+            if (currentSessionId) {
+                try {
+                    const formData = new FormData();
+                    formData.append('action', 'logout');
+                    formData.append('session_id', currentSessionId);
+                    
+                    await fetch('../admin-auth-proxy.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                } catch (error) {
+                    console.error('Logout error:', error);
+                }
+            }
+            
+            localStorage.removeItem('admin_session_id');
+            window.location.href = 'login.html';
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            const form = document.getElementById('createPostForm');
+            
+            if (show) {
+                loading.classList.remove('hidden');
+                form.classList.add('hidden');
+            } else {
+                loading.classList.add('hidden');
+                form.classList.remove('hidden');
+            }
+        }
+
+        function showSuccess(message) {
+            const success = document.getElementById('success');
+            const successMessage = document.getElementById('successMessage');
+            
+            successMessage.innerHTML = message;
+            success.classList.remove('hidden');
+            
+            // Scroll to the success message at the bottom
+            setTimeout(() => {
+                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        function showError(message) {
+            const error = document.getElementById('error');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            errorMessage.textContent = message;
+            error.classList.remove('hidden');
+            
+            // Scroll to the error message at the bottom
+            setTimeout(() => {
+                error.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+                 function generateSlug(title) {
+             // Convert to lowercase
+             let slug = title.toLowerCase();
+             
+             // Replace spaces and special characters with hyphens
+             slug = slug.replace(/[^a-z0-9\s-]/g, '');
+             slug = slug.replace(/[\s-]+/g, '-');
+             
+             // Remove leading/trailing hyphens
+             slug = slug.trim('-');
+             
+             // Limit length
+             if (slug.length > 50) {
+                 slug = slug.substring(0, 50);
+                 slug = slug.replace(/-$/, '');
+             }
+             
+             return slug;
+         }
+         
+         function updateCategoryColor() {
+             const category = document.getElementById('category').value;
+             const categoryColor = document.getElementById('category_color');
+             
+             // Clear existing options
+             categoryColor.innerHTML = '';
+             
+             // Define category-color mappings
+             const colorMap = {
+                 'Tech Trends': 'purple',
+                 'Web Dev': 'green',
+                 'Cybersecurity': 'red',
+                 'Data Analytics': 'blue',
+                 'AI Solutions': 'indigo'
+             };
+             
+             if (category && colorMap[category]) {
+                 const color = colorMap[category];
+                 categoryColor.innerHTML = `<option value="${color}">${color.charAt(0).toUpperCase() + color.slice(1)}</option>`;
+             } else {
+                 categoryColor.innerHTML = '<option value="">Select a category first</option>';
+             }
+             
+             // Update image URLs when category changes
+             updateImageUrls();
+         }
+         
+         function hideMessages() {
+             document.getElementById('success').classList.add('hidden');
+             document.getElementById('error').classList.add('hidden');
+         }
+    </script>
+</body>
+</html>

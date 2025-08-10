@@ -7,7 +7,9 @@ category_color: "red"
 date: "Jul 25, 2025"
 read_time: 8
 published_time: "2025-07-25T00:00:00Z"
+status: "published"
 slug: "passkeys"
+tags: "passkeys, cybersecurity, authentication, biometrics, phishing protection, password security, MFA, online safety, Windows, mobile security"
 ---
 
 Hey everyone!
