@@ -4,9 +4,11 @@
 
 // Security headers
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); // Allow all origins for local development
+header('Access-Control-Allow-Origin: https://trifecta.systems');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+
+
 
 // Security: Only allow POST and GET requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

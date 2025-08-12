@@ -1,14 +1,12 @@
 <?php
-// Blog Parser Proxy - For local development
-// This file calls the backend parser and passes through the response
+// Admin CSRF Token Proxy - For local development
+// This file calls the backend CSRF token handler and passes through the response
 
 // Security headers
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: https://trifecta.systems');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
-
-
 
 // Security: Only allow GET requests
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -17,15 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-// Include the backend parser
-$backendParser = '../../backend/blog-parser.php';
+// Include the backend CSRF token handler
+$backendCSRF = '../../backend/csrf_token.php';
 
-if (!file_exists($backendParser)) {
+if (!file_exists($backendCSRF)) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Backend parser not found']);
+    echo json_encode(['success' => false, 'message' => 'Backend CSRF handler not found']);
     exit();
 }
 
-// Include and execute the backend parser
-include $backendParser;
-?> 
+// Include and execute the backend CSRF handler
+include $backendCSRF;
+?>

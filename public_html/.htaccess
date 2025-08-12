@@ -49,7 +49,19 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     Require all denied
 </FilesMatch>
 
-# Allow blog parser proxy
+# Allow blog proxy files
+<Files "admin-api-proxy.php">
+    Require all granted
+</Files>
+<Files "admin-auth-proxy.php">
+    Require all granted
+</Files>
+<Files "admin-csrf-proxy.php">
+    Require all granted
+</Files>
+<Files "admin-posts-proxy.php">
+    Require all granted
+</Files>
 <Files "parser-proxy.php">
     Require all granted
 </Files>

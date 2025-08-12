@@ -69,6 +69,7 @@
                     <form id="createPostForm" class="space-y-8">
                         <!-- Session and Action -->
                         <input type="hidden" id="sessionId" name="session_id" value="">
+                        <input type="hidden" id="csrfToken" name="csrf_token" value="">
                         <input type="hidden" name="action" value="create_post">
                         
                         <!-- Basic Information -->
@@ -405,6 +406,9 @@
                     document.getElementById('userInfo').classList.remove('hidden');
                     document.getElementById('logoutBtn').classList.remove('hidden');
                     document.getElementById('sessionId').value = currentSessionId;
+                    
+                    // Generate CSRF token
+                    await generateCSRFToken();
                 } else {
                     localStorage.removeItem('admin_session_id');
                     window.location.href = 'login.html';
@@ -413,6 +417,20 @@
             } catch (error) {
                 console.error('Session check error:', error);
                 window.location.href = 'login.html';
+            }
+        }
+
+        async function generateCSRFToken() {
+            try {
+                const response = await fetch('../admin-csrf-proxy.php');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('csrfToken').value = data.csrf_token;
+                } else {
+                    console.error('Failed to get CSRF token');
+                }
+            } catch (error) {
+                console.error('Error generating CSRF token:', error);
             }
         }
 
@@ -436,24 +454,31 @@
                 
                 const result = await response.json();
                 
-                                                      if (result.success) {
-                         let successMessage = `Post created successfully! <a href="../post.html?slug=${result.slug}" target="_blank" class="text-blue-400 hover:text-blue-300">View post</a> | <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">Back to dashboard</a>`;
-                         
-                         // Show uploaded image URLs if any
-                         if (result.uploaded_images && result.uploaded_images.length > 0) {
-                             successMessage += '<br><br><strong>Image URLs (use these in your markdown):</strong><br>';
-                             result.uploaded_images.forEach(imageUrl => {
-                                 successMessage += `<code class="text-xs">${imageUrl}</code><br>`;
-                             });
-                             successMessage += '<br><em class="text-blue-400 text-sm">Copy these URLs and paste them into your markdown content as: ![alt text](URL)</em>';
-                         }
-                         
-                         showSuccess(successMessage);
-                         form.reset();
-                         document.getElementById('publish_date').value = new Date().toISOString().split('T')[0];
-                         document.getElementById('imagePreview').innerHTML = '';
-                         document.getElementById('imageUrls').classList.add('hidden');
-                     } else {
+                                                                      if (result.success) {
+                    // Update session ID if a new one was generated
+                    if (result.new_session_id) {
+                        localStorage.setItem('admin_session_id', result.new_session_id);
+                        document.getElementById('sessionId').value = result.new_session_id;
+                        console.log('Session ID updated to:', result.new_session_id);
+                    }
+                    
+                    let successMessage = `Post created successfully! <a href="../post.html?slug=${result.slug}" target="_blank" class="text-blue-400 hover:text-blue-300">View post</a> | <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">Back to dashboard</a>`;
+                    
+                    // Show uploaded image URLs if any
+                    if (result.uploaded_images && result.uploaded_images.length > 0) {
+                        successMessage += '<br><br><strong>Image URLs (use these in your markdown):</strong><br>';
+                        result.uploaded_images.forEach(imageUrl => {
+                            successMessage += `<code class="text-xs">${imageUrl}</code><br>`;
+                        });
+                        successMessage += '<br><em class="text-blue-400 text-sm">Copy these URLs and paste them into your markdown content as: ![alt text](URL)</em>';
+                    }
+                    
+                    showSuccess(successMessage);
+                    form.reset();
+                    document.getElementById('publish_date').value = new Date().toISOString().split('T')[0];
+                    document.getElementById('imagePreview').innerHTML = '';
+                    document.getElementById('imageUrls').classList.add('hidden');
+                } else {
                     showError(result.message || 'Failed to create post');
                 }
                 
@@ -488,6 +513,13 @@
                 const result = await response.json();
                 
                 if (result.success) {
+                    // Update session ID if a new one was generated
+                    if (result.new_session_id) {
+                        localStorage.setItem('admin_session_id', result.new_session_id);
+                        document.getElementById('sessionId').value = result.new_session_id;
+                        console.log('Session ID updated to:', result.new_session_id);
+                    }
+                    
                     showSuccess(`Draft saved successfully! <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">Back to dashboard</a>`);
                 } else {
                     showError(result.message || 'Failed to save draft');

@@ -49,6 +49,9 @@
 
     <!-- Dashboard Content -->
     <main class="bg-[#0F131C] min-h-screen py-16">
+        <!-- Hidden CSRF Token Field -->
+        <input type="hidden" id="csrfToken" name="csrf_token" value="">
+        
         <div class="container mx-auto px-4">
             <!-- Dashboard Header -->
             <div class="max-w-6xl mx-auto">
@@ -279,6 +282,9 @@
                     // Store session ID
                     localStorage.setItem('admin_session_id', currentSessionId);
                     
+                    // Generate CSRF token
+                    await generateCSRFToken();
+                    
                     // Load posts
                     loadPosts();
                     loadScheduledPosts();
@@ -291,6 +297,20 @@
             } catch (error) {
                 console.error('Session check error:', error);
                 window.location.href = 'login.html';
+            }
+        }
+
+        async function generateCSRFToken() {
+            try {
+                const response = await fetch('../admin-csrf-proxy.php');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('csrfToken').value = data.csrf_token;
+                } else {
+                    console.error('Failed to get CSRF token');
+                }
+            } catch (error) {
+                console.error('Error generating CSRF token:', error);
             }
         }
 
@@ -468,6 +488,7 @@
                 const formData = new FormData();
                 formData.append('action', 'delete_post');
                 formData.append('session_id', currentSessionId);
+                formData.append('csrf_token', document.getElementById('csrfToken').value);
                 formData.append('slug', slug);
                 
                 const response = await fetch('../admin-api-proxy.php', {
@@ -478,6 +499,13 @@
                 const result = await response.json();
                 
                 if (result.success) {
+                    // Update session ID if a new one was generated
+                    if (result.new_session_id) {
+                        localStorage.setItem('admin_session_id', result.new_session_id);
+                        currentSessionId = result.new_session_id;
+                        console.log('Session ID updated to:', result.new_session_id);
+                    }
+                    
                     alert(result.message + '\n\nRefreshing dashboard sections...');
                     console.log('Post deleted successfully, refreshing dashboard sections...');
                     
