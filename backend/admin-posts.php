@@ -1,6 +1,6 @@
 <?php
-// Blog Parser - Handles markdown files and YAML frontmatter
-// Located in backend/ for better security
+// Admin Posts API - Returns all posts for admin dashboard
+// This is separate from the public blog parser for security
 
 // This line tells PHP where to find the libraries installed by Composer
 try {
@@ -17,7 +17,7 @@ try {
 
 // Security headers
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: https://trifecta.systems'); // Restrict to your domain
+header('Access-Control-Allow-Origin: *'); // Allow all origins for local development
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 // Validate action parameter
 $action = $_GET['action'] ?? '';
-if (!in_array($action, ['list', 'post', 'edit'])) {
+if (!in_array($action, ['list', 'post'])) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Invalid action']);
     exit();
@@ -47,7 +47,7 @@ if (!is_dir($postsDir)) {
     exit();
 }
 
-// Simple YAML frontmatter parser
+// Simple YAML frontmatter parser (same as blog-parser.php)
 function parseYamlFrontmatter($content) {
     if (!preg_match('/^---\s*\n(.*?)\n---\s*\n(.*)/s', $content, $matches)) {
         return [null, $content];
@@ -122,17 +122,8 @@ function parseYamlFrontmatter($content) {
     return [$frontmatter, $markdown];
 }
 
-// Use Parsedown to convert markdown to HTML
-function markdownToHtml($markdown) {
-    global $Parsedown;
-    if (!$Parsedown) {
-        throw new Exception('Parsedown not initialized');
-    }
-    return $Parsedown->text($markdown);
-}
-
-// Get all blog posts
-function getBlogPosts($postsDir) {
+// Get all blog posts for admin dashboard (including drafts and scheduled)
+function getAllBlogPosts($postsDir) {
     $posts = [];
     $files = glob($postsDir . '*.md');
     
@@ -146,70 +137,73 @@ function getBlogPosts($postsDir) {
             $slug = pathinfo($file, PATHINFO_FILENAME);
             $status = $frontmatter['status'] ?? 'published';
             
-            // Only include published posts (filter out drafts and scheduled posts)
-            if ($status === 'published') {
-                $posts[] = [
-                    'slug' => $slug,
-                    'title' => $frontmatter['title'] ?? 'Untitled',
-                    'description' => $frontmatter['description'] ?? '',
-                    'excerpt' => $frontmatter['excerpt'] ?? '',
-                    'category' => $frontmatter['category'] ?? 'Uncategorized',
-                    'category_color' => $frontmatter['category_color'] ?? 'blue',
-                    'date' => $frontmatter['date'] ?? '',
-                    'read_time' => $frontmatter['read_time'] ?? 5,
-                    'published_time' => $frontmatter['published_time'] ?? '',
-                    'status' => $status,
-                    'tags' => $frontmatter['tags'] ?? ''
-                ];
-            }
+            // Include ALL posts regardless of status for admin dashboard
+            $posts[] = [
+                'slug' => $slug,
+                'title' => $frontmatter['title'] ?? 'Untitled',
+                'description' => $frontmatter['description'] ?? '',
+                'excerpt' => $frontmatter['excerpt'] ?? '',
+                'category' => $frontmatter['category'] ?? 'Uncategorized',
+                'category_color' => $frontmatter['category_color'] ?? 'blue',
+                'date' => $frontmatter['date'] ?? '',
+                'read_time' => $frontmatter['read_time'] ?? 5,
+                'published_time' => $frontmatter['published_time'] ?? '',
+                'status' => $status,
+                'tags' => $frontmatter['tags'] ?? ''
+            ];
         }
     }
     
-    // Sort by published_time (newest first)
+    // Sort by published_time (newest first), with drafts at the end
     usort($posts, function($a, $b) {
-        $timeA = strtotime($a['published_time']);
-        $timeB = strtotime($b['published_time']);
-        return $timeB - $timeA;
+        // If both have published_time, sort by that
+        if (!empty($a['published_time']) && !empty($b['published_time'])) {
+            $timeA = strtotime($a['published_time']);
+            $timeB = strtotime($b['published_time']);
+            return $timeB - $timeA;
+        }
+        
+        // If only one has published_time, prioritize it
+        if (!empty($a['published_time']) && empty($b['published_time'])) {
+            return -1;
+        }
+        if (empty($a['published_time']) && !empty($b['published_time'])) {
+            return 1;
+        }
+        
+        // If neither has published_time, sort by title
+        return strcasecmp($a['title'], $b['title']);
     });
     
     return $posts;
 }
 
-// Get single blog post
+// Get single blog post for preview (returns raw markdown)
 function getBlogPost($postsDir, $slug) {
     // Validate slug (only allow alphanumeric, hyphens, underscores)
     if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
-        error_log("Invalid slug format: $slug");
         return null;
     }
     
     $file = $postsDir . $slug . '.md';
-    error_log("Looking for file: $file");
     
     if (!file_exists($file)) {
-        error_log("File not found: $file");
         return null;
     }
     
     $content = file_get_contents($file);
     if ($content === false) {
-        error_log("Failed to read file: $file");
         return null;
     }
     
     list($frontmatter, $markdown) = parseYamlFrontmatter($content);
     
     if (!$frontmatter) {
-        error_log("Failed to parse YAML frontmatter for: $slug");
         return null;
     }
     
-    try {
-        $html = markdownToHtml($markdown);
-    } catch (Exception $e) {
-        error_log("Failed to convert markdown to HTML: " . $e->getMessage());
-        return null;
-    }
+    // Convert markdown to HTML for preview
+    $html = markdownToHtml($markdown);
     
     return [
         'slug' => $slug,
@@ -226,92 +220,37 @@ function getBlogPost($postsDir, $slug) {
     ];
 }
 
-// Get single blog post for editing (returns raw markdown)
-function getBlogPostForEdit($postsDir, $slug) {
-    // Validate slug (only allow alphanumeric, hyphens, underscores)
-    if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
-        return null;
+// Use Parsedown to convert markdown to HTML
+function markdownToHtml($markdown) {
+    global $Parsedown;
+    if (!$Parsedown) {
+        throw new Exception('Parsedown not initialized');
     }
     
-    $file = $postsDir . $slug . '.md';
-    
-    if (!file_exists($file)) {
-        return null;
-    }
-    
-    $content = file_get_contents($file);
-    if ($content === false) {
-        return null;
-    }
-    
-    list($frontmatter, $markdown) = parseYamlFrontmatter($content);
-    
-    if (!$frontmatter) {
-        return null;
-    }
-    
-    $result = [
-        'slug' => $slug,
-        'title' => $frontmatter['title'] ?? 'Untitled',
-        'description' => $frontmatter['description'] ?? '',
-        'excerpt' => $frontmatter['excerpt'] ?? '',
-        'category' => $frontmatter['category'] ?? 'Uncategorized',
-        'category_color' => $frontmatter['category_color'] ?? 'blue',
-        'date' => $frontmatter['date'] ?? '',
-        'read_time' => $frontmatter['read_time'] ?? 5,
-        'published_time' => $frontmatter['published_time'] ?? '',
-        'content' => $markdown, // Return raw markdown instead of HTML
-        'images' => $frontmatter['images'] ?? [],
-        'tags' => $frontmatter['tags'] ?? ''
-    ];
-    
-    return $result;
+    // Convert markdown to HTML - no path conversion needed
+    // The markdown files already have the correct relative paths (../Gallery/Blog-images/)
+    // that work with other view panes
+    return $Parsedown->text($markdown);
 }
 
-// Handle requests
-try {
-    switch ($action) {
-        case 'list':
-            $posts = getBlogPosts($postsDir);
-            echo json_encode($posts);
-            break;
-            
-        case 'post':
-            $slug = $_GET['slug'] ?? '';
-            if (empty($slug)) {
-                echo json_encode(['success' => false, 'message' => 'Slug parameter required']);
-                exit();
-            }
-            
-            $post = getBlogPost($postsDir, $slug);
-            if ($post) {
-                echo json_encode(['success' => true, 'post' => $post]);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Post not found']);
-            }
-            break;
-            
-        case 'edit':
-            $slug = $_GET['slug'] ?? '';
-            if (empty($slug)) {
-                echo json_encode(['success' => false, 'message' => 'Slug parameter required']);
-                exit();
-            }
-            
-            $post = getBlogPostForEdit($postsDir, $slug);
-            if ($post) {
-                echo json_encode(['success' => true, 'post' => $post]);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Post not found']);
-            }
-            break;
-            
-        default:
-            echo json_encode(['success' => false, 'message' => 'Invalid action']);
-            break;
+// Handle the request
+if ($action === 'list') {
+    $posts = getAllBlogPosts($postsDir);
+    echo json_encode($posts);
+} elseif ($action === 'post') {
+    $slug = $_GET['slug'] ?? '';
+    if (empty($slug)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Slug parameter required']);
+        exit();
     }
-} catch (Exception $e) {
-    error_log('Blog parser error: ' . $e->getMessage());
-    echo json_encode(['success' => false, 'message' => 'Internal server error']);
+    
+    $post = getBlogPost($postsDir, $slug);
+    if ($post) {
+        echo json_encode($post);
+    } else {
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'Post not found']);
+    }
 }
-?> 
+?>

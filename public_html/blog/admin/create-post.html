@@ -182,7 +182,37 @@
                                 >
                                     <option value="draft" selected>Draft</option>
                                     <option value="published">Published</option>
+                                    <option value="scheduled">Scheduled</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <!-- Scheduling Options -->
+                        <div id="schedulingOptions" class="hidden border-t border-gray-700 pt-6">
+                            <h3 class="text-lg font-semibold text-white mb-4">Scheduling Options</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Publish Time -->
+                                <div>
+                                                            <label for="publish_time" class="block text-sm font-medium text-gray-300 mb-2">
+                            Publish Time *
+                        </label>
+                        <input 
+                            type="datetime-local" 
+                            id="publish_time" 
+                            name="publish_time" 
+                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                                </div>
+                                
+                                <!-- Timezone Info -->
+                                <div class="flex items-end">
+                                    <div class="bg-blue-900 bg-opacity-20 border border-blue-600 rounded-lg p-4">
+                                        <p class="text-blue-300 text-sm">
+                                            <strong>Note:</strong> Times are in your local timezone. 
+                                            The system will automatically convert to UTC for scheduling.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -289,6 +319,7 @@
                             </button>
                             <button 
                                 type="submit"
+                                id="submitButton"
                                 class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200"
                             >
                                 Publish Post
@@ -350,8 +381,11 @@
              // Handle title changes for slug generation
              document.getElementById('title').addEventListener('input', updateImageUrls);
              
-             // Handle logout
-             document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+                         // Handle logout
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+            
+            // Handle status changes for scheduling options
+            document.getElementById('status').addEventListener('change', toggleSchedulingOptions);
         });
 
         async function checkSession() {
@@ -706,10 +740,111 @@
              updateImageUrls();
          }
          
-         function hideMessages() {
-             document.getElementById('success').classList.add('hidden');
-             document.getElementById('error').classList.add('hidden');
-         }
+                 function hideMessages() {
+            document.getElementById('success').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+        }
+
+        // Scheduling Functions
+        function toggleSchedulingOptions() {
+            const status = document.getElementById('status').value;
+            const schedulingOptions = document.getElementById('schedulingOptions');
+            const publishTime = document.getElementById('publish_time');
+            const submitButton = document.getElementById('submitButton');
+            
+            if (status === 'scheduled') {
+                schedulingOptions.classList.remove('hidden');
+                publishTime.required = true;
+                submitButton.textContent = 'Schedule Post';
+                submitButton.className = 'px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors duration-200';
+                
+                // Set default publish time to tomorrow at 9 AM
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(9, 0, 0, 0);
+                publishTime.value = tomorrow.toISOString().slice(0, 16);
+            } else {
+                schedulingOptions.classList.add('hidden');
+                publishTime.required = false;
+                submitButton.textContent = 'Publish Post';
+                submitButton.className = 'px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200';
+            }
+        }
+
+        // Override the existing handleSubmit to handle scheduling
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            formData.append('session_id', currentSessionId);
+            formData.append('action', 'create_post');
+            
+            const status = formData.get('status');
+            
+            // Only include publish_time if status is scheduled or published
+            if (status === 'scheduled' || status === 'published') {
+                const publishTime = formData.get('publish_time');
+                if (!publishTime || publishTime.trim() === '') {
+                    showError('Publish time is required for scheduled and published posts');
+                    return;
+                }
+                
+                // For scheduled posts, validate future date
+                if (status === 'scheduled') {
+                    const scheduledTime = new Date(publishTime);
+                    const now = new Date();
+                    
+                    if (scheduledTime <= now) {
+                        showError('Publish time must be in the future for scheduled posts');
+                        return;
+                    }
+                }
+            } else {
+                // For drafts, remove publish_time field to avoid validation issues
+                formData.delete('publish_time');
+            }
+            
+            // Hide any existing messages
+            hideMessages();
+            
+            // Show loading state
+            showLoading(true);
+            
+            try {
+                const response = await fetch('../admin-api-proxy.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    if (status === 'scheduled') {
+                        showSuccess(`Post scheduled successfully for ${new Date(formData.get('publish_time')).toLocaleString()}`);
+                    } else {
+                        showSuccess(result.message || 'Post created successfully!');
+                    }
+                    
+                    // Reset form
+                    event.target.reset();
+                    document.getElementById('publish_time').value = new Date().toISOString().split('T')[0];
+                    toggleSchedulingOptions(); // Reset scheduling options
+                    
+                    // Redirect to dashboard after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                } else {
+                    showError(result.message || 'An error occurred while creating the post');
+                }
+                
+            } catch (error) {
+                console.error('Submit error:', error);
+                showError('An error occurred while creating the post. Please try again.');
+            } finally {
+                showLoading(false);
+            }
+        }
     </script>
 </body>
 </html>

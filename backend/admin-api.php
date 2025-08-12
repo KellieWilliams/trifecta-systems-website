@@ -2,6 +2,8 @@
 // Admin API Handler
 // This file handles creating, updating, and deleting blog posts
 
+session_start();
+
 // Security headers
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: https://trifecta.systems'); // Restrict to your domain
@@ -26,6 +28,10 @@ $postsDir = $backendDir . '/../public_html/blog/Blog-posts/';
 $imagesDir = $backendDir . '/../public_html/Gallery/Blog-images/';
 $sessionsDir = $backendDir . '/admin-sessions/';
 
+// Include scheduler
+require_once $backendDir . '/scheduler.php';
+$scheduler = new BlogScheduler($backendDir);
+
 // Debug: log the paths
 error_log("Backend directory: " . $backendDir);
 error_log("Posts directory: " . $postsDir);
@@ -46,6 +52,13 @@ if (!is_dir($sessionsDir)) {
 // Handle different actions
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
+// Temporary debug - add this to see what's happening
+error_log("Debug: Session ID = " . session_id());
+error_log("Debug: Session Data = " . print_r($_SESSION, true));
+error_log("Debug: Cookie Data = " . print_r($_COOKIE, true));
+error_log("Debug: Request Method = " . $_SERVER['REQUEST_METHOD']);
+error_log("Debug: Action = " . ($_GET['action'] ?? 'none'));
+
 switch ($action) {
     case 'create_post':
         handleCreatePost();
@@ -58,6 +71,15 @@ switch ($action) {
         break;
     case 'delete_image':
         handleDeleteImage();
+        break;
+    case 'schedule_post':
+        handleSchedulePost();
+        break;
+    case 'get_scheduled_posts':
+        handleGetScheduledPosts();
+        break;
+    case 'unschedule_post':
+        handleUnschedulePost();
         break;
     default:
         echo json_encode(['success' => false, 'message' => 'Invalid action']);
@@ -81,15 +103,22 @@ function handleCreatePost() {
     $excerpt = trim($_POST['excerpt'] ?? '');
     $content = $_POST['content'] ?? '';
     $readTime = intval($_POST['read_time'] ?? 0);
-    $publishDate = $_POST['publish_date'] ?? '';
+    $publishDate = $_POST['publish_time'] ?? '';
     $status = $_POST['status'] ?? 'published';
     $tags = trim($_POST['tags'] ?? '');
     
     // Debug: log the received status
     error_log("Create post - Received status: " . $status);
     
-    if (empty($title) || empty($category) || empty($categoryColor) || empty($excerpt) || empty($content) || $readTime <= 0 || empty($publishDate)) {
+    // Basic validation for all posts
+    if (empty($title) || empty($category) || empty($categoryColor) || empty($excerpt) || empty($content) || $readTime <= 0) {
         echo json_encode(['success' => false, 'message' => 'All required fields must be filled']);
+        return;
+    }
+    
+    // Additional validation for scheduled and published posts
+    if (($status === 'scheduled' || $status === 'published') && (empty($publishDate) || trim($publishDate) === '')) {
+        echo json_encode(['success' => false, 'message' => 'Publish time is required for scheduled and published posts']);
         return;
     }
     
@@ -166,12 +195,31 @@ function handleCreatePost() {
     // Write markdown file
     $markdownFile = $postsDir . $slug . '.md';
     if (file_put_contents($markdownFile, $yamlFrontmatter)) {
-        echo json_encode([
-            'success' => true, 
-            'message' => 'Post created successfully',
-            'slug' => $slug,
-            'uploaded_images' => $uploadedImages
-        ]);
+        // Check if this post should be scheduled
+        $publishTimestamp = strtotime($publishDate);
+        $currentTime = time();
+        
+        if ($status === 'scheduled' || ($publishTimestamp > $currentTime && $status === 'published')) {
+            // Schedule the post for future publication
+            global $scheduler;
+            $scheduler->schedulePost($slug, $publishDate);
+            
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Post created and scheduled for ' . date('Y-m-d H:i:s', $publishTimestamp),
+                'slug' => $slug,
+                'uploaded_images' => $uploadedImages,
+                'scheduled' => true,
+                'scheduled_time' => $publishDate
+            ]);
+        } else {
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Post created successfully',
+                'slug' => $slug,
+                'uploaded_images' => $uploadedImages
+            ]);
+        }
     } else {
         echo json_encode(['success' => false, 'message' => 'Failed to create post file']);
     }
@@ -199,15 +247,22 @@ function handleUpdatePost() {
     $excerpt = trim($_POST['excerpt'] ?? '');
     $content = $_POST['content'] ?? '';
     $readTime = intval($_POST['read_time'] ?? 0);
-    $publishDate = $_POST['publish_date'] ?? '';
+    $publishDate = $_POST['publish_time'] ?? '';
     $status = $_POST['status'] ?? 'published';
     $tags = trim($_POST['tags'] ?? '');
     
     // Debug: log the received status
     error_log("Update post - Received status: " . $status);
     
-    if (empty($originalSlug) || empty($title) || empty($category) || empty($categoryColor) || empty($excerpt) || empty($content) || $readTime <= 0 || empty($publishDate)) {
+    // Basic validation for all posts
+    if (empty($originalSlug) || empty($title) || empty($category) || empty($categoryColor) || empty($excerpt) || empty($content) || $readTime <= 0) {
         echo json_encode(['success' => false, 'message' => 'All required fields must be filled']);
+        return;
+    }
+    
+    // Additional validation for scheduled and published posts
+    if (($status === 'scheduled' || $status === 'published') && (empty($publishDate) || trim($publishDate) === '')) {
+        echo json_encode(['success' => false, 'message' => 'Publish time is required for scheduled and published posts']);
         return;
     }
     
@@ -314,6 +369,17 @@ function handleUpdatePost() {
     if (file_put_contents($newMarkdownFile, $yamlFrontmatter)) {
         // If slug changed, delete the original file
         if ($newSlug !== $originalSlug) {
+            // FIRST: Remove the old slug from scheduled posts before deleting the file
+            // This must happen BEFORE deleting the file
+            global $scheduler;
+            try {
+                $scheduler->unschedulePost($originalSlug);
+            } catch (Exception $e) {
+                // Log the error but don't fail the update
+                error_log("Warning: Failed to unschedule old slug '$originalSlug': " . $e->getMessage());
+            }
+            
+            // SECOND: Delete the original file
             unlink($originalFile);
             
             // Move images from old slug directory to new slug directory if they exist
@@ -338,12 +404,41 @@ function handleUpdatePost() {
             }
         }
         
-        $response = [
-            'success' => true, 
-            'message' => 'Post updated successfully',
-            'slug' => $newSlug,
-            'uploaded_images' => $uploadedImages
-        ];
+        // Check if this post should be scheduled
+        $publishTimestamp = strtotime($publishDate);
+        $currentTime = time();
+        
+        if ($status === 'scheduled' || ($publishTimestamp > $currentTime && $status === 'published')) {
+            // Schedule the post for future publication
+            global $scheduler;
+            $scheduler->schedulePost($newSlug, $publishDate);
+            
+            $response = [
+                'success' => true, 
+                'message' => 'Post updated and scheduled for ' . date('Y-m-d H:i:s', $publishTimestamp),
+                'slug' => $newSlug,
+                'uploaded_images' => $uploadedImages,
+                'scheduled' => true,
+                'scheduled_time' => $publishDate
+            ];
+        } else {
+            // If post is no longer scheduled, unschedule it
+            global $scheduler;
+            try {
+                $scheduler->unschedulePost($newSlug);
+            } catch (Exception $e) {
+                // Log the error but don't fail the update
+                error_log("Warning: Failed to unschedule post '$newSlug': " . $e->getMessage());
+            }
+            
+            $response = [
+                'success' => true, 
+                'message' => 'Post updated successfully',
+                'slug' => $newSlug,
+                'uploaded_images' => $uploadedImages
+            ];
+        }
+        
         error_log("Update post - Success response: " . json_encode($response));
         echo json_encode($response);
     } else {
@@ -356,9 +451,13 @@ function handleUpdatePost() {
 function handleDeletePost() {
     global $postsDir, $imagesDir;
     
+    // Debug logging
+    error_log("Delete post: Starting deletion process for slug: " . ($_POST['slug'] ?? 'unknown'));
+    
     // Validate session first
     $sessionId = $_POST['session_id'] ?? '';
     if (!validateSession($sessionId)) {
+        error_log("Delete post: Invalid session for slug: " . ($_POST['slug'] ?? 'unknown'));
         echo json_encode(['success' => false, 'message' => 'Invalid session']);
         return;
     }
@@ -367,12 +466,14 @@ function handleDeletePost() {
     $slug = trim($_POST['slug'] ?? '');
     
     if (empty($slug)) {
+        error_log("Delete post: Empty slug provided");
         echo json_encode(['success' => false, 'message' => 'Slug is required']);
         return;
     }
     
     // Validate slug format (only allow alphanumeric, hyphens, underscores)
     if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
+        error_log("Delete post: Invalid slug format: $slug");
         echo json_encode(['success' => false, 'message' => 'Invalid slug format']);
         return;
     }
@@ -380,6 +481,7 @@ function handleDeletePost() {
     // Check if post exists
     $postFile = $postsDir . $slug . '.md';
     if (!file_exists($postFile)) {
+        error_log("Delete post: Post file not found: $postFile");
         echo json_encode(['success' => false, 'message' => 'Post not found']);
         return;
     }
@@ -398,26 +500,51 @@ function handleDeletePost() {
         }
     }
     
-    // Delete the markdown file
+    // FIRST: Remove the post from scheduled posts if it exists there
+    // This must happen BEFORE deleting the file
+    error_log("Delete post: Attempting to unschedule post '$slug'");
+    global $scheduler;
+    try {
+        $result = $scheduler->unschedulePost($slug);
+        if ($result) {
+            error_log("Delete post: Successfully unscheduled post '$slug'");
+        } else {
+            error_log("Delete post: Post '$slug' was not in scheduled posts (or already removed)");
+        }
+    } catch (Exception $e) {
+        // Log the error but don't fail the deletion
+        error_log("Warning: Failed to unschedule post '$slug': " . $e->getMessage());
+    }
+    
+    // SECOND: Delete the markdown file
+    error_log("Delete post: Deleting markdown file: $postFile");
     if (!unlink($postFile)) {
+        error_log("Delete post: Failed to delete markdown file: $postFile");
         echo json_encode(['success' => false, 'message' => 'Failed to delete post file']);
         return;
     }
+    error_log("Delete post: Successfully deleted markdown file: $postFile");
     
-    // Delete associated images directory if it exists
+    // THIRD: Delete associated images directory if it exists
     $postImagesDir = $imagesDir . $slug . '/';
     if (is_dir($postImagesDir)) {
+        error_log("Delete post: Deleting images directory: $postImagesDir");
         // Recursively delete all files in the directory
         $files = glob($postImagesDir . '*');
         foreach ($files as $file) {
             if (is_file($file)) {
                 unlink($file);
+                error_log("Delete post: Deleted image file: $file");
             }
         }
         // Remove the empty directory
         rmdir($postImagesDir);
+        error_log("Delete post: Successfully deleted images directory: $postImagesDir");
+    } else {
+        error_log("Delete post: No images directory found for slug: $slug");
     }
     
+    error_log("Delete post: Successfully completed deletion for slug: $slug");
     echo json_encode([
         'success' => true, 
         'message' => "Post '{$title}' deleted successfully"
@@ -515,7 +642,22 @@ function createYamlFrontmatter($title, $category, $categoryColor, $excerpt, $con
     $yaml .= "category_color: " . yamlEscape($categoryColor) . "\n";
     $yaml .= "excerpt: " . yamlEscape($excerpt) . "\n";
     $yaml .= "read_time: " . $readTime . "\n";
-    $yaml .= "published_time: " . $publishDate . "T00:00:00Z\n";
+    
+    // Handle publish date - only add if it's provided
+    if (!empty($publishDate)) {
+        // Handle datetime format from datetime-local input
+        if (strpos($publishDate, 'T') !== false) {
+            // If it's already a datetime format, use it as is
+            $yaml .= "published_time: " . $publishDate . "Z\n";
+        } else {
+            // If it's just a date, add default time
+            $yaml .= "published_time: " . $publishDate . "T00:00:00Z\n";
+        }
+    } else {
+        // For drafts without publish date, use current time as placeholder
+        $yaml .= "published_time: " . date('c') . "\n";
+    }
+    
     $yaml .= "status: " . yamlEscape($status) . "\n";
     
     if (!empty($tags)) {
@@ -696,6 +838,107 @@ function handleDeleteImage() {
             'success' => false, 
             'message' => 'Failed to update post file: ' . ($error['message'] ?? 'Unknown error')
         ]);
+    }
+}
+
+function handleSchedulePost() {
+    global $scheduler;
+    
+    // Validate session first
+    $sessionId = $_POST['session_id'] ?? '';
+    if (!validateSession($sessionId)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid session']);
+        return;
+    }
+    
+    // Validate required fields
+    $slug = trim($_POST['slug'] ?? '');
+    $publishTime = $_POST['publish_time'] ?? '';
+    
+    if (empty($slug) || empty($publishTime)) {
+        echo json_encode(['success' => false, 'message' => 'Slug and publish time are required']);
+        return;
+    }
+    
+    // Validate slug format
+    if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid slug format']);
+        return;
+    }
+    
+    // Validate publish time (must be in the future)
+    $publishTimestamp = strtotime($publishTime);
+    if ($publishTimestamp === false || $publishTimestamp <= time()) {
+        echo json_encode(['success' => false, 'message' => 'Publish time must be in the future']);
+        return;
+    }
+    
+    // Schedule the post
+    if ($scheduler->schedulePost($slug, $publishTime)) {
+        echo json_encode([
+            'success' => true, 
+            'message' => 'Post scheduled successfully for ' . date('Y-m-d H:i:s', $publishTimestamp)
+        ]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to schedule post']);
+    }
+}
+
+function handleGetScheduledPosts() {
+    global $scheduler;
+    
+    // Validate session first
+    $sessionId = $_POST['session_id'] ?? $_GET['session_id'] ?? '';
+    if (!validateSession($sessionId)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid session']);
+        return;
+    }
+    
+    // Clean up any orphaned scheduled posts first
+    $removedCount = $scheduler->cleanupOrphanedPosts();
+    if ($removedCount > 0) {
+        error_log("Admin API: Cleaned up $removedCount orphaned scheduled posts");
+    }
+    
+    $scheduledPosts = $scheduler->getScheduledPosts();
+    echo json_encode([
+        'success' => true, 
+        'scheduled_posts' => $scheduledPosts['scheduled_posts']
+    ]);
+}
+
+function handleUnschedulePost() {
+    global $scheduler;
+    
+    // Validate session first
+    $sessionId = $_POST['session_id'] ?? '';
+    if (!validateSession($sessionId)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid session']);
+        return;
+    }
+    
+    // Validate required fields
+    $slug = trim($_POST['slug'] ?? '');
+    
+    if (empty($slug)) {
+        echo json_encode(['success' => false, 'message' => 'Slug is required']);
+        return;
+    }
+    
+    // Validate slug format
+    if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid slug format']);
+        return;
+    }
+    
+    // Unschedule the post
+    if ($scheduler->unschedulePost($slug)) {
+        echo json_encode([
+            'success' => true, 
+            'message' => 'Post unscheduled successfully'
+        ]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to unschedule post or post not found']);
     }
 }
 ?>

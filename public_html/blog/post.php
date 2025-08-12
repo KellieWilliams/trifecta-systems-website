@@ -153,43 +153,6 @@
             margin: 2rem 0;
             width: 100%;
         }
-        
-        /* Override any unwanted styling from Tailwind prose */
-        .blog-content ol {
-            list-style-type: decimal;
-            color: #d1d5db;
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-        }
-        
-        .blog-content ol li {
-            color: #d1d5db;
-            margin-bottom: 0.5rem;
-            font-style: normal !important;
-        }
-        
-        .blog-content ul {
-            list-style-type: disc;
-            color: #d1d5db;
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-        }
-        
-        .blog-content ul li {
-            color: #d1d5db;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Ensure strong and em tags render correctly */
-        .blog-content strong {
-            color: #ffffff;
-            font-weight: 600;
-        }
-        
-        .blog-content em {
-            color: #9ca3af;
-            font-style: italic;
-        }
     </style>
 </head>
 <body>
@@ -333,52 +296,90 @@
 
     <script src="../script.js"></script>
     
+    <?php
+    require '../../vendor/autoload.php';
+    
+    // Create an instance of the Parsedown class
+    $Parsedown = new Parsedown();
+    
+    // Get slug from URL
+    $slug = $_GET['slug'] ?? '';
+    $isPreview = isset($_GET['preview']) && $_GET['preview'] === 'true';
+    
+    if (empty($slug)) {
+        $errorMessage = 'No post specified';
+        $showError = true;
+    } else {
+        // Define paths
+        $postsDir = __DIR__ . '/../Blog-posts/';
+        $postFile = $postsDir . $slug . '.md';
+        
+        if (!file_exists($postFile)) {
+            $errorMessage = 'Post not found';
+            $showError = true;
+        } else {
+            $content = file_get_contents($postFile);
+            if ($content === false) {
+                $errorMessage = 'Error reading post file';
+                $showError = true;
+            } else {
+                // Parse YAML frontmatter
+                if (preg_match('/^---\s*\n(.*?)\n---\s*\n(.*)/s', $content, $matches)) {
+                    $yaml = $matches[1];
+                    $markdown = $matches[2];
+                    
+                    // Simple YAML parsing for the fields we need
+                    $frontmatter = [];
+                    $lines = explode("\n", $yaml);
+                    foreach ($lines as $line) {
+                        if (preg_match('/^([^:]+):\s*(.*)$/', trim($line), $parts)) {
+                            $key = trim($parts[1]);
+                            $value = trim($parts[2]);
+                            // Remove quotes if present
+                            if (preg_match('/^["\'](.+)["\']$/', $value, $quotes)) {
+                                $value = $quotes[1];
+                            }
+                            $frontmatter[$key] = $value;
+                        }
+                    }
+                    
+                    // Convert markdown to HTML using Parsedown
+                    $htmlContent = $Parsedown->text($markdown);
+                    
+                    $post = [
+                        'slug' => $slug,
+                        'title' => $frontmatter['title'] ?? 'Untitled',
+                        'description' => $frontmatter['description'] ?? '',
+                        'excerpt' => $frontmatter['excerpt'] ?? '',
+                        'category' => $frontmatter['category'] ?? 'Uncategorized',
+                        'category_color' => $frontmatter['category_color'] ?? 'blue',
+                        'date' => $frontmatter['date'] ?? '',
+                        'read_time' => $frontmatter['read_time'] ?? 5,
+                        'published_time' => $frontmatter['published_time'] ?? '',
+                        'content' => $htmlContent,
+                        'tags' => $frontmatter['tags'] ?? '',
+                        'status' => $frontmatter['status'] ?? 'published'
+                    ];
+                    
+                    $showError = false;
+                } else {
+                    $errorMessage = 'Invalid post format';
+                    $showError = true;
+                }
+            }
+        }
+    }
+    ?>
+    
     <script>
         // Blog post functionality
         document.addEventListener('DOMContentLoaded', function() {
-            loadBlogPost();
+            <?php if ($showError): ?>
+                showError('<?php echo addslashes($errorMessage); ?>');
+            <?php else: ?>
+                displayPost(<?php echo json_encode($post); ?>, <?php echo $isPreview ? 'true' : 'false'; ?>);
+            <?php endif; ?>
         });
-
-        async function loadBlogPost() {
-            try {
-                // Get slug and preview parameters from URL
-                const urlParams = new URLSearchParams(window.location.search);
-                const slug = urlParams.get('slug');
-                const isPreview = urlParams.get('preview') === 'true';
-                
-                if (!slug) {
-                    showError('No post specified');
-                    return;
-                }
-                
-                // Use different endpoint for previews vs public posts
-                const endpoint = isPreview ? 'admin-posts-proxy.php?action=post&slug=' : 'parser-proxy.php?action=post&slug=';
-                const response = await fetch(endpoint + encodeURIComponent(slug));
-                const result = await response.json();
-                
-                if (isPreview) {
-                    // For previews, the result is the post directly
-                    if (!result || !result.slug) {
-                        showError('Post not found or not accessible for preview');
-                        return;
-                    }
-                    const post = result;
-                    displayPost(post, true);
-                } else {
-                    // For public posts, check success status
-                    if (!result.success) {
-                        showError(result.message || 'Post not found');
-                        return;
-                    }
-                    const post = result.post;
-                    displayPost(post, false);
-                }
-                
-            } catch (error) {
-                console.error('Error loading blog post:', error);
-                showError('Error loading blog post. Please try again later.');
-            }
-        }
 
         function displayPost(post, isPreview = false) {
             // Update page title and meta tags
