@@ -28,56 +28,44 @@ A modern, responsive business website showcasing technology services for small b
 ## 📁 Project Structure
 
 ```
-Trifecta/
+Project/
 ├── public_html/                 # Main website files
-│   ├── index.html              # Homepage
-│   ├── web-development.html    # Web development services
-│   ├── data-analytics.html     # Data analytics services
-│   ├── cybersecurity.html      # Cybersecurity services
+│   ├── index.html               # Homepage
+│   ├── web-development.html     # Web development services
+│   ├── data-analytics.html      # Data analytics services
+│   ├── cybersecurity.html       # Cybersecurity services
 │   ├── ai-custom-solutions.html # AI and custom solutions
-│   ├── about-the-owner.html    # About the owner page
-│   ├── privacy-policy.html     # Privacy policy page
-│   ├── terms-of-service.html   # Terms of service page
+│   ├── about-the-owner.html     # About the owner page
+│   ├── privacy-policy.html      # Privacy policy page
+│   ├── terms-of-service.html    # Terms of service page
 │   ├── data-rights-request.html # Data rights request form
-│   ├── offline.html            # Offline page for PWA
-│   ├── style.css               # Custom CSS styles
-│   ├── script.js               # JavaScript functionality
-│   ├── sw.js                   # Service worker
-│   ├── robots.txt              # Search engine directives
-│   ├── sitemap.xml             # XML sitemap
-│   ├── .htaccess               # Apache configuration
-│   ├── Gallery/                # Image assets
-│   │   ├── Blog-images/        # Images for blog posts
-│   │   ├── favicon/            # Favicon files
-│   │   └── *.png/jpg/webp      # Website images
-│   └── blog/                   # Blog system
-│       ├── index.html          # Blog listing page
-│       ├── post.html           # Individual post template
-│       ├── Blog-posts/         # Markdown blog posts
-│       ├── admin/              # Blog admin portal
-│       │   ├── login.html      # Admin login
-│       │   ├── dashboard.html  # Admin dashboard
+│   ├── offline.html             # Offline page for PWA
+│   ├── style.css                # Custom CSS styles
+│   ├── script.js                # JavaScript functionality
+│   ├── sw.js                    # Service worker
+│   ├── robots.txt               # Search engine directives
+│   ├── sitemap.xml              # XML sitemap
+│   ├── .htaccess                # Apache configuration
+│   ├── Gallery/                 # Image assets
+│   │   ├── Blog-images/         # Images for blog posts
+│   │   ├── favicon/             # Favicon files
+│   │   └── *.png/jpg/webp       # Website images
+│   └── blog/                    # Blog system
+│       ├── index.html           # Blog listing page
+│       ├── post.html            # Individual post template
+│       ├── Blog-posts/          # Markdown blog posts
+│       ├── admin/               # Blog admin portal
+│       │   ├── login.html       # Admin login
+│       │   ├── dashboard.html   # Admin dashboard
 │       │   ├── create-post.html # Create new post
-│       │   └── edit-post.html  # Edit existing post
-│       └── *-proxy.php         # Secure API proxies
-├── backend/                    # Server-side scripts (outside web root)
-│   ├── submit_form.php         # Contact form handler
-│   ├── csrf_token.php          # CSRF token management
-│   ├── get_recaptcha_key.php   # reCAPTCHA key provider
-│   ├── data_rights_request.php # Data rights request handler
-│   ├── security_monitor.php    # Security monitoring class
-│   ├── security_dashboard.php  # Security analytics
-│   ├── admin-api.php           # Blog admin API
-│   ├── admin-auth.php          # Admin authentication
-│   ├── admin-posts.php         # Blog post management
-│   ├── blog-parser.php         # Markdown parser
-│   └── scheduler.php           # Post scheduling system
-├── config/                     # Configuration files (gitignored)
-│   └── secrets.php             # API keys and sensitive data
-├── vendor/                     # Composer dependencies
-│   └── erusev/parsedown/      # Markdown parsing library
-├── SECURITY.md                 # Security documentation
-└── README.md                   # This file
+│       │   └── edit-post.html   # Edit existing post
+│       └── *-proxy.php          # Secure API proxies
+├── backend_files/               # Server-side scripts (outside web root)
+├── config_files/                # Configuration files (gitignored)
+├── vendor_files/                # Composer dependencies
+│   └── erusev/parsedown/        # Markdown parsing library
+├── SECURITY.md                  # Security documentation
+└── README.md                    # This file
 ```
 
 ## 🚀 Getting Started
@@ -88,53 +76,6 @@ Trifecta/
 - SSL certificate (HTTPS required for PWA features)
 - Git for version control
 - Composer for PHP dependencies
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone [your-repository-url]
-   cd [your-project-directory]
-   ```
-
-2. **Install dependencies**
-   ```bash
-   composer install
-   ```
-
-3. **Configure environment**
-   - Create `config/secrets.php` with your API keys
-   - Configure reCAPTCHA, email settings, and security parameters
-   - Set production domain in CORS headers
-
-4. **Upload to web server**
-   - Upload `public_html/` contents to your web root
-   - Upload `backend/` directory to a secure location **outside** web root
-   - Ensure `config/` directory is outside web root for security
-   - Upload `vendor/` directory for Composer dependencies
-
-5. **Verify setup**
-   - Visit your domain to confirm the site loads
-   - Test the contact form functionality
-   - Test blog admin system (login, create/edit posts)
-   - Check browser console for service worker registration
-   - Test privacy features
-
-## 🔧 Configuration
-
-### Environment Variables
-
-The following variables need to be configured in `config/secrets.php`:
-
-**Important**: The `backend/` directory should be placed outside the web root for security. The proxy files in `public_html/blog/` handle the communication securely.
-
-- `RECAPTCHA_SECRET_KEY`: Google reCAPTCHA v3 secret key
-- `RECAPTCHA_SITE_KEY`: Google reCAPTCHA v3 site key
-- `TO_EMAIL`: Email address to receive contact form submissions
-- `FROM_EMAIL`: Email address for sending notifications
-- `CSRF_TOKEN_EXPIRY`: CSRF token expiration time
-- `RATE_LIMIT_REQUESTS`: Rate limiting configuration
-- `SECURITY_MONITOR_ENABLED`: Security monitoring toggle
 
 ### Production Deployment
 
