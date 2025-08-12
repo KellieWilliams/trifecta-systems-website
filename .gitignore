@@ -1,2 +1,126 @@
-# Ignore the config folder for GitHub
+# Configuration and secrets
 /config/
+*.env
+*.env.local
+*.env.production
+secrets.php
+config.php
+
+# Testing and development files
+testing-checklist.md
+*.log
+logs/
+debug.log
+error.log
+
+# Dependencies and vendor files
+/vendor/
+node_modules/
+package-lock.json
+yarn.lock
+composer.lock
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary and cache files
+*.tmp
+*.temp
+*.cache
+cache/
+temp/
+tmp/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+
+# Database files
+*.sql
+*.sqlite
+*.db
+
+# Session and user data
+sessions/
+admin-sessions/
+*.session
+
+# Security and monitoring logs
+security_logs/
+monitoring/
+security_dashboard_data/
+
+# Build and deployment files
+build/
+dist/
+deploy/
+*.tar.gz
+*.zip
+
+# Local development files
+local/
+dev/
+development/
+
+# API keys and sensitive data
+api_keys.txt
+credentials.txt
+keys.txt
+passwords.txt
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+
+# WordPress specific (if applicable)
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+
+# Other common sensitive files
+.htpasswd
+robots.txt.local
+sitemap.xml.local
+
+# Project-specific sensitive files
+admin-credentials.json
+scheduler.log
+data_rights_requests.log
+security_events.log
+scheduled-posts.json
+
+# Rate limiting and security cache files
+rate_limit_*
+data_rights_rate_limit_*
+security_events_*
+
+# Admin session files
+admin-sessions/
+admin-sessions/*
+*.session
+
+# Temporary security files
+sys_get_temp_dir()/
+temp/
+tmp/
