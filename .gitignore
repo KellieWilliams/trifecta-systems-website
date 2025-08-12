@@ -1,5 +1,7 @@
 # Configuration and secrets
 /config/
+/backend/
+/vendor/
 *.env
 *.env.local
 *.env.production
@@ -14,7 +16,6 @@ debug.log
 error.log
 
 # Dependencies and vendor files
-/vendor/
 node_modules/
 package-lock.json
 yarn.lock
