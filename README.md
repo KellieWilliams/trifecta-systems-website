@@ -93,8 +93,8 @@ Trifecta/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/KellieWilliams/trifecta-systems-website.git
-   cd trifecta-systems-website
+   git clone [your-repository-url]
+   cd [your-project-directory]
    ```
 
 2. **Install dependencies**
@@ -341,7 +341,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For technical support or business inquiries:
 - **Website**: [trifecta.systems](https://trifecta.systems)
 - **Contact**: Use the contact form on the website
-- **GitHub**: [KellieWilliams](https://github.com/KellieWilliams)
 
 ---
 
