@@ -148,21 +148,19 @@ All API endpoints are configured with domain-restricted CORS to prevent unauthor
 ### **File Structure Security**
 
 ```
-Trifecta/
-├── public_html/          # Web root (publicly accessible)
+Project/
+├── public_html/         # Web root (publicly accessible)
 │   ├── index.html
 │   ├── .htaccess        # Security headers & rules
 │   ├── blog/            # Blog system (public)
 │   │   └── *-proxy.php  # Secure API proxies
 │   └── ...
-├── backend/             # Outside web root (protected)
-│   ├── submit_form.php
-│   ├── security_monitor.php
-│   ├── admin-api.php    # Blog admin API
-│   ├── admin-auth.php   # Admin authentication
+├── backend_files/       # Outside web root (protected)
 │   └── ...
-└── config/             # Outside web root (protected)
-    └── secrets.php     # Sensitive configuration
+|── config_files/        # Outside web root (protected)
+|    └── ...
+└── vendor_files/        # Outside web root (protected)
+     └── ...
 ```
 
 ### **Apache Security Configuration**
@@ -255,15 +253,13 @@ The `.htaccess` file implements comprehensive security:
    - Reset admin credentials if compromised
 
 ### **Contact Information**
-- Security: Use form on the website
-
+- Security: Use contact form on the website
 
 ## Compliance
 
 ### **Standards Met**
 - OWASP Top 10 protection
 - GDPR data protection principles
-- PCI DSS requirements (if applicable)
 - WCAG 2.1 AA accessibility
 
 ### **Regular Audits**
