@@ -11,14 +11,14 @@
     <meta property="og:url" id="og-url" content="">
     <meta property="og:title" id="og-title" content="">
     <meta property="og:description" id="og-description" content="">
-    <meta property="og:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
+    <meta property="og:image" id="og-image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" id="twitter-url" content="">
     <meta property="twitter:title" id="twitter-title" content="">
     <meta property="twitter:description" id="twitter-description" content="">
-    <meta property="twitter:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
+    <meta property="twitter:image" id="twitter-image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -385,14 +385,19 @@
             document.getElementById('page-title').textContent = `${post.title} | Trifecta.Systems`;
             document.getElementById('page-description').content = post.description || post.excerpt;
             
+            // Find the first image in the blog post content
+            const firstImage = findFirstImage(post.content);
+            
             // Update Open Graph tags
             document.getElementById('og-title').content = post.title;
             document.getElementById('og-description').content = post.description || post.excerpt;
             document.getElementById('og-url').content = window.location.href;
+            document.getElementById('og-image').content = firstImage;
             
             // Update Twitter Card tags
             document.getElementById('twitter-title').content = post.title;
             document.getElementById('twitter-description').content = post.description || post.excerpt;
+            document.getElementById('twitter-image').content = firstImage;
             
             // Update structured data
             updateStructuredData(post);
@@ -504,6 +509,42 @@
                 month: 'long',
                 day: 'numeric'
             });
+        }
+
+        function findFirstImage(content) {
+            // Create a temporary div to parse the HTML content
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+            
+            // Find the first img tag
+            const firstImg = tempDiv.querySelector('img');
+            
+            if (firstImg && firstImg.src) {
+                // If the image has a relative path, convert it to absolute
+                let imageUrl = firstImg.src;
+                
+                // Handle relative paths (starting with ../Gallery/)
+                if (imageUrl.startsWith('../Gallery/')) {
+                    imageUrl = 'https://trifecta.systems/Gallery/' + imageUrl.replace('../Gallery/', '');
+                }
+                // Handle relative paths (starting with Gallery/)
+                else if (imageUrl.startsWith('Gallery/')) {
+                    imageUrl = 'https://trifecta.systems/Gallery/' + imageUrl.replace('Gallery/', '');
+                }
+                // If it's already an absolute URL, use it as is
+                else if (imageUrl.startsWith('http')) {
+                    // Use as is
+                }
+                // Fallback to default logo if no valid image found
+                else {
+                    imageUrl = 'https://trifecta.systems/Gallery/Trifecta_Logo.png';
+                }
+                
+                return imageUrl;
+            }
+            
+            // Fallback to default logo if no image found
+            return 'https://trifecta.systems/Gallery/Trifecta_Logo.png';
         }
 
         function showError(message) {
