@@ -335,5 +335,77 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Gemini Demo Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tryGeminiButton = document.getElementById('tryGeminiButton');
+            const geminiSection = document.getElementById('gemini-interaction-section');
+            const generateResponseButton = document.getElementById('generateResponseButton');
+            const geminiPromptInput = document.getElementById('geminiPromptInput');
+            const geminiResponseDisplay = document.getElementById('geminiResponseDisplay');
+            const geminiLoadingSpinner = document.getElementById('geminiLoadingSpinner');
+
+            // Show Gemini section when button is clicked
+            tryGeminiButton.addEventListener('click', function() {
+                geminiSection.classList.remove('hidden');
+                geminiSection.scrollIntoView({ behavior: 'smooth' });
+                geminiPromptInput.focus();
+            });
+
+            // Generate response button functionality
+            generateResponseButton.addEventListener('click', function() {
+                const prompt = geminiPromptInput.value.trim();
+                
+                if (!prompt) {
+                    geminiResponseDisplay.innerHTML = '<p class="text-red-400">Please enter a prompt first!</p>';
+                    return;
+                }
+
+                // Show loading spinner
+                geminiLoadingSpinner.style.display = 'block';
+                geminiResponseDisplay.innerHTML = '<p class="text-gray-400">Generating response...</p>';
+
+                // Simulate AI response generation (replace with actual API call)
+                setTimeout(() => {
+                    geminiLoadingSpinner.style.display = 'none';
+                    
+                    // Generate a mock response based on the prompt
+                    const mockResponse = generateMockResponse(prompt);
+                    geminiResponseDisplay.innerHTML = `<div class="space-y-3">
+                        <p class="text-gray-300"><strong>Your prompt:</strong> ${prompt}</p>
+                        <div class="border-t border-gray-600 pt-3">
+                            <p class="text-white">${mockResponse}</p>
+                        </div>
+                    </div>`;
+                }, 2000);
+            });
+
+            // Allow Enter key to submit
+            geminiPromptInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    generateResponseButton.click();
+                }
+            });
+
+            // Generate mock responses for demo purposes
+            function generateMockResponse(prompt) {
+                const promptLower = prompt.toLowerCase();
+                
+                if (promptLower.includes('quantum')) {
+                    return "Quantum computing is like having a computer that can process multiple possibilities simultaneously, rather than one at a time. Think of it like flipping a coin - a regular computer can only see heads OR tails, but a quantum computer can see both at the same time. This makes it incredibly powerful for solving complex problems like cryptography, drug discovery, and optimization challenges that would take regular computers thousands of years to solve.";
+                } else if (promptLower.includes('poem') || promptLower.includes('poetry')) {
+                    return "Innovation's spark ignites the mind,<br>Breaking boundaries, leaving old ways behind.<br>From simple ideas, great solutions grow,<br>Pushing limits, helping knowledge flow.<br>In every challenge, opportunity lies,<br>Innovation's the key that opens new skies.";
+                } else if (promptLower.includes('marketing') || promptLower.includes('slogan')) {
+                    return "Here are three marketing slogan options for your tech product:<br><br>1. 'Tomorrow's Technology, Today's Solution'<br>2. 'Innovate. Integrate. Elevate.'<br>3. 'Where Innovation Meets Implementation'<br><br>Each emphasizes different aspects: the first focuses on cutting-edge technology, the second on the process, and the third on practical application. Choose based on your target audience and brand positioning.";
+                } else if (promptLower.includes('ai') || promptLower.includes('artificial intelligence')) {
+                    return "Artificial Intelligence is technology that enables machines to learn, reason, and perform tasks that typically require human intelligence. It's transforming industries by automating complex processes, providing insights from data, and creating new possibilities. From virtual assistants to autonomous vehicles, AI is reshaping how we work and live. The key is using it responsibly to augment human capabilities rather than replace them.";
+                } else {
+                    return "That's an interesting question! While I'm a demo version, I can help you understand how AI can assist with various tasks. In a real implementation, I could provide detailed, contextual responses based on your specific needs. This demonstrates how custom AI solutions can be integrated into websites to enhance user experience and provide valuable information.";
+                }
+            }
+        });
+    </script>
 </body>
 </html>
