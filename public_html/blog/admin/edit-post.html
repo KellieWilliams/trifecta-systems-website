@@ -65,9 +65,9 @@
                 </div>
 
                 <!-- Loading State -->
-                <div id="loading" class="text-center py-16">
-                    <div class="loading-spinner"></div>
-                    <p class="text-gray-400 mt-4">Loading post...</p>
+                <div id="loading" class="bg-[#161B29] rounded-lg shadow-xl p-8 text-center">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+                    <p class="text-gray-400">Loading post data...</p>
                 </div>
 
                 <!-- Form -->
@@ -76,8 +76,8 @@
                         <!-- Session and Action -->
                         <input type="hidden" id="sessionId" name="session_id" value="">
                         <input type="hidden" id="csrfToken" name="csrf_token" value="">
-                        <input type="hidden" name="action" value="update_post">
                         <input type="hidden" id="originalSlug" name="original_slug" value="">
+                        <input type="hidden" name="action" value="edit_post">
                         
                         <!-- Basic Information -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -131,52 +131,6 @@
                                 </select>
                             </div>
 
-                            <!-- Tags -->
-                            <div>
-                                <label for="tags" class="block text-sm font-medium text-gray-300 mb-2">
-                                    Tags
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="tags" 
-                                    name="tags" 
-                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="tag1, tag2, tag3"
-                                >
-                                <p class="text-gray-500 text-sm mt-1">Separate tags with commas</p>
-                            </div>
-
-                            <!-- Read Time -->
-                            <div>
-                                <label for="read_time" class="block text-sm font-medium text-gray-300 mb-2">
-                                    Read Time (minutes) *
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="read_time" 
-                                    name="read_time" 
-                                    required
-                                    min="1"
-                                    max="60"
-                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="5"
-                                >
-                            </div>
-
-                            <!-- Publish Date -->
-                            <div>
-                                <label for="publish_date" class="block text-sm font-medium text-gray-300 mb-2">
-                                    Publish Date *
-                                </label>
-                                <input 
-                                    type="date" 
-                                    id="publish_date" 
-                                    name="publish_date" 
-                                    required
-                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-
                             <!-- Status -->
                             <div>
                                 <label for="status" class="block text-sm font-medium text-gray-300 mb-2">
@@ -188,37 +142,45 @@
                                     required
                                     class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 >
-                                    <option value="draft" selected>Draft</option>
+                                    <option value="draft">Draft</option>
                                     <option value="published">Published</option>
                                     <option value="scheduled">Scheduled</option>
                                 </select>
                             </div>
+
+                            <!-- Read Time -->
+                            <div>
+                                <label for="read_time" class="block text-sm font-medium text-gray-300 mb-2">
+                                    Read Time (minutes) *
+                                </label>
+                                <input 
+                                    type="number" 
+                                    id="read_time" 
+                                    name="read_time" 
+                                    min="1" 
+                                    max="60" 
+                                    required
+                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="5"
+                                >
+                            </div>
                         </div>
 
                         <!-- Scheduling Options -->
-                        <div id="schedulingOptions" class="hidden border-t border-gray-700 pt-6">
-                            <h3 class="text-lg font-semibold text-white mb-4">Scheduling Options</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Publish Time -->
-                                <div>
-                                    <label for="publish_time" class="block text-sm font-medium text-gray-300 mb-2">
-                                        Publish Time *
-                                    </label>
-                                    <input 
-                                        type="datetime-local" 
-                                        id="publish_time" 
-                                        name="publish_time" 
-                                        class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    >
-                                </div>
-                                
-                                <!-- Timezone Info -->
-                                <div class="flex items-end">
-                                    <div class="bg-blue-900 bg-opacity-20 border border-blue-600 rounded-lg p-4">
-                                        <p class="text-blue-300 text-sm">
-                                            <strong>Note:</strong> Times are in your local timezone. 
-                                            The system will automatically convert to UTC for scheduling.
-                                        </div>
+                        <div id="schedulingOptions" class="hidden">
+                            <div class="border border-gray-600 rounded-lg p-4">
+                                <h3 class="text-lg font-semibold text-white mb-4">Scheduling Options</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="publish_time" class="block text-sm font-medium text-gray-300 mb-2">
+                                            Publish Time *
+                                        </label>
+                                        <input 
+                                            type="datetime-local" 
+                                            id="publish_time" 
+                                            name="publish_time"
+                                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        >
                                     </div>
                                 </div>
                             </div>
@@ -227,105 +189,82 @@
                         <!-- Excerpt -->
                         <div>
                             <label for="excerpt" class="block text-sm font-medium text-gray-300 mb-2">
-                                Excerpt/Description *
+                                Excerpt *
                             </label>
                             <textarea 
                                 id="excerpt" 
                                 name="excerpt" 
+                                rows="3" 
                                 required
-                                rows="3"
                                 class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Brief description of the post (will appear in blog listings)"
+                                placeholder="Brief description of the post"
                             ></textarea>
-                        </div>
-
-                        <!-- Existing Images Section -->
-                        <div class="border-t border-gray-700 pt-8">
-                            <h3 class="text-lg font-semibold text-white mb-4">Existing Images</h3>
-                            <div id="existingImages" class="mb-6">
-                                <!-- Existing images will be loaded here -->
-                            </div>
-                        </div>
-
-                        <!-- New Image Upload Section -->
-                        <div class="border-t border-gray-700 pt-8">
-                            <h3 class="text-lg font-semibold text-white mb-4">Add New Images (Optional)</h3>
-                            
-                            <!-- Image Upload -->
-                            <div class="mb-6">
-                                <label for="imageUpload" class="block text-sm font-medium text-gray-300 mb-2">
-                                    Upload New Images
-                                </label>
-                                <div class="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center">
-                                    <input 
-                                        type="file" 
-                                        id="imageUpload" 
-                                        name="images[]" 
-                                        multiple
-                                        accept="image/*"
-                                        class="hidden"
-                                    >
-                                    <div class="space-y-2">
-                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        <div class="text-gray-400">
-                                            <button type="button" onclick="document.getElementById('imageUpload').click()" class="text-blue-400 hover:text-blue-300 font-medium">
-                                                Click to upload new images
-                                            </button>
-                                            <p class="text-sm">or drag and drop</p>
-                                        </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB each</p>
-                                    </div>
-                                </div>
-                                <div id="newImagePreview" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-                                <div id="newImageUrls" class="mt-4 hidden">
-                                    <h4 class="text-sm font-medium text-gray-300 mb-2">New Image URLs:</h4>
-                                    <div id="newImageUrlList" class="space-y-2"></div>
-                                </div>
-                            </div>
-
-                            <!-- External Image URLs -->
-                            <div>
-                                <label for="externalImages" class="block text-sm font-medium text-gray-300 mb-2">
-                                    External Image URLs (Optional)
-                                </label>
-                                <textarea 
-                                    id="externalImages" 
-                                    name="external_images" 
-                                    rows="3"
-                                    class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="Enter external image URLs, one per line:&#10;https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
-                                ></textarea>
-                                <p class="text-gray-500 text-sm mt-1">One URL per line. These will be included in your markdown content.</p>
-                            </div>
                         </div>
 
                         <!-- Content -->
                         <div>
                             <label for="content" class="block text-sm font-medium text-gray-300 mb-2">
-                                Content (Markdown) *
+                                Content *
                             </label>
-                            <div class="mb-2 flex space-x-2">
-                                <button type="button" onclick="insertMarkdown('**bold**')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Bold</button>
-                                <button type="button" onclick="insertMarkdown('*italic*')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Italic</button>
-                                <button type="button" onclick="insertMarkdown('[link](url)')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Link</button>
-                                <button type="button" onclick="insertMarkdown('![alt text](image-url)')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Image</button>
-                                <button type="button" onclick="insertMarkdown('# Heading')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">Heading</button>
-                                <button type="button" onclick="insertMarkdown('- List item')" class="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded">List</button>
+                            <div class="mb-4">
+                                <div class="flex flex-wrap gap-2 mb-2">
+                                    <button type="button" onclick="insertMarkdown('**text**')" class="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-600">Bold</button>
+                                    <button type="button" onclick="insertMarkdown('*text*')" class="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-600">Italic</button>
+                                    <button type="button" onclick="insertMarkdown('# text')" class="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-600">H1</button>
+                                    <button type="button" onclick="insertMarkdown('## text')" class="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-600">H2</button>
+                                    <button type="button" onclick="insertMarkdown('[text](url)')" class="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-600">Link</button>
+                                    <button type="button" onclick="insertMarkdown('![alt](url)')" class="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-600">Image</button>
+                                </div>
                             </div>
                             <textarea 
                                 id="content" 
                                 name="content" 
+                                rows="20" 
                                 required
-                                rows="20"
                                 class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
-                                placeholder="Write your blog post content in Markdown format..."
+                                placeholder="Write your post content in Markdown format..."
                             ></textarea>
                         </div>
 
-                        <!-- Action Buttons -->
-                        <div class="flex justify-end space-x-4 pt-6 border-t border-gray-700">
+                        <!-- Existing Images -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-4">Existing Images</h3>
+                            <div id="existingImages" class="text-gray-400">
+                                <p>Loading existing images...</p>
+                            </div>
+                        </div>
+
+                        <!-- New Image Upload -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-4">Upload New Images</h3>
+                            <input 
+                                type="file" 
+                                id="imageUpload" 
+                                name="images[]" 
+                                multiple 
+                                accept="image/*"
+                                class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            >
+                            
+                            <!-- Image Preview -->
+                            <div id="newImagePreview" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+                            
+                            <!-- Image URLs -->
+                            <div id="newImageUrls" class="mt-4 hidden">
+                                <h4 class="text-md font-semibold text-white mb-2">Image URLs (use these in your markdown):</h4>
+                                <div id="newImageUrlList" class="space-y-2"></div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="flex flex-wrap gap-4">
+                            <button 
+                                type="submit" 
+                                id="submitButton"
+                                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200"
+                            >
+                                Update Post
+                            </button>
                             <button 
                                 type="button" 
                                 onclick="saveDraft()"
@@ -333,39 +272,40 @@
                             >
                                 Save as Draft
                             </button>
-                            <button 
-                                type="submit"
-                                id="submitButton"
-                                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200"
-                            >
-                                Update Post
-                            </button>
                         </div>
                     </form>
+                </div>
 
-                    <!-- Success Message -->
-                    <div id="success" class="hidden mt-6 p-4 bg-green-900 border border-green-700 rounded-lg">
-                        <p id="successMessage" class="text-green-300 text-sm"></p>
+                <!-- Success Message -->
+                <div id="success" class="bg-[#161B29] rounded-lg shadow-xl p-8 mb-8 hidden">
+                    <div class="text-center">
+                        <div class="text-green-500 text-6xl mb-4">✓</div>
+                        <h2 class="text-2xl font-bold text-white mb-2">Success!</h2>
+                        <div id="successMessage" class="text-gray-300 mb-6"></div>
                     </div>
+                </div>
 
-                    <!-- Error Message -->
-                    <div id="error" class="hidden mt-6 p-4 bg-red-900 border border-red-700 rounded-lg">
-                        <p id="errorMessage" class="text-red-300 text-sm"></p>
+                <!-- Error Message -->
+                <div id="error" class="bg-[#161B29] rounded-lg shadow-xl p-8 mb-8 hidden">
+                    <div class="text-center">
+                        <div class="text-red-500 text-6xl mb-4">✗</div>
+                        <h2 class="text-2xl font-bold text-white mb-2">Error</h2>
+                        <div id="errorMessage" class="text-gray-300 mb-6"></div>
                     </div>
                 </div>
 
                 <!-- Error State -->
-                <div id="errorState" class="hidden text-center py-16">
-                    <p class="text-red-400 text-xl mb-4">Post Not Found</p>
-                    <p class="text-gray-400 mb-8">The blog post you're trying to edit doesn't exist or has been moved.</p>
-                    <a href="dashboard.html" class="btn-primary">Back to Dashboard</a>
+                <div id="errorState" class="bg-[#161B29] rounded-lg shadow-xl p-8 text-center hidden">
+                    <div class="text-red-500 text-6xl mb-4">⚠</div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Error</h2>
+                    <p class="text-gray-300 mb-6">Unable to load post data</p>
                 </div>
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#161B29] text-white py-8">
+    <footer class="bg-[#0F131C] text-white py-8">
         <div class="container mx-auto px-4">
             <div class="text-center">
                 <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
@@ -374,707 +314,8 @@
         </div>
     </footer>
 
-    <!-- Admin edit post doesn't need the main script.js -->
+    <!-- Admin edit post functionality is now handled by script.js -->
     
-    <script>
-        let currentSessionId = null;
-        let currentPost = null;
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check session on page load
-            checkSession();
-            
-            // Handle form submission
-            document.getElementById('editPostForm').addEventListener('submit', handleSubmit);
-            
-            // Handle new image upload
-            document.getElementById('imageUpload').addEventListener('change', handleNewImageUpload);
-            
-            // Handle category color automation
-            document.getElementById('category').addEventListener('change', updateCategoryColor);
-            
-            // Handle status changes for scheduling options
-            document.getElementById('status').addEventListener('change', toggleSchedulingOptions);
-            
-            // Note: Removed title event listener since we use the actual post slug for image URLs
-            
-            // Handle logout
-            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
-        });
-
-        async function checkSession() {
-            currentSessionId = localStorage.getItem('admin_session_id');
-            
-            if (!currentSessionId) {
-                window.location.href = 'login.html';
-                return;
-            }
-
-            try {
-                const response = await fetch(`../admin-auth-proxy.php?action=check_session&session_id=${currentSessionId}`);
-                const result = await response.json();
-                
-                if (result.success) {
-                    document.getElementById('username').textContent = result.username;
-                    document.getElementById('userInfo').classList.remove('hidden');
-                    document.getElementById('logoutBtn').classList.remove('hidden');
-                    document.getElementById('sessionId').value = currentSessionId;
-                    
-                    // Load the post data
-                    loadPost();
-                } else {
-                    localStorage.removeItem('admin_session_id');
-                    window.location.href = 'login.html';
-                }
-                
-            } catch (error) {
-                console.error('Session check error:', error);
-                window.location.href = 'login.html';
-            }
-        }
-
-        async function loadPost() {
-            try {
-                // Get slug from URL parameter
-                const urlParams = new URLSearchParams(window.location.search);
-                const slug = urlParams.get('slug');
-                
-                if (!slug) {
-                    showErrorState('No post specified');
-                    return;
-                }
-                
-                const response = await fetch(`../parser-proxy.php?action=edit&slug=${encodeURIComponent(slug)}`);
-                const result = await response.json();
-                
-                if (!result.success) {
-                    showErrorState(result.message || 'Post not found');
-                    return;
-                }
-                
-                currentPost = result.post;
-                populateForm(currentPost);
-                
-                // Hide loading, show form
-                document.getElementById('loading').classList.add('hidden');
-                document.getElementById('editForm').classList.remove('hidden');
-                
-            } catch (error) {
-                console.error('Error loading post:', error);
-                showErrorState('Error loading post. Please try again later.');
-            }
-        }
-
-        function populateForm(post) {
-            
-            // Set the original slug
-            document.getElementById('originalSlug').value = post.slug;
-            
-            // Populate form fields
-            document.getElementById('title').value = post.title;
-            document.getElementById('category').value = post.category;
-            document.getElementById('category_color').value = post.category_color;
-            document.getElementById('tags').value = post.tags || '';
-            document.getElementById('read_time').value = post.read_time;
-            document.getElementById('publish_date').value = post.published_time.split('T')[0];
-            document.getElementById('status').value = post.status || 'draft';
-            document.getElementById('excerpt').value = post.excerpt || '';
-            document.getElementById('content').value = post.content || '';
-            
-            // Update category color
-            updateCategoryColor();
-            
-            // Load existing images
-            loadExistingImages(post.images || []);
-            
-            // Handle scheduling options if post is scheduled
-            if (post.status === 'scheduled' && post.publish_time) {
-                // Set the publish time field
-                const publishTime = document.getElementById('publish_time');
-                if (publishTime) {
-                    const scheduledDate = new Date(post.publish_time);
-                    publishTime.value = scheduledDate.toISOString().slice(0, 16);
-                }
-                // Show scheduling options
-                toggleSchedulingOptions();
-            }
-        }
-
-        function loadExistingImages(images) {
-            const existingImagesDiv = document.getElementById('existingImages');
-            
-            if (images.length === 0) {
-                existingImagesDiv.innerHTML = '<p class="text-gray-400">No images found for this post.</p>';
-                return;
-            }
-            
-            let html = '<div class="grid grid-cols-2 md:grid-cols-4 gap-4">';
-            
-            images.forEach((imageUrl, index) => {
-                const fileName = imageUrl.split('/').pop();
-                
-                // Fix the image URL path for the admin interface
-                // The image URLs in frontmatter are relative to the blog directory
-                // but the admin interface is in blog/admin/, so we need to go up one more level
-                let displayImageUrl = imageUrl;
-                if (imageUrl.startsWith('../')) {
-                    displayImageUrl = '../../' + imageUrl.substring(3);
-                }
-                
-                html += `
-                    <div class="relative" data-image-url="${imageUrl}">
-                        <img src="${displayImageUrl}" alt="Existing image" class="w-full h-24 object-cover rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div class="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded cursor-pointer" onclick="removeExistingImage('${imageUrl}')">×</div>
-                        <div class="mt-2">
-                            <code class="text-xs text-gray-300">${imageUrl}</code>
-                            <button type="button" onclick="insertImageUrl('${imageUrl}', '${fileName}')" class="block mt-1 text-blue-400 hover:text-blue-300 text-xs">Insert</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            existingImagesDiv.innerHTML = html;
-        }
-
-        async function removeExistingImage(imageUrl) {
-            // Get the current post slug
-            const slug = document.getElementById('originalSlug').value;
-            if (!slug) {
-                alert('Post slug not found. Please refresh the page and try again.');
-                return;
-            }
-            
-            // Get the session ID
-            const sessionId = document.getElementById('sessionId').value;
-            if (!sessionId) {
-                alert('Session not found. Please log in again.');
-                return;
-            }
-            
-            // Confirm deletion
-            if (!confirm(`Are you sure you want to delete this image?\n\n${imageUrl}`)) {
-                return;
-            }
-            
-            try {
-                const formData = new FormData();
-                formData.append('action', 'delete_image');
-                formData.append('session_id', sessionId);
-                formData.append('slug', slug);
-                formData.append('image_url', imageUrl);
-                
-                
-                
-                const response = await fetch('../admin-api-proxy.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                       const responseText = await response.text();
-                
-                let result;
-                try {
-                    result = JSON.parse(responseText);
-                } catch (parseError) {
-                    console.error('Failed to parse JSON response:', parseError);
-                    showError('Invalid response from server');
-                    return;
-                }
-                
-                if (result.success) {
-                    // Find and remove the image element from the DOM
-                    const existingImagesDiv = document.getElementById('existingImages');
-                    const imageElement = existingImagesDiv.querySelector(`[data-image-url="${imageUrl}"]`);
-                    if (imageElement) {
-                        imageElement.remove();
-                    }
-                    
-                    // If no images left, show the "no images" message
-                    const remainingImages = existingImagesDiv.querySelectorAll('.relative');
-                    if (remainingImages.length === 0) {
-                        existingImagesDiv.innerHTML = '<p class="text-gray-400">No images found for this post.</p>';
-                    }
-                    
-                    // Show success message
-                    showSuccess('Image deleted successfully');
-                    
-                    // Reload the existing images to ensure consistency
-                    setTimeout(() => {
-                        loadExistingImages(result.remaining_images || []);
-                    }, 1000);
-                } else {
-                    showError(result.message || 'Failed to delete image');
-                }
-                
-            } catch (error) {
-                console.error('Delete image error:', error);
-                showError('An error occurred while deleting the image');
-            }
-        }
-
-        async function handleSubmit(event) {
-            event.preventDefault();
-            
-            const form = event.target;
-            const formData = new FormData(form);
-            
-            // Use the status value from the form dropdown
-            const statusValue = document.getElementById('status').value;
-            formData.set('status', statusValue);
-            
-            // Debug: log the form data being sent
-            console.log('Updating post with status:', statusValue);
-            console.log('Session ID being sent:', formData.get('session_id'));
-            console.log('Action being sent:', formData.get('action'));
-            
-            // Log all form data for debugging
-            for (let [key, value] of formData.entries()) {
-                console.log(`Form data - ${key}: ${value}`);
-            }
-            
-            showLoading(true);
-            hideMessages();
-            
-            try {
-                const response = await fetch('../admin-api-proxy.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                // Debug: log the response status and text
-                console.log('Response status:', response.status);
-                const responseText = await response.text();
-                console.log('Response text:', responseText);
-                
-                let result;
-                try {
-                    result = JSON.parse(responseText);
-                } catch (parseError) {
-                    console.error('Failed to parse JSON response:', parseError);
-                    showError('Server returned invalid JSON response');
-                    return;
-                }
-                
-                if (result.success) {
-                    let successMessage = `Post updated successfully! <a href="../post.html?slug=${result.slug}" target="_blank" class="text-blue-400 hover:text-blue-300">View post</a> | <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">Back to dashboard</a>`;
-                    
-                    // Show new uploaded image URLs if any
-                    if (result.uploaded_images && result.uploaded_images.length > 0) {
-                        successMessage += '<br><br><strong>New Image URLs (use these in your markdown):</strong><br>';
-                        result.uploaded_images.forEach(imageUrl => {
-                            successMessage += `<code class="text-xs">${imageUrl}</code><br>`;
-                        });
-                        successMessage += '<br><em class="text-blue-400 text-sm">Copy these URLs and paste them into your markdown content as: ![alt text](URL)</em>';
-                    }
-                    
-                    showSuccess(successMessage);
-                } else {
-                    showError(result.message || 'Failed to update post');
-                }
-                
-            } catch (error) {
-                console.error('Update post error:', error);
-                showError('An error occurred while updating the post');
-            } finally {
-                showLoading(false);
-            }
-        }
-
-        async function saveDraft() {
-            const form = document.getElementById('editPostForm');
-            const formData = new FormData(form);
-            
-            // Set status to draft - also update the form field to ensure consistency
-            formData.set('status', 'draft');
-            document.getElementById('status').value = 'draft';
-            
-            // Debug: log the form data being sent
-            console.log('Saving draft with status:', formData.get('status'));
-            console.log('Session ID being sent:', formData.get('session_id'));
-            console.log('Action being sent:', formData.get('action'));
-            
-            // Log all form data for debugging
-            for (let [key, value] of formData.entries()) {
-                console.log(`Form data - ${key}: ${value}`);
-            }
-            
-            showLoading(true);
-            hideMessages();
-            
-            try {
-                const response = await fetch('../admin-api-proxy.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                // Debug: log the response status and text
-                console.log('Response status:', response.status);
-                const responseText = await response.text();
-                console.log('Response text:', responseText);
-                
-                let result;
-                try {
-                    result = JSON.parse(responseText);
-                } catch (parseError) {
-                    console.error('Failed to parse JSON response:', parseError);
-                    showError('Server returned invalid JSON response');
-                    return;
-                }
-                
-                if (result.success) {
-                    showSuccess(`Draft saved successfully! <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">Back to dashboard</a>`);
-                } else {
-                    showError(result.message || 'Failed to save draft');
-                }
-                
-            } catch (error) {
-                console.error('Save draft error:', error);
-                showError('An error occurred while saving the draft');
-            } finally {
-                showLoading(false);
-            }
-        }
-
-        function handleNewImageUpload(event) {
-            const files = event.target.files;
-            const preview = document.getElementById('newImagePreview');
-            const imageUrls = document.getElementById('newImageUrls');
-            const imageUrlList = document.getElementById('newImageUrlList');
-            
-            preview.innerHTML = '';
-            imageUrlList.innerHTML = '';
-            
-            if (files.length > 0) {
-                imageUrls.classList.remove('hidden');
-                window.newUploadedFiles = files;
-            } else {
-                imageUrls.classList.add('hidden');
-                window.newUploadedFiles = null;
-            }
-            
-            for (let file of files) {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const div = document.createElement('div');
-                        div.className = 'relative';
-                        div.innerHTML = `
-                            <img src="${e.target.result}" alt="Preview" class="w-full h-24 object-cover rounded-lg">
-                            <div class="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded cursor-pointer" onclick="removeNewImage(this)">×</div>
-                        `;
-                        preview.appendChild(div);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
-            
-            // Update new image URLs with current slug
-            updateNewImageUrls();
-        }
-        
-        function removeNewImage(button) {
-            const imageDiv = button.parentElement;
-            const imageIndex = Array.from(imageDiv.parentElement.children).indexOf(imageDiv);
-            
-            // Remove from preview
-            imageDiv.remove();
-            
-            // Remove from newUploadedFiles array
-            if (window.newUploadedFiles && window.newUploadedFiles.length > imageIndex) {
-                const newFiles = Array.from(window.newUploadedFiles);
-                newFiles.splice(imageIndex, 1);
-                window.newUploadedFiles = newFiles;
-            }
-            
-            // Update URLs
-            updateNewImageUrls();
-        }
-        
-        function updateNewImageUrls() {
-            const imageUrlList = document.getElementById('newImageUrlList');
-            
-            if (!window.newUploadedFiles || window.newUploadedFiles.length === 0) {
-                return;
-            }
-            
-            // Use the actual post slug from the URL or loaded data
-            const urlParams = new URLSearchParams(window.location.search);
-            const slug = urlParams.get('slug');
-            
-            if (!slug) {
-                imageUrlList.innerHTML = '<div class="text-red-400 text-sm">Error: Could not determine post slug</div>';
-                return;
-            }
-            
-            // Clear existing URLs
-            imageUrlList.innerHTML = '';
-            
-            // Generate relative URLs for each uploaded file
-            for (let file of window.newUploadedFiles) {
-                if (file.type.startsWith('image/')) {
-                    const fileName = file.name;
-                    const sanitizedFileName = fileName.replace(/[^a-zA-Z0-9._-]/g, '_');
-                    const actualUrl = `../Gallery/Blog-images/${slug}/${sanitizedFileName}`;
-                    
-                    const urlDiv = document.createElement('div');
-                    urlDiv.className = 'flex items-center justify-between p-2 bg-gray-800 rounded text-sm';
-                    urlDiv.innerHTML = `
-                        <span class="text-gray-300 font-mono text-xs">${actualUrl}</span>
-                        <button type="button" onclick="insertImageUrl('${actualUrl}', '${fileName}')" class="text-blue-400 hover:text-blue-300 text-xs">Insert</button>
-                    `;
-                    imageUrlList.appendChild(urlDiv);
-                }
-            }
-        }
-        
-        function insertImageUrl(url, fileName) {
-            const textarea = document.getElementById('content');
-            const imageMarkdown = `![${fileName}](${url})`;
-            
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            
-            textarea.value = textarea.value.substring(0, start) + imageMarkdown + textarea.value.substring(end);
-            textarea.focus();
-            textarea.setSelectionRange(start + imageMarkdown.length, start + imageMarkdown.length);
-        }
-
-        function insertMarkdown(text) {
-            const textarea = document.getElementById('content');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-            
-            let insertText = text;
-            if (selectedText) {
-                insertText = text.replace('text', selectedText);
-            }
-            
-            textarea.value = textarea.value.substring(0, start) + insertText + textarea.value.substring(end);
-            textarea.focus();
-            textarea.setSelectionRange(start + insertText.length, start + insertText.length);
-        }
-
-        async function handleLogout() {
-            if (currentSessionId) {
-                try {
-                    const formData = new FormData();
-                    formData.append('action', 'logout');
-                    formData.append('session_id', currentSessionId);
-                    
-                    await fetch('../admin-auth-proxy.php', {
-                        method: 'POST',
-                        body: formData
-                    });
-                } catch (error) {
-                    console.error('Logout error:', error);
-                }
-            }
-            
-            localStorage.removeItem('admin_session_id');
-            window.location.href = 'login.html';
-        }
-
-        function showLoading(show) {
-            const loading = document.getElementById('loading');
-            const form = document.getElementById('editForm');
-            
-            if (show) {
-                loading.classList.remove('hidden');
-                form.classList.add('hidden');
-            } else {
-                loading.classList.add('hidden');
-                form.classList.remove('hidden');
-            }
-        }
-
-        function showSuccess(message) {
-            const success = document.getElementById('success');
-            const successMessage = document.getElementById('successMessage');
-            
-            successMessage.innerHTML = message;
-            success.classList.remove('hidden');
-            
-            // Scroll to the success message at the bottom
-            setTimeout(() => {
-                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
-        }
-
-        function showError(message) {
-            const error = document.getElementById('error');
-            const errorMessage = document.getElementById('errorMessage');
-            
-            errorMessage.textContent = message;
-            error.classList.remove('hidden');
-            
-            // Scroll to the error message at the bottom
-            setTimeout(() => {
-                error.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
-        }
-
-        function showErrorState(message) {
-            document.getElementById('loading').classList.add('hidden');
-            document.getElementById('errorState').classList.remove('hidden');
-            document.querySelector('#errorState p:first-child').textContent = message;
-        }
-
-        function generateSlug(title) {
-            // Convert to lowercase
-            let slug = title.toLowerCase();
-            
-            // Replace spaces and special characters with hyphens
-            slug = slug.replace(/[^a-z0-9\s-]/g, '');
-            slug = slug.replace(/[\s-]+/g, '-');
-            
-            // Remove leading/trailing hyphens
-            slug = slug.trim('-');
-            
-            // Limit length
-            if (slug.length > 50) {
-                slug = slug.substring(0, 50);
-                slug = slug.replace(/-$/, '');
-            }
-            
-            return slug;
-        }
-        
-        function updateCategoryColor() {
-            const category = document.getElementById('category').value;
-            const categoryColor = document.getElementById('category_color');
-            
-            // Clear existing options
-            categoryColor.innerHTML = '';
-            
-            // Define category-color mappings
-            const colorMap = {
-                'Tech Trends': 'purple',
-                'Web Dev': 'green',
-                'Cybersecurity': 'red',
-                'Data Analytics': 'blue',
-                'AI Solutions': 'indigo'
-            };
-            
-            if (category && colorMap[category]) {
-                const color = colorMap[category];
-                categoryColor.innerHTML = `<option value="${color}">${color.charAt(0).toUpperCase() + color.slice(1)}</option>`;
-            } else {
-                categoryColor.innerHTML = '<option value="">Select a category first</option>';
-            }
-            
-            // Update new image URLs when category changes
-            updateNewImageUrls();
-        }
-        
-        function hideMessages() {
-            document.getElementById('success').classList.add('hidden');
-            document.getElementById('error').classList.add('hidden');
-        }
-
-        // Scheduling Functions
-        function toggleSchedulingOptions() {
-            const status = document.getElementById('status').value;
-            const schedulingOptions = document.getElementById('schedulingOptions');
-            const publishTime = document.getElementById('publish_time');
-            const submitButton = document.getElementById('submitButton');
-            
-            if (status === 'scheduled') {
-                schedulingOptions.classList.remove('hidden');
-                publishTime.required = true;
-                submitButton.textContent = 'Schedule Post';
-                submitButton.className = 'px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors duration-200';
-                
-                // Set default publish time to tomorrow at 9 AM if not already set
-                if (!publishTime.value) {
-                    const tomorrow = new Date();
-                    tomorrow.setDate(tomorrow.getDate() + 1);
-                    tomorrow.setHours(9, 0, 0, 0);
-                    publishTime.value = tomorrow.toISOString().slice(0, 16);
-                }
-            } else {
-                schedulingOptions.classList.add('hidden');
-                publishTime.required = false;
-                submitButton.textContent = 'Update Post';
-                submitButton.className = 'px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200';
-            }
-        }
-
-        // Override the existing handleSubmit to handle scheduling
-        async function handleSubmit(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(event.target);
-            formData.append('session_id', currentSessionId);
-            formData.append('action', 'update_post');
-            
-            const status = formData.get('status');
-            
-            // Only include publish_time if status is scheduled or published
-            if (status === 'scheduled' || status === 'published') {
-                const publishTime = formData.get('publish_time');
-                if (!publishTime || publishTime.trim() === '') {
-                    showError('Publish time is required for scheduled and published posts');
-                    return;
-                }
-                
-                // For scheduled posts, validate future date
-                if (status === 'scheduled') {
-                    const scheduledTime = new Date(publishTime);
-                    const now = new Date();
-                    
-                    if (scheduledTime <= now) {
-                        showError('Publish time must be in the future for scheduled posts');
-                        return;
-                    }
-                }
-            } else {
-                // For drafts, remove publish_time field to avoid validation issues
-                formData.delete('publish_time');
-            }
-            
-            // Hide any existing messages
-            hideMessages();
-            
-            // Show loading state
-            showLoading(true);
-            
-            try {
-                const response = await fetch('../admin-api-proxy.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    if (status === 'scheduled') {
-                        const publishTime = formData.get('publish_time');
-                        if (publishTime) {
-                            showSuccess(`Post scheduled successfully for ${new Date(publishTime).toLocaleString()}`);
-                        } else {
-                            showSuccess('Post scheduled successfully!');
-                        }
-                    } else {
-                        showSuccess(result.message || 'Post updated successfully!');
-                    }
-                    
-                    // Redirect to dashboard after a short delay
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 2000);
-                } else {
-                    showError(result.message || 'An error occurred while updating the post');
-                }
-                
-            } catch (error) {
-                console.error('Submit error:', error);
-                showError('An error occurred while updating the post. Please try again.');
-            } finally {
-                showLoading(false);
-            }
-        }
-    </script>
+    <script src="../../script.js" type="module"></script>
 </body>
 </html>
