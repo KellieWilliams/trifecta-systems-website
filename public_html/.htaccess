@@ -65,6 +65,10 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 <Files "parser-proxy.php">
     Require all granted
 </Files>
+<Files "chatbot-proxy.php">
+    Require all granted
+</Files>
+
 
 # Block access to sensitive files
 <FilesMatch "^(\.htaccess|\.htpasswd|\.env|config\.php|secrets\.php|\.git|\.svn|\.DS_Store|Thumbs\.db)$">

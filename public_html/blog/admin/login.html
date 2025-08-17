@@ -108,9 +108,9 @@
                         <input 
                             type="text" 
                             id="setupUsername" 
-                            name="username" 
+                            name="setupUsername" 
                             required
-                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-transparent"
                             placeholder="3-20 characters, letters, numbers, underscores"
                         >
                     </div>
@@ -123,9 +123,9 @@
                         <input 
                             type="password" 
                             id="setupPassword" 
-                            name="password" 
+                            name="setupPassword" 
                             required
-                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-transparent"
                             placeholder="Minimum 8 characters"
                         >
                     </div>
@@ -138,9 +138,9 @@
                         <input 
                             type="password" 
                             id="setupConfirmPassword" 
-                            name="confirm_password" 
+                            name="setupConfirmPassword" 
                             required
-                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            class="w-full px-4 py-3 bg-[#0F131C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-transparent"
                             placeholder="Confirm your password"
                         >
                     </div>
@@ -185,11 +185,7 @@
         </div>
     </footer>
 
-    <!-- Admin login doesn't need the main script.js (cookie banner, service worker, etc.) -->
-    
-
-
-
-    <script src="../../script.js" type="module"></script>
+    <!-- Admin login JavaScript -->
+    <script src="admin-login-js-proxy.php"></script>
 </body>
 </html>
