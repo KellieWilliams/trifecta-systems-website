@@ -69,6 +69,17 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     Require all granted
 </Files>
 
+# Allow contact form proxy files
+<Files "contact-csrf-proxy.php">
+    Require all granted
+</Files>
+<Files "contact-form-proxy.php">
+    Require all granted
+</Files>
+<Files "contact-recaptcha-proxy.php">
+    Require all granted
+</Files>
+
 
 # Block access to sensitive files
 <FilesMatch "^(\.htaccess|\.htpasswd|\.env|config\.php|secrets\.php|\.git|\.svn|\.DS_Store|Thumbs\.db)$">
