@@ -86,7 +86,7 @@ export function getStatusText(status) {
 // CSRF token fetching
 export async function getCSRFToken() {
     try {
-        const response = await fetch('../backend/csrf_token.php');
+        const response = await fetch('contact-csrf-proxy.php');
         if (response.ok) {
             const data = await response.json();
             return data.csrf_token;

@@ -192,28 +192,36 @@ async function validateFormAndRecaptcha(event) {
     submitButton.textContent = 'Sending...';
 
     try {
-        // Execute reCAPTCHA with enhanced error handling
-        if (typeof grecaptcha !== 'undefined' && grecaptcha.execute) {
-            // Get reCAPTCHA site key from server
-            const siteKeyResponse = await fetch('../backend/get_recaptcha_key.php');
-            if (!siteKeyResponse.ok) {
-                throw new Error('Failed to get security configuration. Please refresh the page and try again.');
+        // Wait for reCAPTCHA to be loaded and execute with enhanced error handling
+        let recaptchaReady = false;
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        // Wait for reCAPTCHA to be available
+        while (!recaptchaReady && attempts < maxAttempts) {
+            if (typeof grecaptcha !== 'undefined' && grecaptcha.execute) {
+                recaptchaReady = true;
+            } else {
+                await new Promise(resolve => setTimeout(resolve, 500)); // Wait 500ms
+                attempts++;
             }
-            const siteKeyData = await siteKeyResponse.json();
-            
-            const token = await grecaptcha.execute(siteKeyData.site_key, { 
-                action: 'submit_contact_form' 
-            });
-            recaptchaResponseInput.value = token;
-        } else {
+        }
+        
+        if (!recaptchaReady) {
             throw new Error('reCAPTCHA is not available. Please refresh the page and try again.');
         }
-
-        // Get CSRF token from server
-        const csrfToken = await getCSRFToken();
-        if (!csrfToken) {
-            throw new Error('Failed to get security token. Please refresh the page and try again.');
+        
+        // Get reCAPTCHA site key from server
+        const siteKeyResponse = await fetch('contact-recaptcha-proxy.php');
+        if (!siteKeyResponse.ok) {
+            throw new Error('Failed to get security configuration. Please refresh the page and try again.');
         }
+        const siteKeyData = await siteKeyResponse.json();
+        
+        const token = await grecaptcha.execute(siteKeyData.site_key, { 
+            action: 'submit_contact_form' 
+        });
+        recaptchaResponseInput.value = token;
 
         // Prepare form data with enhanced security
         const formData = new FormData(contactForm);
@@ -222,11 +230,8 @@ async function validateFormAndRecaptcha(event) {
         // Remove honeypot fields from data before sending
         honeypotFields.forEach(field => delete data[field]);
         
-        // Add CSRF token
-        data.csrf_token = csrfToken;
-        
         // Submit form data
-        const response = await fetch('../backend/submit_form.php', {
+        const response = await fetch('contact-form-proxy.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

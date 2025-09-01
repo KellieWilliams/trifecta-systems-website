@@ -356,7 +356,32 @@
     
     <script src="script.js" type="module" defer></script>
 
-    <!-- reCAPTCHA API call -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW" defer></script>
+    <!-- reCAPTCHA API call - dynamically loaded with secure site key -->
+    <script>
+        // Dynamically load reCAPTCHA with site key from secure proxy
+        async function loadRecaptcha() {
+            try {
+                const response = await fetch('contact-recaptcha-proxy.php');
+                if (response.ok) {
+                    const data = await response.json();
+                    const script = document.createElement('script');
+                    script.src = `https://www.google.com/recaptcha/api.js?render=${data.site_key}`;
+                    script.defer = true;
+                    document.head.appendChild(script);
+                } else {
+                    console.error('Failed to load reCAPTCHA configuration');
+                }
+            } catch (error) {
+                console.error('Error loading reCAPTCHA:', error);
+            }
+        }
+        
+        // Load reCAPTCHA when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadRecaptcha);
+        } else {
+            loadRecaptcha();
+        }
+    </script>
 </body>
 </html>
