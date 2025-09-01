@@ -1,4 +1,5 @@
 // admin/dashboard.js - Admin dashboard functionality
+// This file contains only UI logic and delegates sensitive operations to secure backend endpoints
 
 import { formatDate, getCategoryColor, getStatusColor, getStatusText } from '../utils.js';
 
@@ -427,7 +428,7 @@ function showScheduledEmpty() {
 
 function hideScheduledEmpty() {
     const empty = document.getElementById('scheduledEmpty');
-    if (empty) empty.classList.add('hidden');
+    if (empty) empty.classList.remove('hidden');
 }
 
 function hideScheduledError() {

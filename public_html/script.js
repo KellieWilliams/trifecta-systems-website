@@ -226,7 +226,7 @@ async function validateFormAndRecaptcha(event) {
         data.csrf_token = csrfToken;
         
         // Submit form data
-        const response = await fetch('../backend/contact_form.php', {
+        const response = await fetch('../backend/submit_form.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 // utils.js - Shared utility functions used across the application
+// This file contains only utility functions and delegates sensitive operations to secure backend endpoints
 
 // Email validation function
 export function validateEmail(email) {

@@ -1,4 +1,5 @@
 // admin/edit-post.js - Admin edit post functionality
+// This file contains only UI logic and delegates sensitive operations to secure backend endpoints
 
 import { getCSRFToken } from '../utils.js';
 
