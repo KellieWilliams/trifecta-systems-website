@@ -6,6 +6,30 @@
     <title>Edit Post | Trifecta.Systems Blog Admin</title>
     <meta name="description" content="Edit an existing blog post">
     
+    <!-- Google tag (gtag.js) with Consent Mode -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F8YR6XDE82"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Default consent state - deny all until user consent is given
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+    });
+    
+    gtag('js', new Date());
+    gtag('config', 'G-F8YR6XDE82', {
+        'anonymize_ip': true
+    });
+    </script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -316,6 +340,6 @@
 
     <!-- Admin edit post functionality is now handled by script.js -->
     
-    <script src="../../script.js" type="module"></script>
+    <script src="../../script.js?v=2" type="module"></script>
 </body>
 </html>

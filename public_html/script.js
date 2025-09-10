@@ -98,6 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize main site functionality
 function initializeMainSiteFunctionality() {
+    // Initialize mobile menu
+    initializeMobileMenu();
+    
     // Initialize phone number formatting
     initializePhoneMask();
     
@@ -126,6 +129,81 @@ function initializeMainSiteFunctionality() {
 
 
 // --- Main Site Functionality Functions ---
+
+// Mobile menu functionality
+function initializeMobileMenu() {
+    // Handle both ID variations: mobileMenuButton (main pages) and mobileMenuBtn (blog pages)
+    const mobileMenuButton = document.getElementById('mobileMenuButton') || document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const servicesDropdownToggle = document.getElementById('servicesDropdownToggle');
+    const servicesSubmenu = document.getElementById('servicesSubmenu');
+    
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            // Toggle mobile menu visibility
+            mobileMenu.classList.toggle('hidden');
+            
+            // Update button icon (hamburger to X and vice versa)
+            const icon = mobileMenuButton.querySelector('svg');
+            if (icon) {
+                if (mobileMenu.classList.contains('hidden')) {
+                    // Show hamburger icon
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                } else {
+                    // Show X icon
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+                }
+            }
+        });
+    }
+    
+    // Services dropdown functionality for mobile
+    if (servicesDropdownToggle && servicesSubmenu) {
+        servicesDropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Toggle services submenu
+            servicesSubmenu.classList.toggle('hidden');
+            
+            // Rotate arrow icon
+            const arrow = servicesDropdownToggle.querySelector('svg');
+            if (arrow) {
+                arrow.classList.toggle('rotate-180');
+            }
+        });
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (mobileMenu && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+            mobileMenu.classList.add('hidden');
+            
+            // Reset button icon to hamburger
+            const icon = mobileMenuButton.querySelector('svg');
+            if (icon) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            }
+        }
+    });
+    
+    // Close mobile menu when window is resized to desktop size
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768) { // md breakpoint
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+            
+            // Reset button icon to hamburger
+            if (mobileMenuButton) {
+                const icon = mobileMenuButton.querySelector('svg');
+                if (icon) {
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                }
+            }
+        }
+    });
+}
 
 // Enhanced client-side form validation and reCAPTCHA execution
 async function validateFormAndRecaptcha(event) {
@@ -419,11 +497,11 @@ function showDataRightsError(message) {
 
 // Email obfuscation
 function obfuscateEmail() {
-    const emailElement = document.getElementById('obfuscatedEmail');
+    const emailElement = document.getElementById('obfuscated-email');
     if (!emailElement) return;
     
     emailElement.addEventListener('click', function() {
-        const email = 'contact@trifecta.com'; // Replace with actual email
+        const email = 'info@trifecta.systems';
         window.location.href = 'mailto:' + email;
     });
 }
@@ -432,6 +510,9 @@ function obfuscateEmail() {
 async function loadCookieBanner() {
     const container = document.getElementById('cookie-banner-container');
     if (!container) return;
+    
+    // Always load existing consent preferences first
+    loadExistingConsent();
     
     // Check if user has already made a choice
     const cookieChoice = localStorage.getItem('cookieChoice');
@@ -478,6 +559,7 @@ function setupCookieBannerEvents() {
             localStorage.setItem('cookieChoice', 'accepted');
             localStorage.setItem('functionalCookies', 'true');
             localStorage.setItem('analyticsCookies', 'true');
+            updateConsentMode(true, true, true, true);
             hideCookieBanner();
             loadFunctionalCookies();
         });
@@ -509,6 +591,7 @@ function setupCookieBannerEvents() {
             localStorage.setItem('functionalCookies', functional.toString());
             localStorage.setItem('analyticsCookies', analytics.toString());
             
+            updateConsentMode(true, functional, analytics, analytics);
             hideCookieBanner();
             if (functional) loadFunctionalCookies();
         });
@@ -520,6 +603,7 @@ function setupCookieBannerEvents() {
             localStorage.setItem('cookieChoice', 'accepted');
             localStorage.setItem('functionalCookies', 'true');
             localStorage.setItem('analyticsCookies', 'true');
+            updateConsentMode(true, true, true, true);
             hideCookieBanner();
             loadFunctionalCookies();
         });
@@ -531,6 +615,7 @@ function setupCookieBannerEvents() {
             localStorage.setItem('cookieChoice', 'rejected');
             localStorage.setItem('functionalCookies', 'false');
             localStorage.setItem('analyticsCookies', 'false');
+            updateConsentMode(true, false, false, false);
             hideCookieBanner();
         });
     }
@@ -566,6 +651,36 @@ function hideCookieBanner() {
     
     if (modal) {
         modal.classList.add('hidden');
+    }
+}
+
+// Update Google Analytics consent mode
+function updateConsentMode(security, functional, analytics, ads) {
+    if (typeof gtag !== 'undefined') {
+        gtag('consent', 'update', {
+            'analytics_storage': analytics ? 'granted' : 'denied',
+            'ad_storage': ads ? 'granted' : 'denied',
+            'ad_user_data': ads ? 'granted' : 'denied',
+            'ad_personalization': ads ? 'granted' : 'denied',
+            'functionality_storage': functional ? 'granted' : 'denied',
+            'personalization_storage': functional ? 'granted' : 'denied',
+            'security_storage': security ? 'granted' : 'denied'
+        });
+        console.log('Consent mode updated:', { security, functional, analytics, ads });
+    }
+}
+
+// Load existing consent preferences on page load
+function loadExistingConsent() {
+    const cookieChoice = localStorage.getItem('cookieChoice');
+    if (cookieChoice === 'accepted') {
+        updateConsentMode(true, true, true, true);
+    } else if (cookieChoice === 'rejected') {
+        updateConsentMode(true, false, false, false);
+    } else if (cookieChoice === 'custom') {
+        const functional = localStorage.getItem('functionalCookies') === 'true';
+        const analytics = localStorage.getItem('analyticsCookies') === 'true';
+        updateConsentMode(true, functional, analytics, analytics);
     }
 }
 

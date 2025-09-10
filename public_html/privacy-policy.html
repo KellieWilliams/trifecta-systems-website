@@ -6,6 +6,30 @@
     <title>Privacy Policy | Trifecta.Systems</title>
     <meta name="description" content="Privacy Policy for Trifecta.Systems - Learn how we collect, use, and protect your personal information and data.">
     
+    <!-- Google tag (gtag.js) with Consent Mode -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F8YR6XDE82"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Default consent state - deny all until user consent is given
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+    });
+    
+    gtag('js', new Date());
+    gtag('config', 'G-F8YR6XDE82', {
+        'anonymize_ip': true
+    });
+    </script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trifecta.systems/privacy-policy.html">
@@ -168,12 +192,19 @@
                     </div>
 
                     <div class="bg-slate-700 rounded-lg p-4">
-                        <h4 class="text-lg font-medium text-white mb-2">Analytics Cookies (Future)</h4>
-                        <p class="text-sm mb-2">These cookies help us understand how visitors interact with our website.</p>
+                        <h4 class="text-lg font-medium text-white mb-2">Analytics Cookies (Google Analytics 4)</h4>
+                        <p class="text-sm mb-2">These cookies help us understand how visitors interact with our website through Google Analytics.</p>
                         <ul class="text-sm space-y-1">
-                            <li>• <strong>Website Analytics:</strong> Page views, user behavior, and performance metrics</li>
-                            <li>• <strong>Improvement:</strong> Help us improve our services and user experience</li>
+                            <li>• <strong>Google Analytics 4:</strong> Website usage statistics, page views, and user behavior</li>
+                            <li>• <strong>Performance Metrics:</strong> Site speed, user engagement, and conversion tracking</li>
+                            <li>• <strong>IP Anonymization:</strong> Your IP address is anonymized for privacy protection</li>
+                            <li>• <strong>Consent-Based:</strong> Only active when you explicitly consent to analytics cookies</li>
                         </ul>
+                        <p class="text-xs mt-2 text-gray-400">
+                            <strong>Data Controller:</strong> Google LLC (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA)<br>
+                            <strong>Data Processing:</strong> Google Analytics processes data on our behalf under a data processing agreement<br>
+                            <strong>Retention:</strong> Data is retained for up to 26 months and then automatically deleted
+                        </p>
                     </div>
 
                     <h3 class="text-xl font-medium text-white mb-3 mt-6">4.3 Managing Cookies</h3>
@@ -182,6 +213,48 @@
                         may affect the functionality of our website. You can also manage your cookie preferences through 
                         our cookie settings panel.
                     </p>
+
+                    <h3 class="text-xl font-medium text-white mb-3 mt-6">4.4 Google Analytics and Consent Management</h3>
+                    <p class="leading-relaxed mb-4">
+                        We use Google Analytics 4 (GA4) to analyze website traffic and user behavior. This service is provided by Google LLC and helps us understand how visitors interact with our website to improve our services.
+                    </p>
+                    
+                    <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                        <h4 class="text-lg font-medium text-white mb-2">What Google Analytics Collects</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• <strong>Page Views:</strong> Which pages you visit and how long you spend on them</li>
+                            <li>• <strong>Traffic Sources:</strong> How you arrived at our website (search engines, direct links, etc.)</li>
+                            <li>• <strong>Device Information:</strong> Browser type, operating system, and device category</li>
+                            <li>• <strong>Geographic Data:</strong> General location (country/region level, not precise location)</li>
+                            <li>• <strong>User Interactions:</strong> Clicks, scrolls, and other engagement metrics</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                        <h4 class="text-lg font-medium text-white mb-2">Privacy Protection Measures</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• <strong>IP Anonymization:</strong> Your IP address is automatically anonymized before processing</li>
+                            <li>• <strong>Consent Mode:</strong> Analytics only collect data after you explicitly consent</li>
+                            <li>• <strong>No Personal Data:</strong> We do not collect personally identifiable information through analytics</li>
+                            <li>• <strong>Data Retention:</strong> Analytics data is automatically deleted after 26 months</li>
+                            <li>• <strong>Opt-Out Available:</strong> You can withdraw consent at any time through our cookie settings</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-700 rounded-lg p-4">
+                        <h4 class="text-lg font-medium text-white mb-2">Your Consent Rights</h4>
+                        <p class="text-sm mb-2">You have full control over your analytics consent:</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• <strong>Grant Consent:</strong> Choose to allow analytics data collection</li>
+                            <li>• <strong>Deny Consent:</strong> Refuse analytics data collection (default setting)</li>
+                            <li>• <strong>Withdraw Consent:</strong> Change your mind and withdraw previously given consent</li>
+                            <li>• <strong>Granular Control:</strong> Choose specific types of data collection you're comfortable with</li>
+                        </ul>
+                        <p class="text-xs mt-2 text-gray-400">
+                            <strong>Note:</strong> Withdrawing consent will stop future data collection but will not delete previously collected data. 
+                            You can request deletion of previously collected data by contacting us directly.
+                        </p>
+                    </div>
                 </section>
 
                 <section>
@@ -191,9 +264,25 @@
                     </p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li><strong>Service Providers:</strong> We may share information with trusted third-party service providers who assist us in operating our website and providing services</li>
+                        <li><strong>Google Analytics:</strong> We share anonymized website usage data with Google LLC for analytics purposes, only with your explicit consent</li>
                         <li><strong>Legal Requirements:</strong> We may disclose information when required by law or to protect our rights and safety</li>
                         <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred</li>
                     </ul>
+                    
+                    <div class="bg-slate-700 rounded-lg p-4 mt-4">
+                        <h4 class="text-lg font-medium text-white mb-2">Google Analytics Data Sharing</h4>
+                        <p class="text-sm mb-2">When you consent to analytics cookies, the following data may be shared with Google:</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• Anonymized website usage statistics</li>
+                            <li>• General geographic information (country/region level)</li>
+                            <li>• Device and browser information</li>
+                            <li>• Page interaction data (clicks, scrolls, time on page)</li>
+                        </ul>
+                        <p class="text-xs mt-2 text-gray-400">
+                            <strong>Important:</strong> No personally identifiable information is shared with Google. 
+                            All data is processed under Google's data processing agreement and is subject to their privacy policy.
+                        </p>
+                    </div>
                 </section>
 
                 <section>
@@ -300,7 +389,7 @@
 
                 <div class="border-t border-gray-600 pt-6 mt-8">
                     <p class="text-sm text-gray-400">
-                        <strong>Last Updated:</strong> July 2025<br>
+                        <strong>Last Updated:</strong> September 2025<br>
                         <strong>Version:</strong> 1.0
                     </p>
                 </div>
@@ -319,7 +408,7 @@
     <!-- Include Cookie Banner -->
     <div id="cookie-banner-container"></div>
     
-    <script src="script.js" type="module" defer></script>
+    <script src="script.js?v=2" type="module" defer></script>
 
     <!-- reCAPTCHA API call -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW" defer></script>

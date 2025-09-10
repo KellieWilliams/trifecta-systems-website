@@ -6,6 +6,30 @@
     <title>Terms of Service | Trifecta.Systems</title>
     <meta name="description" content="Terms of Service for Trifecta.Systems - Learn about the terms and conditions governing the use of our website and services.">
     
+    <!-- Google tag (gtag.js) with Consent Mode -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F8YR6XDE82"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Default consent state - deny all until user consent is given
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+    });
+    
+    gtag('js', new Date());
+    gtag('config', 'G-F8YR6XDE82', {
+        'anonymize_ip': true
+    });
+    </script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trifecta.systems/terms-of-service.html">
@@ -197,14 +221,61 @@
                 </section>
 
                 <section>
-                    <h2 class="text-2xl font-semibold text-white mb-4">12. Privacy Policy</h2>
+                    <h2 class="text-2xl font-semibold text-white mb-4">12. Data Collection and Analytics</h2>
+                    <p class="leading-relaxed mb-4">
+                        By using our website, you acknowledge and agree to the following regarding data collection and analytics:
+                    </p>
+                    
+                    <h3 class="text-xl font-medium text-white mb-3">12.1 Google Analytics</h3>
+                    <p class="leading-relaxed mb-4">
+                        We use Google Analytics 4 to collect and analyze website usage data. This service helps us understand how visitors interact with our website to improve our services and user experience.
+                    </p>
+                    
+                    <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                        <h4 class="text-lg font-medium text-white mb-2">Analytics Data Collection</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• <strong>Consent-Based:</strong> Analytics data is only collected with your explicit consent</li>
+                            <li>• <strong>Anonymized Data:</strong> All collected data is anonymized and cannot identify you personally</li>
+                            <li>• <strong>IP Anonymization:</strong> Your IP address is automatically anonymized before processing</li>
+                            <li>• <strong>Usage Statistics:</strong> Page views, session duration, and user interactions</li>
+                            <li>• <strong>Technical Data:</strong> Browser type, device information, and general geographic location</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-xl font-medium text-white mb-3">12.2 Consent Management</h3>
+                    <p class="leading-relaxed mb-4">
+                        You have full control over your data collection preferences through our cookie consent management system:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li><strong>Opt-In Required:</strong> Analytics data collection requires your explicit consent</li>
+                        <li><strong>Granular Control:</strong> You can choose which types of data collection to allow</li>
+                        <li><strong>Withdrawal Rights:</strong> You can withdraw consent at any time through our cookie settings</li>
+                        <li><strong>Default Denial:</strong> All non-essential data collection is denied by default</li>
+                    </ul>
+
+                    <h3 class="text-xl font-medium text-white mb-3">12.3 Third-Party Services</h3>
+                    <p class="leading-relaxed mb-4">
+                        Our website may use third-party services that collect data on our behalf:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li><strong>Google Analytics:</strong> Website analytics and performance monitoring</li>
+                        <li><strong>Google reCAPTCHA:</strong> Security and spam protection</li>
+                        <li><strong>Google Fonts:</strong> Font loading and optimization</li>
+                    </ul>
+                    <p class="text-sm text-gray-400 mt-2">
+                        All third-party services are used in compliance with applicable privacy laws and our data processing agreements.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4">13. Privacy Policy</h2>
                     <p class="leading-relaxed">
                         Your privacy is important to us. Please review our <a href="privacy-policy.html" class="text-blue-400 hover:text-blue-300 underline">Privacy Policy</a>, which also governs your use of the website, to understand our practices.
                     </p>
                 </section>
 
                 <section>
-                    <h2 class="text-2xl font-semibold text-white mb-4">13. Contact Information</h2>
+                    <h2 class="text-2xl font-semibold text-white mb-4">14. Contact Information</h2>
                     <p class="leading-relaxed mb-4">
                         If you have any questions about these Terms of Service, please contact us:
                     </p>
@@ -239,7 +310,7 @@
     <!-- Include Cookie Banner -->
     <div id="cookie-banner-container"></div>
     
-    <script src="script.js" type="module" defer></script>
+    <script src="script.js?v=2" type="module" defer></script>
 
     <!-- reCAPTCHA API call -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW" defer></script>

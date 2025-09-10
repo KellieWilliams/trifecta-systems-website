@@ -593,3 +593,9 @@ textarea.form-input {
     color: #9ca3af;
     font-style: italic;
 }
+
+/* Mobile menu arrow rotation animation */
+.rotate-180 {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease-in-out;
+}

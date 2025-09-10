@@ -6,6 +6,30 @@
     <title>Data Rights Request | Trifecta.Systems</title>
     <meta name="description" content="Exercise your data rights under GDPR and CCPA - request access, deletion, or portability of your personal data.">
     
+    <!-- Google tag (gtag.js) with Consent Mode -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F8YR6XDE82"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Default consent state - deny all until user consent is given
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+    });
+    
+    gtag('js', new Date());
+    gtag('config', 'G-F8YR6XDE82', {
+        'anonymize_ip': true
+    });
+    </script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trifecta.systems/data-rights-request.html">
@@ -278,7 +302,7 @@
     <!-- Include Cookie Banner -->
     <div id="cookie-banner-container"></div>
     
-    <script src="script.js" type="module" defer></script>
+    <script src="script.js?v=2" type="module" defer></script>
 
     <!-- reCAPTCHA API call -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Lc0HhorAAAAACu9xCMytFjXm_Tolkrv3m-QU9OW" defer></script>
