@@ -1,4 +1,4 @@
-const CACHE_NAME = 'trifecta-systems-v1';
+const CACHE_NAME = 'trifecta-systems-v2';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -8,6 +8,7 @@ const urlsToCache = [
   '/ai-custom-solutions.html',
   '/about-the-owner.html',
   '/offline.html',
+  '/css/tailwind.min.css',
   '/style.css',
   '/script.js',
   '/Gallery/Trifecta_Logo.png',

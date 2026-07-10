@@ -20,6 +20,8 @@ node_modules/
 package-lock.json
 yarn.lock
 composer.lock
+/bin/
+*.exe
 
 # IDE and editor files
 .vscode/
