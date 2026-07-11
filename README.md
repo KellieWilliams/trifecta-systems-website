@@ -2,286 +2,91 @@
 
 A modern, responsive business website showcasing technology services for small businesses and nonprofits. Built with performance, accessibility, SEO, and privacy compliance best practices in mind.
 
-## 🚀 Features
+This public repository contains the **frontend / public web assets** used as a portfolio example. Private server-side code, configuration, and secrets are maintained separately and are not published here.
 
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Progressive Web App**: Service worker for offline functionality and caching
-- **Blog Management System**: Full admin portal for content management
-- **SEO Optimized**: Structured data, meta tags, and semantic HTML
-- **Performance**: Lazy loading, image optimization, and deferred scripts
-- **Security**: Comprehensive Content Security Policy, security headers, and form protection
-- **Privacy Compliance**: GDPR/CCPA compliant with advanced cookie consent and data rights
-- **Accessibility**: WCAG 2.1 AA compliant with proper ARIA labels
-- **Modern Standards**: HTML5, CSS3, ES6+ with modular architecture, and modern web APIs
+## Features
 
-## 🛠️ Tech Stack
+- **Responsive Design**: Mobile-first layout with a production Tailwind CSS build
+- **Blog**: Markdown-based posts with an admin content workflow
+- **SEO**: Structured data, meta tags, Open Graph, Twitter Cards, sitemap, robots.txt
+- **Performance**: Lazy loading, image optimization, deferred scripts, compiled CSS
+- **Security-minded frontend**: CSP-friendly setup, form protections, privacy controls
+- **Privacy Compliance**: Cookie consent (Consent Mode), privacy policy, terms, data rights request page
+- **Accessibility**: Semantic HTML and WCAG-oriented patterns
 
-- **Frontend**: HTML5, CSS3 (Tailwind CSS), JavaScript (ES6+ with modular architecture)
-- **Backend**: PHP (contact form, data rights processing, blog management)
-- **Blog System**: Markdown parsing with Parsedown library
-- **Security**: Google reCAPTCHA v3, CSRF protection, honeypot fields, comprehensive CSP
-- **Performance**: Service Worker, lazy loading, compression, WebP images
-- **SEO**: Schema.org structured data, Open Graph, Twitter Cards
-- **Privacy**: Advanced cookie consent management, data rights request system
-- **Hosting**: Apache with .htaccess configuration and security headers
+## Tech Stack (Public)
 
-## 📁 Project Structure
+- HTML5, CSS3 (Tailwind production build + custom CSS)
+- JavaScript (ES modules)
+- Apache-friendly static hosting with `.htaccess` for headers/caching
+- PHP used at the edge for public form/API gateways (implementation details private)
+
+## Project Structure (Public)
 
 ```
 Project/
-├── public_html/                 # Main website files
-│   ├── index.html               # Homepage
-│   ├── web-development.html     # Web development services
-│   ├── data-analytics.html      # Data analytics services
-│   ├── cybersecurity.html       # Cybersecurity services
-│   ├── ai-custom-solutions.html # AI and custom solutions
-│   ├── about-the-owner.html     # About the owner page
-│   ├── privacy-policy.html      # Privacy policy page
-│   ├── terms-of-service.html    # Terms of service page
-│   ├── data-rights-request.html # Data rights request form
-│   ├── offline.html             # Offline page for PWA
-│   ├── style.css                # Custom CSS styles
-│   ├── script.js                # Main JavaScript entry point (modular architecture)
-│   ├── js/                      # JavaScript modules
-│   │   ├── utils.js             # Utility functions
-│   │   ├── blog.js              # Blog functionality
-│   │   └── admin/               # Admin system modules
-│   ├── sw.js                    # Service worker
-│   ├── robots.txt               # Search engine directives
-│   ├── sitemap.xml              # XML sitemap
-│   ├── .htaccess                # Apache configuration
-│   ├── Gallery/                 # Image assets
-│   └── blog/                    # Blog system
-├── backend_files/               # Server-side scripts (outside web root)
-├── config_files/                # Configuration files (gitignored)
-├── vendor_files/                # Composer dependencies
-├── SECURITY.md                  # Security documentation
-└── README.md                    # This file
+├── public_html/                 # Public website files
+│   ├── *.html                   # Site pages
+│   ├── css/tailwind.min.css     # Production Tailwind build
+│   ├── style.css                # Custom styles
+│   ├── script.js                # Main JS entry
+│   ├── js/                      # Frontend modules
+│   ├── Gallery/                 # Images
+│   ├── blog/                    # Blog UI + posts
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   └── .htaccess
+├── css-src/                     # Tailwind source
+├── build-css.sh                 # Rebuild production CSS
+├── tailwind.config.js
+├── SECURITY.md                  # High-level security overview
+└── README.md
 ```
 
-## 🚀 Getting Started
+Private application code and configuration are intentionally excluded from this repository.
+
+## Getting Started (Frontend)
 
 ### Prerequisites
 
-- Web server with PHP support (Apache/Nginx)
-- SSL certificate (HTTPS required for PWA features)
-- Git for version control
-- Composer for PHP dependencies
+- A local web server (PHP’s built-in server is fine for static/frontend checks)
+- Git
 
-### Production Deployment
+### Local preview
 
-**Security Features**: The system includes comprehensive security measures including CORS protection, file access control, and security headers.
+Do not open pages via `file://` (ES modules and fetches need HTTP):
 
-**Architecture**: Secure proxy architecture ensures backend APIs are protected while maintaining functionality.
+```bash
+cd public_html && php -S 127.0.0.1:8000
+```
 
-### Apache Configuration
+### CSS build
 
-The `.htaccess` file includes:
-- Comprehensive security headers (CSP, X-Frame-Options, X-Content-Type-Options, etc.)
-- HTTPS redirect enforcement
-- Gzip compression for performance
-- Browser caching rules for static assets
-- File access restrictions and security
-- Blog proxy file allowances for secure API access
+Production styles are compiled with Tailwind (no CDN). Rebuild after changing utility classes:
 
-### Service Worker
+```bash
+./build-css.sh
+```
 
-The service worker (`sw.js`) provides:
-- Offline functionality
-- Static asset caching
-- Network-first strategy for dynamic content
+## What This Portfolio Demonstrates
 
-## 📝 Blog Management System
+- Clean, maintainable frontend structure
+- Privacy-aware analytics consent flow
+- SEO and accessibility fundamentals
+- Separation of public assets from private server-side systems
 
-### Features
-- **Markdown Support**: Write posts in Markdown format
-- **Admin Portal**: Secure login and dashboard
-- **Post Management**: Create, edit, delete, and schedule posts
-- **Image Upload**: Support for blog post images
-- **Scheduling**: Schedule posts for future publication
-- **SEO Integration**: Automatic meta tag generation
+For security practices at a high level, see [SECURITY.md](SECURITY.md).
 
-### Admin Access
-- Secure authentication system
-- CSRF protection on all forms
-- Session management with expiration
-- Role-based access control
-
-## 📊 Performance Features
-
-### Optimizations Implemented
-
-- **Image Optimization**: WebP format with PNG fallbacks, lazy loading
-- **Script Loading**: Deferred non-critical JavaScript with modular architecture
-- **Resource Preloading**: Critical images and fonts with `fetchpriority`
-- **Caching**: Service worker with intelligent cache strategies
-- **Compression**: Gzip compression for text assets
-- **Minification**: Tailwind CSS CDN for optimized styles
-- **Code Organization**: Modular JavaScript architecture for better maintainability and performance
-
-### Performance Metrics
-
-- **Lighthouse Score**: 90+ across all categories
-- **Core Web Vitals**: Optimized for LCP, FID, and CLS
-- **Mobile Performance**: Responsive design with touch-friendly interactions
-
-## 🔒 Security Features
-
-### Implemented Security Measures
-
-- **Content Security Policy**: Comprehensive CSP with frame-src protection for third-party integrations
-- **HTTPS Enforcement**: Automatic redirect from HTTP
-- **Security Headers**: Comprehensive security header implementation (X-Frame-Options, X-Content-Type-Options, etc.)
-- **Form Protection**: reCAPTCHA v3, honeypot fields, CSRF tokens
-- **Input Validation**: Client and server-side validation with XSS protection
-- **Rate Limiting**: IP-based rate limiting for forms
-- **Security Monitoring**: Logging and alerting for suspicious activity
-- **File Access Control**: Blocked dangerous file types and sensitive files
-- **CORS Protection**: Domain-restricted API access
-- **Admin Security**: Secure authentication and session management
-
-## 🎯 SEO Features
-
-### Search Engine Optimization
-
-- **Structured Data**: Schema.org markup for all pages (Organization, Service, Person, OfferCatalog)
-- **Meta Tags**: Comprehensive meta descriptions and titles
-- **Open Graph**: Social media sharing optimization
-- **Twitter Cards**: Twitter-specific meta tags
-- **XML Sitemap**: Automated sitemap generation
-- **Robots.txt**: Search engine crawling directives
-- **Blog SEO**: Automatic meta tags for blog posts
-
-### Local SEO
-
-- **Business Schema**: Organization and service markup
-- **Contact Information**: Structured contact data
-- **Service Areas**: Geographic service coverage
-
-## 🔐 Privacy & Compliance
-
-### GDPR/CCPA Compliance
-
-- **Cookie Consent**: Comprehensive cookie banner with categories
-- **Privacy Policy**: Detailed privacy policy with legal basis
-- **Data Rights**: Data Subject Rights (DSR) request form
-- **Terms of Service**: Complete terms of service page
-- **Email Obfuscation**: Bot-protected email addresses
-- **Children's Privacy**: Age 18+ protection (GDPR requirement)
-
-### Cookie Management
-
-- **Essential Cookies**: Required for site functionality (reCAPTCHA, security features)
-- **Functional Cookies**: Enhanced user experience and personalization
-- **Analytics Cookies**: Optional tracking (user consent required)
-- **Advanced Settings**: Comprehensive cookie preferences modal with granular control
-- **GDPR/CCPA Ready**: Full compliance with privacy regulations
-
-## ♿ Accessibility Features
-
-### WCAG 2.1 AA Compliance
-
-- **Semantic HTML**: Proper heading hierarchy and landmarks
-- **ARIA Labels**: Screen reader support
-- **Keyboard Navigation**: Full keyboard accessibility
-- **Color Contrast**: AA compliant color ratios
-- **Focus Management**: Visible focus indicators
-- **Alt Text**: Descriptive image alt attributes
-
-## 📱 Progressive Web App
-
-### PWA Features
-
-- **Service Worker**: Offline functionality and caching
-- **Web App Manifest**: Installable app experience
-- **Offline Page**: Custom offline experience
-- **App Icons**: Multiple sizes for different devices
-- **Theme Colors**: Consistent branding
-
-## 🧪 Testing
-
-### Manual Testing Checklist
-
-- [ ] Responsive design on all devices
-- [ ] Contact form functionality with validation and reCAPTCHA
-- [ ] Blog admin system (login, create/edit posts)
-- [ ] Blog post display and navigation
-- [ ] Advanced cookie consent banner and settings modal
-- [ ] Privacy policy and data rights forms
-- [ ] Service worker registration
-- [ ] Offline functionality
-- [ ] Social media sharing
-- [ ] Search engine indexing
-- [ ] Accessibility compliance
-- [ ] Content Security Policy compliance
-- [ ] Third-party integrations (reCAPTCHA) functionality
-
-### Automated Testing
-
-- Lighthouse audits for performance
-- Google PageSpeed Insights
-- WAVE accessibility testing
-- Schema.org validation
-- Security header testing
-
-## 🚀 Deployment
-
-### Production Checklist
-
-- [ ] SSL certificate installed
-- [ ] Environment variables configured
-- [ ] Backend directory moved outside web root
-- [ ] CORS headers configured for production domain
-- [ ] .htaccess properly configured for PHP proxies and security headers
-- [ ] Error logging enabled
-- [ ] Backup strategy implemented
-- [ ] Monitoring tools configured
-- [ ] Analytics tracking setup
-- [ ] Privacy compliance verified
-- [ ] Content Security Policy tested and validated
-- [ ] Third-party integrations (reCAPTCHA) tested
-- [ ] Cookie consent system verified for compliance
-
-### Recommended Hosting
-
-- **Shared Hosting**: Namecheap, SiteGround
-- **VPS**: DigitalOcean, Linode
-- **Cloud**: AWS, Google Cloud Platform
-
-### Deployment Notes
-
-The system is designed with security best practices and can be deployed on any hosting provider that supports PHP and Apache/Nginx.
-
-## 📈 Analytics & Monitoring
-
-### Recommended Tools
-
-- **Google Analytics 4**: Website traffic and user behavior
-- **Google Search Console**: Search performance monitoring
-- **Lighthouse CI**: Automated performance testing
-- **Uptime Monitoring**: Pingdom, UptimeRobot
-- **Security Monitoring**: Built-in security dashboard
-
-## 🤝 Contributing
-
-This is a business website, so direct contributions are not typically sought. However, if you find issues or have suggestions:
-
-1. Open an issue on GitHub
-2. Provide detailed description of the problem
-3. Include browser/device information
-4. Suggest potential solutions
-
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Support
+## Support
 
-For technical support or business inquiries:
 - **Website**: [trifecta.systems](https://trifecta.systems)
 - **Contact**: Use the contact form on the website
 
 ---
 
-**Built with ❤️ by Trifecta.Systems**  
-*Empowering small businesses and nonprofits with cutting-edge technology solutions.*
+**Built by Trifecta.Systems**  
+*Empowering small businesses and nonprofits with practical technology solutions.*
