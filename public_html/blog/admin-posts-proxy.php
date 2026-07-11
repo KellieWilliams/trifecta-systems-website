@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 // Include the backend admin posts API
-$backendApi = '../../backend/admin-posts.php';
+$backendApi = __DIR__ . '/../../backend/admin-posts.php';
 
 if (!file_exists($backendApi)) {
     http_response_code(500);

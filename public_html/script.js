@@ -429,17 +429,59 @@ async function handleDataRightsSubmit(event) {
         return;
     }
     
-    const formData = new FormData(form);
     const submitButton = form.querySelector('button[type="submit"]');
     const originalText = submitButton.textContent;
+    const recaptchaResponseInput = document.getElementById('recaptchaResponse');
     
     submitButton.disabled = true;
     submitButton.textContent = 'Submitting...';
     
     try {
-        const response = await fetch('../backend/data_rights_request.php', {
+        // Wait for reCAPTCHA
+        let recaptchaReady = false;
+        let attempts = 0;
+        const maxAttempts = 10;
+        while (!recaptchaReady && attempts < maxAttempts) {
+            if (typeof grecaptcha !== 'undefined' && grecaptcha.execute) {
+                recaptchaReady = true;
+            } else {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                attempts++;
+            }
+        }
+        if (!recaptchaReady) {
+            throw new Error('reCAPTCHA is not available. Please refresh the page and try again.');
+        }
+
+        const siteKeyResponse = await fetch('contact-recaptcha-proxy.php');
+        if (!siteKeyResponse.ok) {
+            throw new Error('Failed to get security configuration. Please refresh the page and try again.');
+        }
+        const siteKeyData = await siteKeyResponse.json();
+        const token = await grecaptcha.execute(siteKeyData.site_key, {
+            action: 'submit_data_rights_request'
+        });
+        if (recaptchaResponseInput) {
+            recaptchaResponseInput.value = token;
+        }
+
+        const csrfToken = await getCSRFToken();
+        if (!csrfToken) {
+            throw new Error('Failed to get security token. Please refresh the page and try again.');
+        }
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        data['g-recaptcha-response'] = token;
+        data.csrf_token = csrfToken;
+
+        // Do not send honeypot values intentionally filled by bots beyond what backend checks
+        const response = await fetch('data-rights-proxy.php', {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
         });
         
         if (response.ok) {
@@ -451,12 +493,17 @@ async function handleDataRightsSubmit(event) {
                 showDataRightsError(result.message || 'Failed to submit request');
             }
         } else {
-            showDataRightsError('Failed to submit request. Please try again.');
+            let message = 'Failed to submit request. Please try again.';
+            try {
+                const result = await response.json();
+                if (result.message) message = result.message;
+            } catch (_) { /* ignore */ }
+            showDataRightsError(message);
         }
         
     } catch (error) {
         console.error('Data rights request error:', error);
-        showDataRightsError('An error occurred. Please try again.');
+        showDataRightsError(error.message || 'An error occurred. Please try again.');
     } finally {
         submitButton.disabled = false;
         submitButton.textContent = originalText;
@@ -465,9 +512,16 @@ async function handleDataRightsSubmit(event) {
 
 function validateDataRightsForm(form) {
     const email = form.querySelector('[name="email"]').value.trim();
-    const requestType = form.querySelector('[name="request_type"]').value;
-    const reason = form.querySelector('[name="reason"]').value.trim();
+    const requestType = form.querySelector('[name="requestType"]').value;
+    const firstName = form.querySelector('[name="firstName"]').value.trim();
+    const lastName = form.querySelector('[name="lastName"]').value.trim();
+    const verificationMethod = form.querySelector('[name="verificationMethod"]').value;
     
+    if (!firstName || !lastName) {
+        alert('Please enter your first and last name.');
+        return false;
+    }
+
     if (!email || !validateEmail(email)) {
         alert('Please enter a valid email address.');
         return false;
@@ -477,10 +531,19 @@ function validateDataRightsForm(form) {
         alert('Please select a request type.');
         return false;
     }
-    
-    if (!reason) {
-        alert('Please provide a reason for your request.');
+
+    if (!verificationMethod) {
+        alert('Please select a verification method.');
         return false;
+    }
+
+    const phoneInput = form.querySelector('[name="phone"]');
+    if (phoneInput && phoneInput.value.trim()) {
+        const phoneDigits = phoneInput.value.replace(/\D/g, '');
+        if (phoneDigits.length !== 10) {
+            alert('Please enter a valid 10-digit phone number.');
+            return false;
+        }
     }
     
     return true;
@@ -709,7 +772,7 @@ async function generateGeminiResponse() {
     generateBtn.textContent = 'Generating...';
     
     try {
-        const response = await fetch('../backend/gemini_api.php', {
+        const response = await fetch('chatbot-proxy.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -719,10 +782,10 @@ async function generateGeminiResponse() {
         
         if (response.ok) {
             const result = await response.json();
-            if (result.success) {
-                responseArea.value = result.response;
+            if (result.success || result.response) {
+                responseArea.value = result.response || result.text || JSON.stringify(result);
             } else {
-                responseArea.value = 'Error: ' + result.message;
+                responseArea.value = 'Error: ' + (result.message || result.error || 'Unknown error');
             }
         } else {
             responseArea.value = 'Error: Failed to generate response';

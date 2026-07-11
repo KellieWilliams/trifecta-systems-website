@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 // Include the backend parser
-$backendParser = '../../backend/blog-parser.php';
+$backendParser = __DIR__ . '/../../backend/blog-parser.php';
 
 if (!file_exists($backendParser)) {
     http_response_code(500);

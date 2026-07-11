@@ -154,6 +154,7 @@ export async function handleSubmit(event) {
         let uploadedImageUrls = [];
         if (window.uploadedImages && window.uploadedImages.length > 0) {
             const imageFormData = new FormData();
+            imageFormData.append('action', 'upload_image');
             imageFormData.append('session_id', createPostSessionId);
             imageFormData.append('csrf_token', formData.get('csrf_token'));
             
@@ -557,6 +558,7 @@ async function saveDraftPost(formData) {
         let uploadedImageUrls = [];
         if (window.uploadedImages && window.uploadedImages.length > 0) {
             const imageFormData = new FormData();
+            imageFormData.append('action', 'upload_image');
             imageFormData.append('session_id', createPostSessionId);
             imageFormData.append('csrf_token', formData.get('csrf_token'));
             

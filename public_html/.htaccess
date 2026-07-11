@@ -68,6 +68,12 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 <Files "chatbot-proxy.php">
     Require all granted
 </Files>
+<Files "data-rights-proxy.php">
+    Require all granted
+</Files>
+<Files "admin-image-upload-proxy.php">
+    Require all granted
+</Files>
 
 # Allow contact form proxy files
 <Files "contact-csrf-proxy.php">

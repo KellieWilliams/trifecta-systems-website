@@ -45,7 +45,7 @@ if (!$input || !isset($input['prompt']) || empty(trim($input['prompt']))) {
 }
 
 // Include and execute the backend API directly
-$backendFile = '../backend/chatbot-api.php';
+$backendFile = __DIR__ . '/../backend/chatbot-api.php';
 
 if (!file_exists($backendFile)) {
     error_log("Chatbot Proxy: Backend file not found: " . $backendFile);

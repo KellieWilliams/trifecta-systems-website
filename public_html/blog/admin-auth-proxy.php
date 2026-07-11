@@ -23,7 +23,7 @@ if (!in_array($_SERVER['REQUEST_METHOD'], ['POST', 'GET'])) {
 }
 
 // Include the backend admin auth
-$backendAuth = '../../backend/admin-auth.php';
+$backendAuth = __DIR__ . '/../../backend/admin-auth.php';
 
 if (!file_exists($backendAuth)) {
     http_response_code(500);

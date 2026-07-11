@@ -101,8 +101,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <script src="script.js?v=2" type="module" defer></script>
-    <script src="js/chatbot.js" type="module" defer></script>
+    <script src="script.js?v=3" type="module" defer></script>
     
     <!-- favicon -->
     <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
@@ -181,29 +180,8 @@
                 <p class="mb-8">
                     From concept to deployment, we work closely with you to design, build, and maintain scalable solutions that grow with your organization, ensuring you have the precise tools needed to thrive in a rapidly evolving digital landscape.
                 </p>
-                <button id="tryGeminiButton" class="btn-primary"> Give Gemini a Try! ✨
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="gemini-interaction-section" class="hidden main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Interactive AI Demo</h2> <div class="max-w-3xl mx-auto text-content-block"> <p class="mb-6">
-                    Enter a prompt below and experience the power of generative AI. Ask it anything!
-                </p>
-            </div>
-            <div class="max-w-3xl mx-auto text-center"> <textarea id="geminiPromptInput"
-                            class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-                            rows="6"
-                            placeholder="e.g., Explain quantum computing in simple terms, Write a short poem about innovation, or Suggest a marketing slogan for a new tech product."></textarea>
-                <button id="generateResponseButton" class="btn-primary mb-6"> Generate Response ✨
-                </button>
-
-                <div id="geminiLoadingSpinner" class="loading-spinner mb-4" style="display: none;"></div>
-
-                <div id="geminiResponseDisplay"
-                        class="p-6 rounded-lg bg-gray-700 text-white border border-gray-600 text-left min-h-[150px] overflow-auto">
-                    <p class="text-gray-400">Your AI-generated response will appear here...</p>
-                </div>
+                <a href="index.html#contact" class="btn-primary"> Discuss Your Project
+                </a>
             </div>
         </div>
     </section>
@@ -360,39 +338,5 @@
             </div>
         </div>
     </footer>
-
-    <script type="module">
-        // Import chatbot functionality
-        import { Chatbot, ChatbotUI } from './js/chatbot.js';
-
-        // Initialize chatbot when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            const tryGeminiButton = document.getElementById('tryGeminiButton');
-            const geminiSection = document.getElementById('gemini-interaction-section');
-
-            // Show Gemini section when button is clicked
-            tryGeminiButton.addEventListener('click', function() {
-                geminiSection.classList.remove('hidden');
-                geminiSection.scrollIntoView({ behavior: 'smooth' });
-                
-                // Initialize chatbot after section is shown
-                setTimeout(() => {
-                    initializeChatbot();
-                }, 100);
-            });
-        });
-
-        // Initialize the chatbot
-        function initializeChatbot() {
-            try {
-                const chatbot = new Chatbot();
-                const chatbotUI = new ChatbotUI(chatbot);
-                
-                console.log('Chatbot initialized successfully');
-            } catch (error) {
-                console.error('Failed to initialize chatbot:', error);
-            }
-        }
-    </script>
 </body>
 </html>

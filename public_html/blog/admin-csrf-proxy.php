@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 // Include the backend CSRF token handler
-$backendCSRF = '../../backend/csrf_token.php';
+$backendCSRF = __DIR__ . '/../../backend/csrf_token.php';
 
 if (!file_exists($backendCSRF)) {
     http_response_code(500);
