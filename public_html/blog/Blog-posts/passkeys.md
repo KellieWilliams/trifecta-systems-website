@@ -16,7 +16,7 @@ Hey everyone!
 
 If you've been surfing the web lately, you might have noticed Windows (or even your phone) popping up with an offer to "make a passkey." If you're like most people, you probably wondered, "What on earth is that?" and maybe even clicked 'not now' because, well, change can be scary!
 
-But guess what? That little prompt is actually inviting you to step into the future of online security – a future where passwords are old news and logging in is faster and way more secure. Welcome to the world of passkeys!
+But guess what? That little prompt is actually inviting you to step into the future of online security: a future where passwords are old news and logging in is faster and way more secure. Welcome to the world of passkeys!
 
 ## So, What Exactly IS a Passkey?
 

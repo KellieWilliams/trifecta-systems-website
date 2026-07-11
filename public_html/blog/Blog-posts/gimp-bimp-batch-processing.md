@@ -79,4 +79,4 @@ BIMP will now work its magic, processing each image sequentially. You'll see a p
 
 ## Conclusion
 
-By leveraging the power of GIMP and the user-friendly BIMP plugin, you can transform a tedious, manual process into a quick and efficient batch operation. This not only saves you valuable time but also ensures a consistent, professional look across all your images. So, go ahead and give it a try – your workflow will thank you! 
+By leveraging the power of GIMP and the user-friendly BIMP plugin, you can transform a tedious, manual process into a quick and efficient batch operation. This not only saves you valuable time but also ensures a consistent, professional look across all your images. So, go ahead and give it a try; your workflow will thank you! 

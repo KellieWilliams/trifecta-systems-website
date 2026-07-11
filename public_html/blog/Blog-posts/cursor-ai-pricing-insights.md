@@ -47,7 +47,7 @@ Here's a summary of our cumulative usage data:
 
 ### Cache Read Tokens are the Game Changer
 
-The most striking observation is the sheer volume of "Cache Read" tokens – over 3.3 million in our case! Cursor's ability to efficiently cache and re-use conversational context and file content is a massive cost-saver. These cached tokens are significantly cheaper than fresh input tokens (reportedly 10-25% of input token price). This means that for multi-turn conversations and long-horizon tasks requiring deep project understanding, Cursor's architecture provides immense value.
+The most striking observation is the sheer volume of "Cache Read" tokens: over 3.3 million in our case! Cursor's ability to efficiently cache and re-use conversational context and file content is a massive cost-saver. These cached tokens are significantly cheaper than fresh input tokens (reportedly 10-25% of input token price). This means that for multi-turn conversations and long-horizon tasks requiring deep project understanding, Cursor's architecture provides immense value.
 
 ### Exceptional Cost Efficiency
 

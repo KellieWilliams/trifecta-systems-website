@@ -121,9 +121,6 @@ function initializeMainSiteFunctionality() {
     
     // Initialize email obfuscation
     obfuscateEmail();
-    
-    // Initialize review display
-    updateReviewDisplay();
 }
 
 
@@ -307,6 +304,12 @@ async function validateFormAndRecaptcha(event) {
         
         // Remove honeypot fields from data before sending
         honeypotFields.forEach(field => delete data[field]);
+
+        const csrfToken = await getCSRFToken();
+        if (!csrfToken) {
+            throw new Error('Security token unavailable. Please refresh the page and try again.');
+        }
+        data.csrf_token = csrfToken;
         
         // Submit form data
         const response = await fetch('contact-form-proxy.php', {
@@ -320,7 +323,7 @@ async function validateFormAndRecaptcha(event) {
         if (response.ok) {
             const result = await response.json();
             if (result.success) {
-                alert('Thank you for your message! We\'ll get back to you soon.');
+                alert('Thank you for your message! I will get back to you soon.');
                 contactForm.reset();
             } else {
                 throw new Error(result.message || 'Failed to send message');
@@ -584,8 +587,8 @@ async function loadCookieBanner() {
     }
     
     try {
-        // Load the cookie banner HTML
-        const response = await fetch('cookie-banner.html');
+        // Load the cookie banner HTML (root-relative so blog pages work too)
+        const response = await fetch('/cookie-banner.html');
         if (response.ok) {
             const html = await response.text();
             container.innerHTML = html;
@@ -752,58 +755,6 @@ function loadFunctionalCookies() {
     // Load Google Fonts optimization, etc.
     // This function can be expanded based on your needs
     console.log('Functional cookies loaded');
-}
-
-// Gemini AI response generation
-async function generateGeminiResponse() {
-    const promptInput = document.getElementById('geminiPrompt');
-    const responseArea = document.getElementById('geminiResponse');
-    const generateBtn = document.getElementById('generateGeminiBtn');
-    
-    if (!promptInput || !responseArea || !generateBtn) return;
-    
-    const prompt = promptInput.value.trim();
-    if (!prompt) {
-        alert('Please enter a prompt.');
-        return;
-    }
-    
-    generateBtn.disabled = true;
-    generateBtn.textContent = 'Generating...';
-    
-    try {
-        const response = await fetch('chatbot-proxy.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ prompt: prompt })
-        });
-        
-        if (response.ok) {
-            const result = await response.json();
-            if (result.success || result.response) {
-                responseArea.value = result.response || result.text || JSON.stringify(result);
-            } else {
-                responseArea.value = 'Error: ' + (result.message || result.error || 'Unknown error');
-            }
-        } else {
-            responseArea.value = 'Error: Failed to generate response';
-        }
-        
-    } catch (error) {
-        console.error('Gemini API error:', error);
-        responseArea.value = 'Error: An error occurred while generating the response';
-    } finally {
-        generateBtn.disabled = false;
-        generateBtn.textContent = 'Generate Response';
-    }
-}
-
-// Review display functionality
-function updateReviewDisplay() {
-    // This function can be expanded based on your review system needs
-    console.log('Review display updated');
 }
 
 // Export functions for global access if needed

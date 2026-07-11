@@ -18,7 +18,7 @@ Forget the rigid, uniform rows of traditional grid systems. The masonry display 
 
 ## What is a Masonry Layout?
 
-At its heart, a masonry layout is a grid arrangement where items (like images, articles, or product cards) are positioned based on available vertical space. Unlike a standard grid that forces all items into rows of equal height, masonry "fills in" the gaps. Imagine a bricklayer placing bricks – they don't necessarily line up perfectly across the top; they fit where space allows, creating a staggered, yet cohesive, pattern.
+At its heart, a masonry layout is a grid arrangement where items (like images, articles, or product cards) are positioned based on available vertical space. Unlike a standard grid that forces all items into rows of equal height, masonry "fills in" the gaps. Imagine a bricklayer placing bricks; they don't necessarily line up perfectly across the top; they fit where space allows, creating a staggered, yet cohesive, pattern.
 
 On the web, this usually involves a JavaScript library (the most popular being **Masonry.js**) that intelligently calculates the best position for each item, minimizing unsightly gaps and optimizing the use of screen real estate.
 
@@ -67,4 +67,4 @@ While the visual effect is seamless, achieving it in HTML typically involves:
 
 ## Ready to Build Your Own?
 
-While setting up a dynamic masonry gallery requires a bit more JavaScript than a simple static grid, the visual payoff is immense. By leveraging libraries like Masonry.js and `imagesLoaded`, you can transform a collection of disparate images into a stunning, professional, and highly engaging display that truly lets your content shine. So go ahead, give the masonry display a try – your content will thank you! 
+While setting up a dynamic masonry gallery requires a bit more JavaScript than a simple static grid, the visual payoff is immense. By leveraging libraries like Masonry.js and `imagesLoaded`, you can transform a collection of disparate images into a stunning, professional, and highly engaging display that truly lets your content shine. So go ahead, give the masonry display a try; your content will thank you! 

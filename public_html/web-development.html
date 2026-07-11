@@ -97,7 +97,7 @@
     
     <link rel="stylesheet" href="css/tailwind.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
@@ -119,7 +119,7 @@
     <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
         <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
             <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
-            <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            <span class="site-wordmark text-3xl text-white">Trifecta.Systems</span>
         </a>
 
         <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
@@ -143,7 +143,8 @@
                         </button>
                     </div>
                     
-                    <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                    <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-56 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                        <li><a href="business-consulting.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Business Consulting</a></li>
                         <li><a href="web-development.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Web Development</a></li>
                         <li><a href="data-analytics.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Data Analytics</a></li>
                         <li><a href="cybersecurity.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Cybersecurity</a></li>
@@ -151,7 +152,7 @@
                     </ul>
                 </li>
                 
-                <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
                     
                 <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 
@@ -166,19 +167,19 @@
             </h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90 text-gray-300"> Building responsive, engaging, and powerful websites tailored to your unique business goals.
             </p>
-            <a href="#portfolio" class="btn-primary"> View Our Work
+            <a href="#portfolio" class="btn-primary"> View My Work
             </a>
         </div>
     </section>
 
-    <section class="main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Our Website Development Expertise</h2> <div class="max-w-4xl mx-auto text-content-block"> <p class="mb-6">
-                    Whether you need a simple, elegant single-page website to establish your online presence, or a complex e-commerce platform to drive sales, Trifecta.Systems has you covered. We specialize in creating custom web solutions that are not only visually appealing but also highly functional, secure, and optimized for performance across all devices.
+    <section class="main-section"> <div class="container mx-auto px-4"> <h2 class="section-heading">Website Development</h2> <div class="max-w-4xl mx-auto text-content-block">                 <p class="mb-6">
+                    Whether you need a clear single-page site or a fuller e-commerce presence, I build custom web work that is readable, secure, and maintainable: HTML, CSS, and JavaScript done carefully, not as a black box.
                 </p>
                 <p class="mb-6">
-                    Our approach involves understanding your brand, target audience, and business objectives to deliver a website that truly converts visitors into customers. From intuitive user interfaces to robust backend systems, we ensure every aspect of your online platform is meticulously crafted to meet your needs.
+                    Projects start from your brand, audience, and goals. The result should convert visitors and stay easy to update, with sensible performance and security basics baked in from the start.
                 </p>
                 <p>
-                    We handle everything from initial concept and design to development, deployment, and ongoing maintenance, allowing you to focus on your core business. Let us transform your digital vision into a powerful reality.
+                    From concept and design through development, deployment, and light ongoing care, I stay focused on what your business actually needs.
                 </p>
             </div>
         </div>
@@ -217,16 +218,45 @@
         </div>
     </section>
 
-    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
-            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
-            <div class="mt-4 text-sm space-x-4">
-                <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a>
-                <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Terms of Service</a>
-                <a href="data-rights-request.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Rights</a>
+        <footer class="bg-[#0F131C] text-gray-300 py-10 rounded-t-lg shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-center mb-8">
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Site</h2>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Home</a></li>
+                        <li><a href="about-the-owner.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">About</a></li>
+                        <li><a href="blog/index.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Blog</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Services</h2>
+                    <ul class="space-y-2">
+                        <li><a href="business-consulting.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Business Consulting</a></li>
+                        <li><a href="web-development.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Web Development</a></li>
+                        <li><a href="data-analytics.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Analytics</a></li>
+                        <li><a href="cybersecurity.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Cybersecurity</a></li>
+                        <li><a href="ai-custom-solutions.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">AI &amp; Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Legal</h2>
+                    <ul class="space-y-2">
+                        <li><a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Terms of Service</a></li>
+                        <li><a href="data-rights-request.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Rights</a></li>
+                        <li><a href="sitemap.xml" class="text-gray-400 hover:text-white transition-colors duration-200 underline">XML Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p>&copy; 2026 Trifecta.Systems. All rights reserved.</p>
+                <p class="mt-2 text-gray-500">Built for small businesses and nonprofits.</p>
             </div>
         </div>
     </footer>
+
+    <div id="cookie-banner-container"></div>
 </body>
 </html>

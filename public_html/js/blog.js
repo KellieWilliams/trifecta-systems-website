@@ -171,7 +171,7 @@ export function createPostSummary(post) {
                 <span class="text-sm text-gray-400">${post.read_time} min read</span>
             </div>
             
-            <h2 class="text-xl font-bold text-white mb-2 hover:text-blue-400 transition-colors">
+            <h2 class="text-xl font-bold text-white mb-2 hover:text-gray-200 transition-colors">
                 <a href="post.html?slug=${post.slug}">${post.title}</a>
             </h2>
             
@@ -181,7 +181,7 @@ export function createPostSummary(post) {
                 <time class="text-sm text-gray-400" datetime="${post.published_time}">
                     ${formatDate(post.published_time)}
                 </time>
-                <a href="post.html?slug=${post.slug}" class="text-blue-400 hover:text-blue-300 font-medium">
+                <a href="post.html?slug=${post.slug}" class="text-gray-300 hover:text-white font-medium underline underline-offset-2">
                     Read more →
                 </a>
             </div>

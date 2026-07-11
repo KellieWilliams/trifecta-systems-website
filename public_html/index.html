@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Solutions for Your Business | Trifecta.Systems</title>
-    <meta name="description" content="Trifecta.Systems provides expert website development, data analytics, cybersecurity, and custom AI solutions for small businesses and nonprofits. Empower your business with cutting-edge technology.">
+    <title>Trifecta.Systems | Solo Digital &amp; Business Consulting</title>
+    <meta name="description" content="Kellie Williams: solo digital and business consulting for small businesses and nonprofits: web, data, cybersecurity, AI tooling, operations, and organizational structure.">
     
     <!-- Google tag (gtag.js) with Consent Mode -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-F8YR6XDE82"></script>
@@ -33,15 +33,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trifecta.systems/">
-    <meta property="og:title" content="Tech Solutions for Your Business | Trifecta.Systems">
-    <meta property="og:description" content="Trifecta.Systems provides expert website development, data analytics, cybersecurity, and custom AI solutions for small businesses and nonprofits. Empower your business with cutting-edge technology.">
+    <meta property="og:title" content="Trifecta.Systems | Solo Digital &amp; Business Consulting">
+    <meta property="og:description" content="Kellie Williams: solo digital and business consulting for small businesses and nonprofits: web, data, cybersecurity, AI tooling, operations, and organizational structure.">
     <meta property="og:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://trifecta.systems/">
-    <meta property="twitter:title" content="Tech Solutions for Your Business | Trifecta.Systems">
-    <meta property="twitter:description" content="Trifecta.Systems provides expert website development, data analytics, cybersecurity, and custom AI solutions for small businesses and nonprofits. Empower your business with cutting-edge technology.">
+    <meta property="twitter:title" content="Trifecta.Systems | Solo Digital &amp; Business Consulting">
+    <meta property="twitter:description" content="Kellie Williams: solo digital and business consulting for small businesses and nonprofits: web, data, cybersecurity, AI tooling, operations, and organizational structure.">
     <meta property="twitter:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
     
     <!-- Structured Data -->
@@ -52,7 +52,7 @@
       "name": "Trifecta.Systems",
       "url": "https://trifecta.systems",
       "logo": "https://trifecta.systems/Gallery/Trifecta_Logo.png",
-      "description": "Trifecta.Systems provides expert website development, data analytics, cybersecurity, and custom AI solutions for small businesses and nonprofits. Empower your business with cutting-edge technology.",
+      "description": "Solo digital and business consulting for small businesses and nonprofits.",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "US"
@@ -67,14 +67,22 @@
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Technology Services",
+        "name": "Consulting Services",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
+              "name": "Business Consulting",
+              "description": "Operations, organizational structure, product decisions, and practical research support"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
               "name": "Website Development",
-              "description": "Professional website development services for small businesses and nonprofits"
+              "description": "Custom websites for small businesses and nonprofits"
             }
           },
           {
@@ -82,7 +90,7 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Data Analytics",
-              "description": "Transform your business data into actionable insights"
+              "description": "Turn business data into actionable insights"
             }
           },
           {
@@ -90,15 +98,15 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Cybersecurity",
-              "description": "Protect your business with comprehensive cybersecurity solutions"
+              "description": "Practical security guidance for small organizations"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "AI-Powered Custom Digital Solutions",
-              "description": "Leverage AI and custom digital solutions to automate workflows"
+              "name": "AI & Custom Solutions",
+              "description": "Custom tooling and thoughtful AI use with human oversight"
             }
           }
         ]
@@ -108,12 +116,12 @@
     
     <!-- Tailwind CSS (production build) -->
     <link rel="stylesheet" href="css/tailwind.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <!-- Preload critical images for faster loading -->
     <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_Hero_Background.webp" fetchpriority="high">
-    <link rel="preload" as="image" href="Gallery/Gemini_Generated_Image_About_Us_Monitor.webp" fetchpriority="high">    
+    <link rel="preload" as="image" href="Gallery/About_Lace_Monitor.webp" fetchpriority="high">    
 
         <!-- favicon -->
     <link rel="icon" type="image/png" href="Gallery/favicon/favicon-96x96.png" sizes="96x96" />
@@ -130,7 +138,7 @@
     <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
         <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
             <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
-            <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+            <span class="site-wordmark text-3xl text-white">Trifecta.Systems</span>
         </a>
 
         <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
@@ -154,7 +162,8 @@
                         </button>
                     </div>
                     
-                    <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                    <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-56 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                        <li><a href="business-consulting.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Business Consulting</a></li>
                         <li><a href="web-development.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Web Development</a></li>
                         <li><a href="data-analytics.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Data Analytics</a></li>
                         <li><a href="cybersecurity.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Cybersecurity</a></li>
@@ -162,7 +171,7 @@
                     </ul>
                 </li>
                 
-                <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
                     
                 <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 
@@ -178,25 +187,38 @@
         
         <div class="container mx-auto px-4 relative z-10">
             <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
-                Empowering Your Business Through Technology
+                Solo consulting with real breadth
             </h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                Providing expert technical services to small businesses and nonprofits.<br>
-                Website Development<br>
-                Data Analytics<br>
-                Cybersecurity<br>
-                Other Custom Digital Solutions
+                Digital and business consulting for small businesses and nonprofits: web, data, security, AI tooling, operations, and organizational structure; from one practitioner who connects the dots.
             </p>
             <a href="#services" class="btn-primary">
-                Explore Our Services
+                Explore Services
             </a>
         </div>
     </section>
 
-    <!-- Our Services Section -->
+    <!-- Services Section -->
     <section id="services" class="main-section container mx-auto px-4">
-    <h2 class="section-heading">Our Services</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <h2 class="section-heading">What I Offer</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Business Consulting Card -->
+        <a href="business-consulting.html" class="group service-card service-card-business">
+            <div class="service-card-overlay"></div>
+            <div class="service-card-content">
+                <div class="service-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase text-white">
+                        <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                </div>
+                <h3 class="service-title">Business Consulting</h3>
+                <p class="service-description">
+                    Operations, accountability systems, product decisions, and practical research: hands-on help when the owner needs a thinking partner.
+                </p>
+            </div>
+        </a>
 
         <!-- Web Development Card -->
         <a href="web-development.html" class="group service-card service-card-web">
@@ -210,7 +232,7 @@
                 </div>
                 <h3 class="service-title">Website Development</h3>
                 <p class="service-description">
-                    From compelling designs to robust e-commerce solutions, we build websites that truly represent your brand and drive engagement.
+                    Clear, secure sites and e-commerce builds in HTML, CSS, and JavaScript: crafted to represent your brand and stay maintainable.
                 </p>
             </div>
         </a>
@@ -228,7 +250,7 @@
                 </div>
                 <h3 class="service-title">Data Analytics</h3>
                 <p class="service-description">
-                    Unlock the power of your data. We help you collect, analyze, and interpret insights to make informed business decisions.
+                    Turn messy data into dashboards and views you can act on: trends, exceptions, and decisions you can defend.
                 </p>
             </div>
         </a>
@@ -243,9 +265,9 @@
                         <path d="m9 12 2 2 4-4"></path>
                     </svg>
                 </div>
-                <h3 class="service-title">Cyber Security</h3>
+                <h3 class="service-title">Cybersecurity</h3>
                 <p class="service-description">
-                    Protect your valuable assets. Our cybersecurity solutions safeguard your data and systems from evolving threats.
+                    Practical security guidance for small organizations: hardening, access control, and privacy-aware process without enterprise theater.
                 </p>
             </div>
         </a>
@@ -263,53 +285,59 @@
                         <path d="M8 22l4 -12l4 12"></path>
                     </svg>
                 </div>
-                <h3 class="service-title">AI-Powered Custom Digital Solutions</h3>
+                <h3 class="service-title">AI &amp; Custom Solutions</h3>
                 <p class="service-description">
-                    Leverage our expertise in AI and prompt engineering to create tailored digital solutions that meet your unique needs, from automating workflows to generating creative assets.
+                    Custom tooling and thoughtful AI use: automation, integrations, and creative assets with clear constraints and human oversight.
                 </p>
             </div>
             </a>
         </div>
     </section>
 
-    <!-- About Us Section -->
+    <!-- About Section -->
     <section id="about" class="main-section container mx-auto px-4">
-        <h2 class="section-heading">About Us</h2>
+        <h2 class="section-heading">About</h2>
         <div class="flex flex-col md:flex-row items-center justify-center gap-10">
             <div class="md:w-1/2">
                 <picture>
-                    <source srcset="Gallery/Gemini_Generated_Image_About_Us_Monitor.webp" type="image/webp">
-                    <img src="Gallery/Gemini_Generated_Image_About_Us_Monitor.png" 
-                         alt="Abstract image representing 'About Us'" 
-                         class="rounded-xl shadow-lg mx-auto w-3/4 h-auto object-cover" 
+                    <source srcset="Gallery/About_Lace_Monitor.webp" type="image/webp">
+                    <img src="Gallery/About_Lace_Monitor.jpg"
+                         alt="Lace monitor"
+                         class="rounded-xl shadow-lg mx-auto w-3/4 h-auto"
                          loading="eager"
                          fetchpriority="high"
                          decoding="async"
-                         width="600"
-                         height="400">
+                         width="1200"
+                         height="1600">
                 </picture>
+                <p class="w-3/4 mx-auto mt-3 text-sm text-gray-400 text-center">
+                    I photographed this lace monitor for a client’s social post; grateful they let me use it here.
+                </p>
             </div>
-            <div class="md:w-1/2 text-center md:text-left text-content-block"> <p class="mb-6">
-                    At Trifecta.Systems, we believe in empowering small businesses and nonprofits with the technology they need to thrive in the digital age. We started because a friend needed their e-commerce website updated and streamlined for their custom reptile enclosures (<a href="https://crypticcreations.net/" class="text-gray-200 hover:text-white underline transition duration-300 ease-in-out">Cryptic Creations</a>). Now we have helped many, reptile or otherwise, with their digital needs.
-                </p>
-                <p class="mb-8">
-                    Our mission is to provide accessible, reliable, and cutting-edge technical expertise, allowing you to focus on what you do best while we handle your digital infrastructure. We're committed to building long-term partnerships and delivering solutions that truly make a difference.
-                </p>
-                <a href="about-the-owner.html" class="btn-primary inline-block">
-                    About the Owner
-                </a>
+            <div class="md:w-1/2">
+                <div class="w-3/4 mx-auto text-center md:text-left text-content-block">
+                    <p class="mb-6">
+                        I started Trifecta.Systems when a friend needed their e-commerce site updated for custom reptile enclosures. That hands-on work grew into a solo practice spanning digital systems and, more recently, deep business operations consulting.
+                    </p>
+                    <p class="mb-8">
+                        There is no team behind the curtain. You work with me: a materials engineer turned cybersecurity graduate and programmer who also digs into org design, SOPs, product choices, and the research questions owners throw when they are building something real.
+                    </p>
+                    <a href="about-the-owner.html" class="btn-primary inline-block">
+                        My Resume
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Us Section -->
+    <!-- Contact Section -->
     <section id="contact" class="main-section container mx-auto px-4">
-    <h2 class="section-heading">Contact Us</h2>
+    <h2 class="section-heading">Contact</h2>
     <div class="max-w-2xl mx-auto p-8 bg-slate-800 rounded-xl shadow-lg border border-gray-600">
         <p class="text-center text-lg mb-8 text-gray-300">
-            Please fill out the form below and we'll get back to you as soon as possible.
+            Send a note and I will get back to you as soon as I can.
         </p>
-        <form id="contactForm" action="#" method="POST" class="space-y-6">
+        <form id="contactForm" method="POST" class="space-y-6">
             <div>
                 <label for="name" class="block text-gray-300 text-sm font-bold mb-2">
                     Your Name <span class="text-red-500">*</span>
@@ -361,14 +389,41 @@
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
-            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
-            <div class="mt-4 text-sm space-x-4">
-                <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a>
-                <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Terms of Service</a>
-                <a href="data-rights-request.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Rights</a>
+        <footer class="bg-[#0F131C] text-gray-300 py-10 rounded-t-lg shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-center mb-8">
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Site</h2>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Home</a></li>
+                        <li><a href="about-the-owner.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">About</a></li>
+                        <li><a href="blog/index.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Blog</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Services</h2>
+                    <ul class="space-y-2">
+                        <li><a href="business-consulting.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Business Consulting</a></li>
+                        <li><a href="web-development.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Web Development</a></li>
+                        <li><a href="data-analytics.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Analytics</a></li>
+                        <li><a href="cybersecurity.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Cybersecurity</a></li>
+                        <li><a href="ai-custom-solutions.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">AI &amp; Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Legal</h2>
+                    <ul class="space-y-2">
+                        <li><a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Terms of Service</a></li>
+                        <li><a href="data-rights-request.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Rights</a></li>
+                        <li><a href="sitemap.xml" class="text-gray-400 hover:text-white transition-colors duration-200 underline">XML Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p>&copy; 2026 Trifecta.Systems. All rights reserved.</p>
+                <p class="mt-2 text-gray-500">Built for small businesses and nonprofits.</p>
             </div>
         </div>
     </footer>

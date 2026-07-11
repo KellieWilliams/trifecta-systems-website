@@ -45,7 +45,7 @@
     <meta property="twitter:image" content="https://trifecta.systems/Gallery/Trifecta_Logo.png">
     
     <link rel="stylesheet" href="css/tailwind.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <!-- favicon -->
@@ -61,7 +61,7 @@
         <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
             <a href="index.html" class="flex items-center space-x-3 flex-shrink-0">
                 <img id="mainLogo" src="Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
-                <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+                <span class="site-wordmark text-3xl text-white">Trifecta.Systems</span>
             </a>
 
             <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-gray-400 p-2 rounded-md">
@@ -84,15 +84,16 @@
                             </button>
                         </div>
                         
-                        <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-48 top-full left-0 z-50 transition-all duration-300 ease-in-out">
-                            <li><a href="web-development.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Web Development</a></li>
+                        <ul id="servicesSubmenu" class="hidden absolute md:group-hover:block bg-[#0F131C] text-white py-2 px-4 shadow-lg rounded-md w-56 top-full left-0 z-50 transition-all duration-300 ease-in-out">
+                        <li><a href="business-consulting.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Business Consulting</a></li>
+                        <li><a href="web-development.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Web Development</a></li>
                             <li><a href="data-analytics.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Data Analytics</a></li>
                             <li><a href="cybersecurity.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Cybersecurity</a></li>
                             <li><a href="ai-custom-solutions.html" class="block w-full py-2 hover:bg-gray-700 rounded-sm text-center">Custom/AI Solutions</a></li>
                         </ul>
                     </li>
                     
-                                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                                    <li><a href="index.html#about" class="nav-link">About</a></li>
                     
                 <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 
@@ -125,6 +126,7 @@
                         <li><strong>Contact Information:</strong> Name, email address, phone number (optional)</li>
                         <li><strong>Communication:</strong> Messages and inquiries you send through our contact form</li>
                         <li><strong>Service Requests:</strong> Information related to your service inquiries</li>
+                        <li><strong>Data Rights Requests:</strong> Information you submit to exercise privacy rights</li>
                     </ul>
 
                     <h3 class="text-xl font-medium text-white mb-3 mt-6">2.2 Automatically Collected Information</h3>
@@ -263,9 +265,13 @@
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li><strong>Service Providers:</strong> We may share information with trusted third-party service providers who assist us in operating our website and providing services</li>
                         <li><strong>Google Analytics:</strong> We share anonymized website usage data with Google LLC for analytics purposes, only with your explicit consent</li>
+                        <li><strong>Google reCAPTCHA:</strong> Form submissions may be verified by Google reCAPTCHA to reduce spam and abuse</li>
                         <li><strong>Legal Requirements:</strong> We may disclose information when required by law or to protect our rights and safety</li>
                         <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred</li>
                     </ul>
+                    <p class="text-sm text-gray-400 mt-4">
+                        Site content (for example images or draft copy) may be created with AI tools offline. That work does not send your visitor data to AI providers.
+                    </p>
                     
                     <div class="bg-slate-700 rounded-lg p-4 mt-4">
                         <h4 class="text-lg font-medium text-white mb-2">Google Analytics Data Sharing</h4>
@@ -290,11 +296,11 @@
                         alteration, disclosure, or destruction. These measures include:
                     </p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
-                        <li>Encryption of data in transit and at rest</li>
-                        <li>Regular security assessments and updates</li>
-                        <li>Access controls and authentication measures</li>
-                        <li>Secure hosting and infrastructure</li>
-                        <li>Employee training on data protection</li>
+                        <li>HTTPS encryption for data in transit</li>
+                        <li>Security headers and access controls on public forms</li>
+                        <li>Separation of public website assets from private server-side handlers</li>
+                        <li>Bot protections (including reCAPTCHA) and CSRF checks on sensitive forms</li>
+                        <li>Ongoing review of security practices appropriate to a small professional practice</li>
                     </ul>
                 </section>
 
@@ -387,8 +393,8 @@
 
                 <div class="border-t border-gray-600 pt-6 mt-8">
                     <p class="text-sm text-gray-400">
-                        <strong>Last Updated:</strong> September 2025<br>
-                        <strong>Version:</strong> 1.0
+                        <strong>Last Updated:</strong> July 2026<br>
+                        <strong>Version:</strong> 1.1
                     </p>
                 </div>
             </div>
@@ -396,10 +402,42 @@
     </main>
 
     <!-- Footer Section -->
-    <footer class="bg-[#0F131C] text-gray-300 py-8 rounded-t-lg shadow-inner mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
-            <p class="mt-2 text-gray-500">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
+        <footer class="bg-[#0F131C] text-gray-300 py-10 rounded-t-lg shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-center mb-8">
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Site</h2>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Home</a></li>
+                        <li><a href="about-the-owner.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">About</a></li>
+                        <li><a href="blog/index.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Blog</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Services</h2>
+                    <ul class="space-y-2">
+                        <li><a href="business-consulting.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Business Consulting</a></li>
+                        <li><a href="web-development.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Web Development</a></li>
+                        <li><a href="data-analytics.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Analytics</a></li>
+                        <li><a href="cybersecurity.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Cybersecurity</a></li>
+                        <li><a href="ai-custom-solutions.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">AI &amp; Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Legal</h2>
+                    <ul class="space-y-2">
+                        <li><a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Terms of Service</a></li>
+                        <li><a href="data-rights-request.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Rights</a></li>
+                        <li><a href="sitemap.xml" class="text-gray-400 hover:text-white transition-colors duration-200 underline">XML Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p>&copy; 2026 Trifecta.Systems. All rights reserved.</p>
+                <p class="mt-2 text-gray-500">Built for small businesses and nonprofits.</p>
+            </div>
         </div>
     </footer>
 

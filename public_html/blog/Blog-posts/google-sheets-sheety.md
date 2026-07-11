@@ -249,4 +249,4 @@ The beauty of this approach is its versatility. Any static website that needs re
 
 This project exemplifies how modern web development can creatively bridge the gap between static site simplicity and dynamic content needs. By leveraging the power of Google Sheets and Sheety, we can deliver robust, maintainable, and client-friendly solutions that are both performant and incredibly easy to manage.
 
-This approach is a testament to thinking outside the box and utilizing the best tools for the job—even if those tools weren't originally designed to be a "CMS." Consider this pattern for your next static site project; your clients (and your future self) will thank you!
+This approach is a testament to thinking outside the box and utilizing the best tools for the job; even if those tools weren't originally designed to be a "CMS." Consider this pattern for your next static site project; your clients (and your future self) will thank you!

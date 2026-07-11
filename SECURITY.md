@@ -6,17 +6,18 @@ Trifecta.Systems is built with security and privacy in mind. Sensitive applicati
 
 This document describes security practices at a high level suitable for a public portfolio. Implementation details, private server paths, and operational secrets are intentionally omitted.
 
-## Practices in Place
+## Practices Visitors Can Verify
 
 ### Transport & Headers
 - HTTPS with HSTS
 - Security headers including Content Security Policy, frame protections, and MIME sniffing protections
+- CSP is present; further hardening (for example removing `'unsafe-inline'` via nonces) is a known roadmap item
 
 ### Forms & Abuse Prevention
-- Bot protection (including reCAPTCHA)
-- CSRF protections on sensitive actions
+- Bot protection (including reCAPTCHA) on public forms
+- CSRF protections on contact and data-rights submissions
 - Honeypot fields and server-side validation
-- Rate limiting on public form endpoints
+- Rate limiting on public form endpoints (enforced server-side; not visible in this repo)
 
 ### Application Architecture
 - Public frontend separated from private server-side handlers
@@ -27,9 +28,11 @@ This document describes security practices at a high level suitable for a public
 ### Privacy
 - Cookie consent with Google Consent Mode defaults that deny analytics until opt-in
 - Privacy policy, terms of service, and data subject rights request flow
+- Disclosure of third-party processors used by the site (for example Analytics and reCAPTCHA)
 
-### Monitoring
-- Security event logging and review processes for suspicious activity
+## Practices Maintained Privately
+
+Security event logging, session storage, and other operational controls live in the private server environment and are not published here. Claims in marketing copy are scoped to what a small professional practice can honestly deliver.
 
 ## Responsible Disclosure
 

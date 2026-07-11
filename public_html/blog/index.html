@@ -46,7 +46,7 @@
     
     <!-- Tailwind CSS (production build) -->
     <link rel="stylesheet" href="../css/tailwind.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 
     <!-- favicon -->
@@ -62,14 +62,13 @@
             <div class="flex justify-between items-center">
                 <a href="../index.html" class="flex items-center space-x-3 flex-shrink-0">
                     <img id="mainLogo" src="../Gallery/Trifecta_Logo.png" alt="Trifecta.Systems Logo" class="w-auto h-10 rounded-md" loading="eager">
-                    <span class="text-3xl font-bold text-white">Trifecta.Systems</span>
+                    <span class="site-wordmark text-3xl text-white">Trifecta.Systems</span>
                 </a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="../index.html" class="nav-link">Home</a>
+                <div class="hidden md:flex space-x-6 text-lg font-medium">
                     <a href="../index.html#services" class="nav-link">Services</a>
                     <a href="../index.html#about" class="nav-link">About</a>
                     <a href="../index.html#contact" class="nav-link">Contact</a>
-                    <a href="index.html" class="nav-link text-blue-400 font-semibold">Blog</a>
+                    <a href="index.html" class="nav-link font-semibold underline underline-offset-4">Blog</a>
                 </div>
                 <button id="mobileMenuBtn" class="md:hidden text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,11 +78,10 @@
             </div>
             <div id="mobileMenu" class="md:hidden hidden mt-4 pb-4">
                 <ul class="space-y-2">
-                    <li><a href="../index.html" class="nav-link">Home</a></li>
                     <li><a href="../index.html#services" class="nav-link">Services</a></li>
                     <li><a href="../index.html#about" class="nav-link">About</a></li>
                     <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-                    <li><a href="index.html" class="nav-link text-blue-400 font-semibold">Blog</a></li>
+                    <li><a href="index.html" class="nav-link font-semibold">Blog</a></li>
                 </ul>
             </div>
         </nav>
@@ -114,20 +112,47 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#161B29] text-white py-12">
+        <footer class="bg-[#0F131C] text-gray-300 py-10 rounded-t-lg shadow-inner">
         <div class="container mx-auto px-4">
-            <div class="text-center">
-                <p>&copy; 2025 Trifecta.Systems. All rights reserved.</p>
-                <p class="text-gray-400 mt-2">Designed with purpose for small businesses & nonprofits with the help of Google's Gemini and other AI.</p>
-                <div class="mt-4 space-x-4">
-                    <a href="../privacy-policy.html" class="text-blue-400 hover:text-blue-300">Privacy Policy</a>
-                    <a href="../terms-of-service.html" class="text-blue-400 hover:text-blue-300">Terms of Service</a>
-                    <a href="../data-rights-request.html" class="text-blue-400 hover:text-blue-300">Data Rights</a>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-center mb-8">
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Site</h2>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Home</a></li>
+                        <li><a href="../about-the-owner.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">About</a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Blog</a></li>
+                        <li><a href="../index.html#contact" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Contact</a></li>
+                    </ul>
                 </div>
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Services</h2>
+                    <ul class="space-y-2">
+                        <li><a href="../business-consulting.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Business Consulting</a></li>
+                        <li><a href="../web-development.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Web Development</a></li>
+                        <li><a href="../data-analytics.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Analytics</a></li>
+                        <li><a href="../cybersecurity.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Cybersecurity</a></li>
+                        <li><a href="../ai-custom-solutions.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">AI &amp; Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-white font-semibold mb-3">Legal</h2>
+                    <ul class="space-y-2">
+                        <li><a href="../privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Privacy Policy</a></li>
+                        <li><a href="../terms-of-service.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Terms of Service</a></li>
+                        <li><a href="../data-rights-request.html" class="text-gray-400 hover:text-white transition-colors duration-200 underline">Data Rights</a></li>
+                        <li><a href="../sitemap.xml" class="text-gray-400 hover:text-white transition-colors duration-200 underline">XML Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p>&copy; 2026 Trifecta.Systems. All rights reserved.</p>
+                <p class="mt-2 text-gray-500">Built for small businesses and nonprofits.</p>
             </div>
         </div>
     </footer>
 
+    <div id="cookie-banner-container"></div>
+
     <script src="../script.js?v=3" type="module"></script>
 </body>
-</html> 
+</html>

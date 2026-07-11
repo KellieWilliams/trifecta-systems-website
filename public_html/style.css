@@ -1,10 +1,26 @@
-/* Base Styles */
+/* Base Styles — Source Sans 3 site-wide (beats Tailwind preflight on html) */
+html {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
     background-color: #0F131C; /* Dark Background */
     color: #ffffff; /* Light Font */
     -webkit-font-smoothing: antialiased; /* antialiased equivalent */
     -moz-osx-font-smoothing: grayscale; /* antialiased equivalent */
+}
+
+h1, h2, h3, h4, h5, h6,
+.section-heading, .service-title, .portfolio-title,
+.site-wordmark,
+header, footer, nav, button, input, select, textarea {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+}
+
+.site-wordmark {
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 /* Container for consistent content width */
@@ -186,6 +202,11 @@ body {
     background-size: cover;
     background-position: center;
 }
+.service-card-business:hover {
+    background-image: url('Gallery/Gemini_Generated_Image_Hero_Background.webp');
+    background-size: cover;
+    background-position: center;
+}
 
 /* Service Card Overlay */
 .service-card-overlay {
@@ -342,6 +363,14 @@ textarea.form-input {
     margin-bottom: 3rem;
     overflow: hidden;
     /* Note: text color specific to hero text elements, not the section itself */
+}
+
+/* Specific background for Business Consulting Hero */
+.hero-business-consulting-bg {
+    background-image: url('Gallery/Gemini_Generated_Image_Hero_Background.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Specific background for Web Development Hero */
