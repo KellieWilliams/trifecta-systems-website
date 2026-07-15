@@ -89,4 +89,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Built by Trifecta.Systems**  
-*Empowering small businesses and nonprofits with practical technology solutions.*
+*Helping small businesses and nonprofits get more done.*
