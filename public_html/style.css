@@ -449,6 +449,21 @@ textarea.form-input {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     border: 1px solid #4b5563;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-card > .p-6,
+.portfolio-card > div.p-6 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-card .btn-secondary {
+    margin-top: auto;
+    align-self: flex-start;
+    text-align: center;
 }
 
 /* Portfolio Item Title */
